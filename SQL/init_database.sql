@@ -243,3 +243,35 @@ BEGIN
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
 DELIMITER ;
+
+/*DROP PROCEDURE modification_user*/
+/*CALL modification_user(id_user, id_permission, 'imie', 'nazwisko', 'mail', 'haslo') RETURN columns:  was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE modification_user(IN id_user_var BIGINT, IN id_permission_var INT, IN name_var VARCHAR(50), IN surname_var VARCHAR(50), IN mail_var VARCHAR(50), password_var VARCHAR(100)) 
+modification_user_label:BEGIN
+
+
+	IF NOT EXISTS (SELECT 1 FROM users WHERE id_user=id_user_var) THEN
+		SELECT FALSE AS was_ok, 1 AS code, 'Podany użytkownik nie istnieje' AS message;
+		LEAVE modification_user_label;
+	END IF;
+	
+	UPDATE users SET 
+		id_permission=COALESCE(id_permission_var, id_permission), 
+		name=COALESCE(name_var, name),
+		surname=COALESCE(surname_var, surname),
+		mail=COALESCE(mail_var, mail),
+		password=COALESCE(password_var, password)
+	WHERE 
+		id_user=id_user_var AND
+		(
+			id_permission<>COALESCE(id_permission_var, id_permission) OR 
+			name<>COALESCE(name_var, name) OR
+			surname<>COALESCE(surname_var, surname) OR
+			mail<>COALESCE(mail_var, mail) OR
+			password<>COALESCE(password_var, password)
+		);
+	
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+END$$
+DELIMITER ;
