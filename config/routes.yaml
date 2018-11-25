@@ -1,0 +1,18 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_acc_annoncements:
+    path: /
+    controller: App\Controller\MainController::MainSite
+
+account:
+    path: /account
+    controller: App\Controller\MainController::profile
+
+orders:
+    path: /orders
+    controller: App\Controller\MainController::orders
+
+
+

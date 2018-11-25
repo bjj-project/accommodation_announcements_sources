@@ -1,0 +1,85 @@
+blockquote, address, .page-links a:hover, .post-format-wrap {border-color:#3498db}
+.meta span i, .more-link, .post-title h3:hover, #main .standard-posts-wrapper .posts-wrapper .post-single .text-holder-full .post-format-wrap p.link-text a:hover, .breadcrumbs .breadcrumbs-wrap ul li a:hover, #article p a, .navigation a, .link-post i.fa, .quote-post i.fa, #article .link-post p.link-text a:hover, .link-post p.link-text a:hover, .quote-post span.quote-author, .post-single ul.link-pages li a strong, .post-info span i, .footer-widget-col ul li a:hover, .sidebar ul.link-pages li.next-link a span, .sidebar ul.link-pages li.previous-link a span, .sidebar ul.link-pages li i, .row .row-item .service i.fa {color:#3498db}
+.page-links a:hover {background:#3498db}
+.search-submit,.wpcf7-form-control,.main-navigation ul ul, .content-boxes .circle, .feature .circle, .section-title-right:after, .boxtitle:after, .section-title:after, .content-btn, #comments .form-submit #submit {background-color:#3498db}
+.back-to-top {color:#888888}
+.back-to-top i.fa:hover {color:#3498db}
+#logo {width:300px }
+#logo {height:30px }
+#logo { margin-top:8px }
+#logo { margin-right:25px }
+#logo {text-transform: uppercase }
+#logo {font-family:Open Sans}
+#logo {font-size:24px }
+#logo {font-weight:700}
+#logo a {color:#ffffff}
+#logo h5.site-description {font-size:16px }
+#logo .site-description {color:#ffffff}
+#logo .site-description {text-transform: uppercase}
+#navbar {margin-top:15px}
+#navbar ul li a {font-family:Open Sans}
+#navbar ul li a {font-size:13px}
+#navbar ul li a {text-transform: uppercase;}
+.navbar-nav li a {color:#ffffff}
+.dropdown-menu {border-bottom: 5px solid #c9c9c9}
+.navbar-nav {background-color:#1a1a1a}
+.dropdown-menu { background:#1a1a1a}
+.navbar-nav li a:hover {color:#3498db}
+.navbar-nav ul li a:hover, .navbar-nav ul li a:focus, .navbar-nav ul li a.active, .navbar-nav ul li a.active-parent, .navbar-nav ul li.current_page_item a, #menu-navmenu li a:hover { background:#1a1a1a}
+.active a { color:#3498db !important}
+body {font-family:Raleway}
+body {font-size:15px !important}
+body {color:#777777}
+#header-holder { background-color: #1a1a1a}
+#header-holder {opacity:1}
+.banner ul li { min-height:500px;}
+.banner .inner h1 { color:#111111}
+.iis-caption-title a { color:#111111}
+.banner .inner p { color: #111111}
+.iis-caption-content p { color: #111111}
+.banner .btn { color: #111111}
+.banner .btn { border-color: #111111}
+.iis-caption { left: 0%}
+.banner .inner { padding-top: 120px}
+.iis-caption { bottom: 5%}
+.banner .inner { width: 90%}
+.iis-caption { max-width: 90%}
+#footer { background-color:#252525}
+#copyright { background-color:#111111}
+.footer-widget-col h4 { color:#ffffff}
+.footer-widget-col h4 { border-bottom: 4px solid #ffffff}
+.footer-widget-col a, .footer-widget-col { color:#ffffff}
+.footer-widget-col ul li { border-bottom: 1px solid #ffffff}
+#social-bar-footer ul li a i { color:#ffffff}
+.home-blog {background: none repeat scroll 0 0 #ffffff}
+.from-blog .post-info span a, .from-blog .post-info span {color:#111111;}
+.from-blog h3 {color:#111111;}
+.from-blog h2 {color:#111111;}
+.from-blog {background: none repeat scroll 0 0 #ffffff;}
+.blog-top-image {background: none repeat scroll 0 0 #eeeeee;}
+.blog-top-image h1.section-title, .blog-top-image h1.section-title-right {color:#111111;}
+.get-strated-button { background-color: #3498db}
+#get-started h2 { color: #ffffff}
+.get-strated-left span { color: #ffffff}
+#get-started { background: none repeat scroll 0 0 #252525}
+#features { background-color:#ffffff;}
+h4.sub-title, #features p { color:#111111;}
+#features .section-title, #features h3 { color:#111111;}
+.about p {color:#111111;}
+.about h2 {color:#111111;}
+.about {background: none repeat scroll 0 0 #eeeeee;}
+#services { background-color:#ffffff;}
+#services h2, #services h3 { color:#111111;}
+#services p { color:#777777;}
+.cta h2 { color:#111111;}
+.cta h4 { color:#111111;}
+.cta { background-color:#eeeeee;}
+.content-boxes h4 { color:#ffffff;}
+.content-boxes {color:#ffffff}
+.content-boxes {background: none repeat scroll 0 0 #252525}
+.get-in-touch { background-color: #eeeeee}
+.get-in-touch h2.boxtitle {color:#111111;}
+.get-in-touch h4.sub-title {color:#111111;}
+.git-link { color: #111111}
+.git-link { border-color: #111111}
+.social { background-color: #eeeeee}
