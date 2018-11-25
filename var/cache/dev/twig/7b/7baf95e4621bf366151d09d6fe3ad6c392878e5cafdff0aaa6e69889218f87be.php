@@ -36,7 +36,6 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
     <link rel='dns-prefetch' href='//s.w.org' />
 
 
-
     <link rel='stylesheet' id='contact-form-7-css'  href='css/styles.css?ver=5.0.5' type='text/css' media='all' />
     <link rel='stylesheet' id='select2-css'  href='css/select2.css?ver=3.5.1' type='text/css' media='all' />
     <link rel='stylesheet' id='accannouncements-layout-css'  href='css/accannouncements-layout.css?ver=3.5.1' type='text/css' media='all' />
@@ -86,52 +85,7 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
 
     <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-110327317-1\"></script>
 
-    <script type=\"text/javascript\">
-        //<![CDATA[
-        function getCookie(c_name)
-        {
-            if (document.cookie.length>0)
-            {
-                c_start=document.cookie.indexOf(c_name + \"=\");
-                if (c_start!=-1)
-                {
-                    c_start=c_start + c_name.length+1;
-                    c_end=document.cookie.indexOf(\";\",c_start);
-                    if (c_end==-1) c_end=document.cookie.length;
-                    return unescape(document.cookie.substring(c_start,c_end));
-                }
-            }
-            return \"\";
-        }
 
-        function setCookie(c_name,value,expiredays)
-        {
-            var exdate=new Date();
-            exdate.setDate(exdate.getDate()+expiredays);
-            document.cookie=c_name+ \"=\" +escape(value)+
-                ((expiredays==null) ? \"\" : \";expires=\"+exdate.toUTCString());
-        }
-
-        function isMobile() {
-            if (navigator.userAgent.match(/Android/i) ||
-                navigator.userAgent.match(/webOS/i) ||
-                navigator.userAgent.match(/iPhone/i) ||
-                navigator.userAgent.match(/iPad/i) ||
-                navigator.userAgent.match(/iPod/i) ||
-                navigator.userAgent.match(/BlackBerry/i) ||
-                navigator.userAgent.match(/Windows Phone/i)){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-
-
-
-        //]]>
-    </script>
 
 
 
@@ -263,7 +217,7 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
 
 
                                         <p>
-                                            <input type=\"hidden\" id=\"save-account-details-nonce\" name=\"save-account-details-nonce\" value=\"905a6c5d74\"><input type=\"hidden\" name=\"_wp_http_referer\" value=\"/dpd/moje-konto/edit-account/\">\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"save_account_details\" value=\"Zapisz zmiany\">Zapisz zmiany</button>
+                                            <input type=\"hidden\" id=\"save-account-details-nonce\" name=\"save-account-details-nonce\" value=\"905a6c5d74\"><input type=\"hidden\" name=\"\" value=\"\">\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"save_account_details\" value=\"Zapisz zmiany\">Zapisz zmiany</button>
                                             <input type=\"hidden\" name=\"action\" value=\"save_account_details\">
                                         </p>
 
@@ -326,15 +280,14 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
                         <div id=\"nav_menu-5\" class=\"footer-widget-col widget_nav_menu\"><h4>Wynajmij</h4><div class=\"menu-f4-container\"><ul id=\"menu-f4\" class=\"menu\"><li id=\"menu-item-4147\" class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-4147\"><a href=\"#\">Apartament</a></li>
                                 </ul></div></div>\t\t</div>
                 </div>
-            </div>\t\t</div><!--footer-wrap-->
-    </div><!--footer-->
+            </div>\t\t</div>
+    </div>
     <div id=\"copyright\">
         <div class=\"copyright-wrap\">
             <span class=\"left\"><i class=\"fa fa-copyright\"></i><a href=\"/\">Copyright 2018 Accommodation Announcements</a></span>
             <span class=\"right\">Accomodation announcements</span>
         </div>
-    </div><!--copyright--></div><!--grid-container-->
-
+    </div></div>
 
 
 <script type='text/javascript' src='js/scripts.js?ver=5.0.5'></script>
@@ -375,7 +328,7 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
     /* ]]> */
 </script>
 <script type='text/javascript' src='js/ideal-slides.js?ver=4.9.8'></script>
-<script type='text/javascript' src='js/wp-embed.min.js?ver=4.9.8'></script>
+
 
 
 <script type=\"text/javascript\">
@@ -417,7 +370,6 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
     <link rel='dns-prefetch' href='//s.w.org' />
 
 
-
     <link rel='stylesheet' id='contact-form-7-css'  href='css/styles.css?ver=5.0.5' type='text/css' media='all' />
     <link rel='stylesheet' id='select2-css'  href='css/select2.css?ver=3.5.1' type='text/css' media='all' />
     <link rel='stylesheet' id='accannouncements-layout-css'  href='css/accannouncements-layout.css?ver=3.5.1' type='text/css' media='all' />
@@ -467,52 +419,7 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
 
     <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-110327317-1\"></script>
 
-    <script type=\"text/javascript\">
-        //<![CDATA[
-        function getCookie(c_name)
-        {
-            if (document.cookie.length>0)
-            {
-                c_start=document.cookie.indexOf(c_name + \"=\");
-                if (c_start!=-1)
-                {
-                    c_start=c_start + c_name.length+1;
-                    c_end=document.cookie.indexOf(\";\",c_start);
-                    if (c_end==-1) c_end=document.cookie.length;
-                    return unescape(document.cookie.substring(c_start,c_end));
-                }
-            }
-            return \"\";
-        }
 
-        function setCookie(c_name,value,expiredays)
-        {
-            var exdate=new Date();
-            exdate.setDate(exdate.getDate()+expiredays);
-            document.cookie=c_name+ \"=\" +escape(value)+
-                ((expiredays==null) ? \"\" : \";expires=\"+exdate.toUTCString());
-        }
-
-        function isMobile() {
-            if (navigator.userAgent.match(/Android/i) ||
-                navigator.userAgent.match(/webOS/i) ||
-                navigator.userAgent.match(/iPhone/i) ||
-                navigator.userAgent.match(/iPad/i) ||
-                navigator.userAgent.match(/iPod/i) ||
-                navigator.userAgent.match(/BlackBerry/i) ||
-                navigator.userAgent.match(/Windows Phone/i)){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-
-
-
-        //]]>
-    </script>
 
 
 
@@ -644,7 +551,7 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
 
 
                                         <p>
-                                            <input type=\"hidden\" id=\"save-account-details-nonce\" name=\"save-account-details-nonce\" value=\"905a6c5d74\"><input type=\"hidden\" name=\"_wp_http_referer\" value=\"/dpd/moje-konto/edit-account/\">\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"save_account_details\" value=\"Zapisz zmiany\">Zapisz zmiany</button>
+                                            <input type=\"hidden\" id=\"save-account-details-nonce\" name=\"save-account-details-nonce\" value=\"905a6c5d74\"><input type=\"hidden\" name=\"\" value=\"\">\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"save_account_details\" value=\"Zapisz zmiany\">Zapisz zmiany</button>
                                             <input type=\"hidden\" name=\"action\" value=\"save_account_details\">
                                         </p>
 
@@ -707,15 +614,14 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
                         <div id=\"nav_menu-5\" class=\"footer-widget-col widget_nav_menu\"><h4>Wynajmij</h4><div class=\"menu-f4-container\"><ul id=\"menu-f4\" class=\"menu\"><li id=\"menu-item-4147\" class=\"menu-item menu-item-type-custom menu-item-object-custom menu-item-4147\"><a href=\"#\">Apartament</a></li>
                                 </ul></div></div>\t\t</div>
                 </div>
-            </div>\t\t</div><!--footer-wrap-->
-    </div><!--footer-->
+            </div>\t\t</div>
+    </div>
     <div id=\"copyright\">
         <div class=\"copyright-wrap\">
             <span class=\"left\"><i class=\"fa fa-copyright\"></i><a href=\"/\">Copyright 2018 Accommodation Announcements</a></span>
             <span class=\"right\">Accomodation announcements</span>
         </div>
-    </div><!--copyright--></div><!--grid-container-->
-
+    </div></div>
 
 
 <script type='text/javascript' src='js/scripts.js?ver=5.0.5'></script>
@@ -756,7 +662,7 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
     /* ]]> */
 </script>
 <script type='text/javascript' src='js/ideal-slides.js?ver=4.9.8'></script>
-<script type='text/javascript' src='js/wp-embed.min.js?ver=4.9.8'></script>
+
 
 
 <script type=\"text/javascript\">
@@ -767,6 +673,6 @@ class __TwigTemplate_5141197e5f99bea5cfbd4a0b909fa0e74d5fd126e6e0fa84321be65b702
 
 
 </body>
-</html>", "profile.html.twig", "C:\\Users\\bartekd\\PhpstormProjects\\accommodation_announcements\\acc_announcements\\templates\\profile.html.twig");
+</html>", "profile.html.twig", "D:\\szkola\\pz\\accommodation_announcements_sources\\templates\\profile.html.twig");
     }
 }

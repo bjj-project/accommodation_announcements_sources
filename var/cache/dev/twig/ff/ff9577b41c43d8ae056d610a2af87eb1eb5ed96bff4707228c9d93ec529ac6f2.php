@@ -86,53 +86,6 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
 
     <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-110327317-1\"></script>
 
-    <script type=\"text/javascript\">
-        //<![CDATA[
-        function getCookie(c_name)
-        {
-            if (document.cookie.length>0)
-            {
-                c_start=document.cookie.indexOf(c_name + \"=\");
-                if (c_start!=-1)
-                {
-                    c_start=c_start + c_name.length+1;
-                    c_end=document.cookie.indexOf(\";\",c_start);
-                    if (c_end==-1) c_end=document.cookie.length;
-                    return unescape(document.cookie.substring(c_start,c_end));
-                }
-            }
-            return \"\";
-        }
-
-        function setCookie(c_name,value,expiredays)
-        {
-            var exdate=new Date();
-            exdate.setDate(exdate.getDate()+expiredays);
-            document.cookie=c_name+ \"=\" +escape(value)+
-                ((expiredays==null) ? \"\" : \";expires=\"+exdate.toUTCString());
-        }
-
-        function isMobile() {
-            if (navigator.userAgent.match(/Android/i) ||
-                navigator.userAgent.match(/webOS/i) ||
-                navigator.userAgent.match(/iPhone/i) ||
-                navigator.userAgent.match(/iPad/i) ||
-                navigator.userAgent.match(/iPod/i) ||
-                navigator.userAgent.match(/BlackBerry/i) ||
-                navigator.userAgent.match(/Windows Phone/i)){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-
-
-
-        //]]>
-    </script>
-
 
 
     <script>
@@ -222,7 +175,7 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
 
 
                                             <p class=\"form-row\">
-                                                <input type=\"hidden\" id=\"accannouncements-login-nonce\" name=\"accannouncements-login-nonce\" value=\"d326c07e50\" /><input type=\"hidden\" name=\"_wp_http_referer\" value=\"/dpd/moje-konto/\" />
+                                                <input type=\"hidden\" id=\"accannouncements-login-nonce\" name=\"accannouncements-login-nonce\" value=\"d326c07e50\" /><input type=\"hidden\" name=\"\" value=\"\" />
                                                 <button type=\"submit\" class=\"accannouncements-Button button\" name=\"login\" value=\"Zaloguj się\">Zaloguj się</button>
                                                 <label class=\"accannouncements-form__label accannouncements-form__label-for-checkbox inline\">
                                                     <input class=\"accannouncements-form__input accannouncements-form__input-checkbox\" name=\"rememberme\" type=\"checkbox\" id=\"rememberme\" value=\"forever\" /> <span>Zapamiętaj mnie</span>
@@ -253,7 +206,7 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
 
                                             <div class=\"accannouncements-privacy-policy-text\"></div>
                                             <p class=\"accannouncements-FormRow form-row\">
-                                                <input type=\"hidden\" id=\"accannouncements-register-nonce\" name=\"accannouncements-register-nonce\" value=\"ce32910364\" /><input type=\"hidden\" name=\"_wp_http_referer\" value=\"/dpd/moje-konto/\" />\t\t\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"register\" value=\"Zarejestruj się\">Zarejestruj się</button>
+                                                <input type=\"hidden\" id=\"accannouncements-register-nonce\" name=\"accannouncements-register-nonce\" value=\"ce32910364\" /><input type=\"hidden\" name=\"\" value=\"\" />\t\t\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"register\" value=\"Zarejestruj się\">Zarejestruj się</button>
                                             </p>
 
 
@@ -364,7 +317,7 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
     /* ]]> */
 </script>
 <script type='text/javascript' src='js/ideal-slides.js?ver=4.9.8'></script>
-<script type='text/javascript' src='js/wp-embed.min.js?ver=4.9.8'></script>
+
 
 
 <script type=\"text/javascript\">
@@ -372,8 +325,6 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
     c = c.replace(/accannouncements-no-js/, 'accannouncements-js');
     document.body.className = c;
 </script>
-
-
 </body>
 </html>";
         
@@ -456,53 +407,6 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
 
     <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-110327317-1\"></script>
 
-    <script type=\"text/javascript\">
-        //<![CDATA[
-        function getCookie(c_name)
-        {
-            if (document.cookie.length>0)
-            {
-                c_start=document.cookie.indexOf(c_name + \"=\");
-                if (c_start!=-1)
-                {
-                    c_start=c_start + c_name.length+1;
-                    c_end=document.cookie.indexOf(\";\",c_start);
-                    if (c_end==-1) c_end=document.cookie.length;
-                    return unescape(document.cookie.substring(c_start,c_end));
-                }
-            }
-            return \"\";
-        }
-
-        function setCookie(c_name,value,expiredays)
-        {
-            var exdate=new Date();
-            exdate.setDate(exdate.getDate()+expiredays);
-            document.cookie=c_name+ \"=\" +escape(value)+
-                ((expiredays==null) ? \"\" : \";expires=\"+exdate.toUTCString());
-        }
-
-        function isMobile() {
-            if (navigator.userAgent.match(/Android/i) ||
-                navigator.userAgent.match(/webOS/i) ||
-                navigator.userAgent.match(/iPhone/i) ||
-                navigator.userAgent.match(/iPad/i) ||
-                navigator.userAgent.match(/iPod/i) ||
-                navigator.userAgent.match(/BlackBerry/i) ||
-                navigator.userAgent.match(/Windows Phone/i)){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-
-
-
-        //]]>
-    </script>
-
 
 
     <script>
@@ -592,7 +496,7 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
 
 
                                             <p class=\"form-row\">
-                                                <input type=\"hidden\" id=\"accannouncements-login-nonce\" name=\"accannouncements-login-nonce\" value=\"d326c07e50\" /><input type=\"hidden\" name=\"_wp_http_referer\" value=\"/dpd/moje-konto/\" />
+                                                <input type=\"hidden\" id=\"accannouncements-login-nonce\" name=\"accannouncements-login-nonce\" value=\"d326c07e50\" /><input type=\"hidden\" name=\"\" value=\"\" />
                                                 <button type=\"submit\" class=\"accannouncements-Button button\" name=\"login\" value=\"Zaloguj się\">Zaloguj się</button>
                                                 <label class=\"accannouncements-form__label accannouncements-form__label-for-checkbox inline\">
                                                     <input class=\"accannouncements-form__input accannouncements-form__input-checkbox\" name=\"rememberme\" type=\"checkbox\" id=\"rememberme\" value=\"forever\" /> <span>Zapamiętaj mnie</span>
@@ -623,7 +527,7 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
 
                                             <div class=\"accannouncements-privacy-policy-text\"></div>
                                             <p class=\"accannouncements-FormRow form-row\">
-                                                <input type=\"hidden\" id=\"accannouncements-register-nonce\" name=\"accannouncements-register-nonce\" value=\"ce32910364\" /><input type=\"hidden\" name=\"_wp_http_referer\" value=\"/dpd/moje-konto/\" />\t\t\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"register\" value=\"Zarejestruj się\">Zarejestruj się</button>
+                                                <input type=\"hidden\" id=\"accannouncements-register-nonce\" name=\"accannouncements-register-nonce\" value=\"ce32910364\" /><input type=\"hidden\" name=\"\" value=\"\" />\t\t\t\t<button type=\"submit\" class=\"accannouncements-Button button\" name=\"register\" value=\"Zarejestruj się\">Zarejestruj się</button>
                                             </p>
 
 
@@ -734,7 +638,7 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
     /* ]]> */
 </script>
 <script type='text/javascript' src='js/ideal-slides.js?ver=4.9.8'></script>
-<script type='text/javascript' src='js/wp-embed.min.js?ver=4.9.8'></script>
+
 
 
 <script type=\"text/javascript\">
@@ -742,9 +646,7 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
     c = c.replace(/accannouncements-no-js/, 'accannouncements-js');
     document.body.className = c;
 </script>
-
-
 </body>
-</html>", "base.html.twig", "C:\\Users\\bartekd\\PhpstormProjects\\accommodation_announcements\\acc_announcements\\templates\\base.html.twig");
+</html>", "base.html.twig", "D:\\szkola\\pz\\accommodation_announcements_sources\\templates\\base.html.twig");
     }
 }
