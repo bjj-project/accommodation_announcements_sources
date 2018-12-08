@@ -647,6 +647,6 @@ class __TwigTemplate_1a9fc825b0296dd9eea2f459e08183df9f7ddf6953be8d01fa0e1f59158
     document.body.className = c;
 </script>
 </body>
-</html>", "base.html.twig", "D:\\szkola\\pz\\accommodation_announcements_sources\\templates\\base.html.twig");
+</html>", "base.html.twig", "C:\\xampp\\htdocs\\accommodation_announcements_sources\\templates\\base.html.twig");
     }
 }

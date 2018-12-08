@@ -415,6 +415,6 @@ class __TwigTemplate_3a03ab1efcd77ebc3839c2d69743820166ee8ab85f23b20edb0b14fd6c2
     });
 
 /*]]>*/</script>
-", "@Twig/base_js.html.twig", "C:\\Users\\bartekd\\PhpstormProjects\\accommodation_announcements\\acc_announcements\\vendor\\symfony\\twig-bundle\\Resources\\views\\base_js.html.twig");
+", "@Twig/base_js.html.twig", "C:\\xampp\\htdocs\\accommodation_announcements_sources\\vendor\\symfony\\twig-bundle\\Resources\\views\\base_js.html.twig");
     }
 }

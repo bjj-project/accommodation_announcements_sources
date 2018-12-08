@@ -372,6 +372,6 @@ class __TwigTemplate_2d8ca736c634ac0c8b639b07fb5d47d23e6546c573458c9dd534d348065
 {% block body %}
     {% include '@Twig/Exception/exception.html.twig' %}
 {% endblock %}
-", "@Twig/Exception/exception_full.html.twig", "C:\\Users\\bartekd\\PhpstormProjects\\accommodation_announcements\\acc_announcements\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\exception_full.html.twig");
+", "@Twig/Exception/exception_full.html.twig", "C:\\xampp\\htdocs\\accommodation_announcements_sources\\vendor\\symfony\\twig-bundle\\Resources\\views\\Exception\\exception_full.html.twig");
     }
 }

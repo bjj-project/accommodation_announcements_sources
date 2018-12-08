@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
   <parameters>
-    <parameter key="kernel.root_dir">D:\szkola\pz\accommodation_announcements_sources\src</parameter>
-    <parameter key="kernel.project_dir">D:\szkola\pz\accommodation_announcements_sources</parameter>
+    <parameter key="kernel.root_dir">C:\xampp\htdocs\accommodation_announcements_sources\src</parameter>
+    <parameter key="kernel.project_dir">C:\xampp\htdocs\accommodation_announcements_sources</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.debug">true</parameter>
     <parameter key="kernel.name">src</parameter>
-    <parameter key="kernel.cache_dir">D:\szkola\pz\accommodation_announcements_sources\var\cache\dev</parameter>
-    <parameter key="kernel.logs_dir">D:\szkola\pz\accommodation_announcements_sources\var\log</parameter>
+    <parameter key="kernel.cache_dir">C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev</parameter>
+    <parameter key="kernel.logs_dir">C:\xampp\htdocs\accommodation_announcements_sources\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
-        <parameter key="path">D:\szkola\pz\accommodation_announcements_sources\vendor\symfony\framework-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\framework-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
       </parameter>
       <parameter key="TwigBundle" type="collection">
-        <parameter key="path">D:\szkola\pz\accommodation_announcements_sources\vendor\symfony\twig-bundle</parameter>
+        <parameter key="path">C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\twig-bundle</parameter>
         <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
       </parameter>
     </parameter>
@@ -40,13 +40,15 @@
       <parameter key="cookie_httponly">true</parameter>
       <parameter key="gc_probability">1</parameter>
     </parameter>
-    <parameter key="session.save_path">D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/sessions</parameter>
+    <parameter key="session.save_path">C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/sessions</parameter>
     <parameter key="session.metadata.update_threshold">0</parameter>
+    <parameter key="form.type_extension.csrf.enabled">false</parameter>
+    <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="asset.request_context.base_path"></parameter>
     <parameter key="asset.request_context.secure">false</parameter>
     <parameter key="data_collector.templates" type="collection"/>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/srcDevDebugProjectContainer.xml</parameter>
+    <parameter key="debug.container.dump">C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/srcDevDebugProjectContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
@@ -58,7 +60,7 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
-    <parameter key="twig.default_path">D:\szkola\pz\accommodation_announcements_sources/templates</parameter>
+    <parameter key="twig.default_path">C:\xampp\htdocs\accommodation_announcements_sources/templates</parameter>
     <parameter key="console.command.ids" type="collection"/>
   </parameters>
   <services>
@@ -66,6 +68,7 @@
     <service id="App\Controller\MainController" class="App\Controller\MainController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
     </service>
+    <service id="App\Model\Task" class="App\Model\Task" public="false" autowire="true" autoconfigure="true"/>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -235,6 +238,14 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
+        <argument>console.command</argument>
+        <argument type="collection">
+          <argument type="service" id="debug.debug_handlers_listener"/>
+          <argument>configure</argument>
+        </argument>
+        <argument>2048</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.request</argument>
         <argument type="collection">
           <argument type="service" id="router_listener"/>
@@ -293,9 +304,9 @@
     <service id="filesystem" class="Symfony\Component\Filesystem\Filesystem" public="true"/>
     <service id="file_locator" class="Symfony\Component\HttpKernel\Config\FileLocator" public="false">
       <argument type="service" id="kernel"/>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\src/Resources</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\src/Resources</argument>
       <argument type="collection">
-        <argument>D:\szkola\pz\accommodation_announcements_sources\src</argument>
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources\src</argument>
       </argument>
     </service>
     <service id="uri_signer" class="Symfony\Component\HttpKernel\UriSigner" public="false">
@@ -429,11 +440,31 @@
         <argument>lint:yaml</argument>
       </call>
     </service>
+    <service id="console.command.form_debug" class="Symfony\Component\Form\Command\DebugCommand" public="false">
+      <tag name="console.command" command="debug:form"/>
+      <argument type="service" id="form.registry"/>
+      <argument type="collection">
+        <argument>Symfony\Component\Form\Extension\Core\Type</argument>
+      </argument>
+      <argument type="collection">
+        <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
+        <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
+      </argument>
+      <argument type="collection">
+        <argument>Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension</argument>
+        <argument>Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension</argument>
+      </argument>
+      <argument type="collection"/>
+      <call method="setName">
+        <argument>debug:form</argument>
+      </call>
+    </service>
     <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter" public="true">
       <tag name="cache.pool"/>
-      <argument>QsOP76MmxO</argument>
+      <argument>skpRoSER-W</argument>
       <argument>0</argument>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/pools</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/pools</argument>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
       </call>
@@ -443,37 +474,37 @@
     </service>
     <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="true">
       <tag name="cache.pool"/>
-      <argument>85fmBOExtt</argument>
+      <argument>U6Qryc0yRR</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/pools</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.validator" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
       <tag name="cache.pool"/>
-      <argument>vrCthKIyjZ</argument>
+      <argument>VIQoQmgll1</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/pools</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.serializer" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
       <tag name="cache.pool"/>
-      <argument>A8YnuItetW</argument>
+      <argument>mxJZsy5xZx</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/pools</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.annotations" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
       <tag name="cache.pool"/>
-      <argument>DFyxN+SUHC</argument>
+      <argument>ifCxn5Y5Y1</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/pools</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -483,7 +514,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/pools</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/pools</argument>
       <argument type="service" id="logger" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -512,7 +543,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/pools</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/pools</argument>
       <call method="setLogger">
         <argument type="service" id="logger" on-invalid="ignore"/>
       </call>
@@ -577,15 +608,15 @@
         <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
-    <service id=".2_ServiceLocator~rb9gT7C" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".2_ServiceLocator~JjHKe0l" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="initialized_session" type="service" id="session" on-invalid="ignore_uninitialized"/>
         <argument key="session" type="service" id="session" on-invalid="ignore"/>
       </argument>
     </service>
-    <service id=".1_NativeFileSessionHandler~rb9gT7C" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler" public="false">
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/sessions</argument>
+    <service id=".1_NativeFileSessionHandler~JjHKe0l" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler" public="false">
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/sessions</argument>
     </service>
     <service id="session" class="Symfony\Component\HttpFoundation\Session\Session" public="true">
       <argument type="service" id="session.storage.native"/>
@@ -608,22 +639,80 @@
     <service id="session.flash_bag" class="Symfony\Component\HttpFoundation\Session\Flash\FlashBag" public="false"/>
     <service id="session.attribute_bag" class="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag" public="false"/>
     <service id="session.storage.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage" public="false">
-      <argument>D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/sessions</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service" id="session.storage.metadata_bag"/>
     </service>
     <service id="session.handler.native_file" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler" public="false">
-      <argument type="service" id=".1_NativeFileSessionHandler~rb9gT7C"/>
+      <argument type="service" id=".1_NativeFileSessionHandler~JjHKe0l"/>
     </service>
     <service id="session_listener" class="Symfony\Component\HttpKernel\EventListener\SessionListener" public="false">
       <tag name="kernel.event_subscriber"/>
       <tag name="container.hot_path"/>
       <tag name="container.hot_path"/>
       <tag name="container.hot_path"/>
-      <argument type="service" id=".2_ServiceLocator~rb9gT7C"/>
+      <argument type="service" id=".2_ServiceLocator~JjHKe0l"/>
     </service>
     <service id="session.save_listener" class="Symfony\Component\HttpKernel\EventListener\SaveSessionListener" public="false">
       <deprecated>The "%service_id%" service is deprecated since Symfony 4.1. Use the "session_listener" service instead.</deprecated>
+    </service>
+    <service id="form.resolved_type_factory" class="Symfony\Component\Form\ResolvedFormTypeFactory" public="false"/>
+    <service id="form.registry" class="Symfony\Component\Form\FormRegistry" public="false">
+      <argument type="collection">
+        <argument type="service" id="form.extension"/>
+      </argument>
+      <argument type="service" id="form.resolved_type_factory"/>
+    </service>
+    <service id="form.factory" class="Symfony\Component\Form\FormFactory" public="true">
+      <argument type="service" id="form.registry"/>
+      <argument type="service" id="form.resolved_type_factory"/>
+    </service>
+    <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
+      <argument type="service" id=".service_locator.G7nCPaT"/>
+      <argument type="collection">
+        <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
+          <argument type="service" id="form.type_extension.form.http_foundation"/>
+        </argument>
+        <argument key="Symfony\Component\Form\Extension\Core\Type\RepeatedType" type="iterator">
+          <argument type="service" id="form.type_extension.repeated.validator"/>
+        </argument>
+        <argument key="Symfony\Component\Form\Extension\Core\Type\SubmitType" type="iterator">
+          <argument type="service" id="form.type_extension.submit.validator"/>
+        </argument>
+      </argument>
+      <argument type="iterator"/>
+    </service>
+    <service id="form.choice_list_factory.default" class="Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory" public="false"/>
+    <service id="form.choice_list_factory.property_access" class="Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator" public="false">
+      <argument type="service" id="form.choice_list_factory.default"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="form.choice_list_factory.cached" class="Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator" public="false">
+      <argument type="service" id="form.choice_list_factory.property_access"/>
+    </service>
+    <service id="form.type.form" class="Symfony\Component\Form\Extension\Core\Type\FormType" public="false">
+      <tag name="form.type"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="form.type.choice" class="Symfony\Component\Form\Extension\Core\Type\ChoiceType" public="false">
+      <tag name="form.type"/>
+      <argument type="service" id="form.choice_list_factory.cached"/>
+    </service>
+    <service id="form.type_extension.form.http_foundation" class="Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension" public="false">
+      <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
+      <argument type="service" id="form.type_extension.form.request_handler"/>
+    </service>
+    <service id="form.type_extension.form.request_handler" class="Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler" public="false">
+      <argument type="service" id="form.server_params"/>
+    </service>
+    <service id="form.server_params" class="Symfony\Component\Form\Util\ServerParams" public="false">
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="form.type_extension.repeated.validator" class="Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension" public="false">
+      <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\RepeatedType" extended-type="Symfony\Component\Form\Extension\Core\Type\RepeatedType"/>
+    </service>
+    <service id="form.type_extension.submit.validator" class="Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension" public="false">
+      <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\SubmitType" extended-type="Symfony\Component\Form\Extension\Core\Type\SubmitType"/>
     </service>
     <service id="assets.packages" class="Symfony\Component\Asset\Packages" public="false">
       <argument type="service" id="assets._default_package"/>
@@ -673,6 +762,10 @@
         <argument key="lazy">true</argument>
       </argument>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createConnection"/>
+    </service>
+    <service id="cache.property_access" class="Symfony\Component\Cache\Adapter\ArrayAdapter" public="false">
+      <argument>0</argument>
+      <argument>false</argument>
     </service>
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener" public="false">
       <tag name="kernel.event_subscriber"/>
@@ -743,7 +836,7 @@
       <argument type="service" id=".service_locator.oNnsU_h.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">D:\szkola\pz\accommodation_announcements_sources\var\cache\dev</argument>
+        <argument key="cache_dir">C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
         <argument key="generator_base_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
@@ -785,7 +878,7 @@
       <argument type="service" id="request_stack"/>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="logger" on-invalid="ignore"/>
-      <argument>D:\szkola\pz\accommodation_announcements_sources</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources</argument>
       <argument>true</argument>
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
@@ -797,10 +890,15 @@
       <argument type="service" id="twig" on-invalid="ignore"/>
       <argument>null</argument>
     </service>
+    <service id="property_accessor" class="Symfony\Component\PropertyAccess\PropertyAccessor" public="false">
+      <argument>false</argument>
+      <argument>false</argument>
+      <argument type="service" id="cache.property_access" on-invalid="ignore"/>
+    </service>
     <service id="twig" class="Twig\Environment" public="true">
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
-        <argument key="default_path">D:\szkola\pz\accommodation_announcements_sources/templates</argument>
+        <argument key="default_path">C:\xampp\htdocs\accommodation_announcements_sources/templates</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
         <argument key="exception_controller">twig.controller.exception::showAction</argument>
@@ -808,7 +906,7 @@
           <argument>form_div_layout.html.twig</argument>
         </argument>
         <argument key="autoescape">name</argument>
-        <argument key="cache">D:\szkola\pz\accommodation_announcements_sources\var\cache\dev/twig</argument>
+        <argument key="cache">C:\xampp\htdocs\accommodation_announcements_sources\var\cache\dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="paths" type="collection"/>
         <argument key="date" type="collection">
@@ -847,6 +945,9 @@
         <argument type="service" id="twig.extension.httpfoundation"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="twig.extension.form"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="twig.extension.debug"/>
       </call>
       <call method="addGlobal">
@@ -858,7 +959,7 @@
       </call>
       <call method="addGlobal">
         <argument>kernelRootDir</argument>
-        <argument>D:\szkola\pz\accommodation_announcements_sources</argument>
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources</argument>
       </call>
       <configurator service="twig.configurator.environment" method="configure"/>
     </service>
@@ -878,13 +979,17 @@
       <tag name="container.service_subscriber" id="twig"/>
       <argument type="service" id=".service_locator.UEpceA5.twig.cache_warmer"/>
       <argument>null</argument>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
+      </argument>
     </service>
     <service id="twig.template_iterator" class="Symfony\Bundle\TwigBundle\TemplateIterator" public="false">
       <argument type="service" id="kernel"/>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\src</argument>
-      <argument type="collection"/>
-      <argument>D:\szkola\pz\accommodation_announcements_sources/templates</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\src</argument>
+      <argument type="collection">
+        <argument key="C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\twig-bridge/Resources/views/Form">null</argument>
+      </argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources/templates</argument>
     </service>
     <service id="twig.template_cache_warmer" class="Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer" public="false">
       <tag name="kernel.cache_warmer"/>
@@ -895,25 +1000,28 @@
     <service id="twig.loader.native_filesystem" class="Twig\Loader\FilesystemLoader" public="false">
       <tag name="twig.loader"/>
       <argument type="collection"/>
-      <argument>D:\szkola\pz\accommodation_announcements_sources</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources</argument>
       <call method="addPath">
-        <argument>D:\szkola\pz\accommodation_announcements_sources\vendor\symfony\framework-bundle/Resources/views</argument>
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\framework-bundle/Resources/views</argument>
         <argument>Framework</argument>
       </call>
       <call method="addPath">
-        <argument>D:\szkola\pz\accommodation_announcements_sources\vendor\symfony\framework-bundle/Resources/views</argument>
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\framework-bundle/Resources/views</argument>
         <argument>!Framework</argument>
       </call>
       <call method="addPath">
-        <argument>D:\szkola\pz\accommodation_announcements_sources\vendor\symfony\twig-bundle/Resources/views</argument>
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\twig-bundle/Resources/views</argument>
         <argument>Twig</argument>
       </call>
       <call method="addPath">
-        <argument>D:\szkola\pz\accommodation_announcements_sources\vendor\symfony\twig-bundle/Resources/views</argument>
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\twig-bundle/Resources/views</argument>
         <argument>!Twig</argument>
       </call>
       <call method="addPath">
-        <argument>D:\szkola\pz\accommodation_announcements_sources/templates</argument>
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources/templates</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\accommodation_announcements_sources\vendor\symfony\twig-bridge/Resources/views/Form</argument>
       </call>
     </service>
     <service id="twig.loader.chain" class="Twig\Loader\ChainLoader" public="false"/>
@@ -939,7 +1047,7 @@
     <service id="twig.extension.code" class="Symfony\Bridge\Twig\Extension\CodeExtension" public="false">
       <tag name="twig.extension"/>
       <argument type="service" id="debug.file_link_formatter" on-invalid="ignore"/>
-      <argument>D:\szkola\pz\accommodation_announcements_sources\src</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources\src</argument>
       <argument>UTF-8</argument>
     </service>
     <service id="twig.extension.routing" class="Symfony\Bridge\Twig\Extension\RoutingExtension" public="false">
@@ -995,12 +1103,28 @@
       <argument>,</argument>
     </service>
     <service id="twig.runtime_loader" class="Twig\RuntimeLoader\ContainerRuntimeLoader" public="false">
-      <argument type="service" id=".service_locator.k9sO3Wl"/>
+      <argument type="service" id=".service_locator.WOSHvMv"/>
+    </service>
+    <service id="twig.extension.form" class="Symfony\Bridge\Twig\Extension\FormExtension" public="false">
+      <tag name="twig.extension"/>
+      <argument type="collection">
+        <argument type="service" id="service_container"/>
+        <argument>twig.form.renderer</argument>
+      </argument>
+    </service>
+    <service id="twig.form.engine" class="Symfony\Bridge\Twig\Form\TwigRendererEngine" public="false">
+      <argument>%twig.form.resources%</argument>
+      <argument type="service" id="twig"/>
+    </service>
+    <service id="twig.form.renderer" class="Symfony\Component\Form\FormRenderer" public="false">
+      <tag name="twig.runtime"/>
+      <argument type="service" id="twig.form.engine"/>
+      <argument>null</argument>
     </service>
     <service id="twig.command.debug" class="Symfony\Bridge\Twig\Command\DebugCommand" public="false">
       <tag name="console.command" command="debug:twig"/>
       <argument type="service" id="twig"/>
-      <argument>D:\szkola\pz\accommodation_announcements_sources</argument>
+      <argument>C:\xampp\htdocs\accommodation_announcements_sources</argument>
       <call method="setName">
         <argument>debug:twig</argument>
       </call>
@@ -1022,6 +1146,13 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="inline" type="service" id="fragment.renderer.inline"/>
+      </argument>
+    </service>
+    <service id=".service_locator.G7nCPaT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service" id="form.type.choice"/>
+        <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service" id="form.type.form"/>
       </argument>
     </service>
     <service id="logger" class="Symfony\Component\HttpKernel\Log\Logger" public="false"/>
@@ -1064,7 +1195,7 @@
       <factory service=".service_locator.UEpceA5" method="withContext"/>
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id=".service_locator.b7BwCpU"/>
+      <argument type="service" id=".service_locator.5sWu8vA"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -1081,11 +1212,12 @@
         <argument key="debug:router">console.command.router_debug</argument>
         <argument key="router:match">console.command.router_match</argument>
         <argument key="lint:yaml">console.command.yaml_lint</argument>
+        <argument key="debug:form">console.command.form_debug</argument>
         <argument key="debug:twig">twig.command.debug</argument>
         <argument key="lint:twig">twig.command.lint</argument>
       </argument>
     </service>
-    <service id=".service_locator.b7BwCpU" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.5sWu8vA" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -1100,6 +1232,7 @@
         <argument key="console.command.container_debug" type="service" id="console.command.container_debug"/>
         <argument key="console.command.debug_autowiring" type="service" id="console.command.debug_autowiring"/>
         <argument key="console.command.event_dispatcher_debug" type="service" id="console.command.event_dispatcher_debug"/>
+        <argument key="console.command.form_debug" type="service" id="console.command.form_debug"/>
         <argument key="console.command.router_debug" type="service" id="console.command.router_debug"/>
         <argument key="console.command.router_match" type="service" id="console.command.router_match"/>
         <argument key="console.command.yaml_lint" type="service" id="console.command.yaml_lint"/>
@@ -1107,10 +1240,11 @@
         <argument key="twig.command.lint" type="service" id="twig.command.lint"/>
       </argument>
     </service>
-    <service id=".service_locator.k9sO3Wl" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.WOSHvMv" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Symfony\Bridge\Twig\Extension\HttpKernelRuntime" type="service" id="twig.runtime.httpkernel"/>
+        <argument key="Symfony\Component\Form\FormRenderer" type="service" id="twig.form.renderer"/>
       </argument>
     </service>
     <service id="Psr\Container\ContainerInterface" alias="service_container" public="false"/>
@@ -1133,6 +1267,11 @@
     <service id="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface" alias="session.flash_bag" public="false"/>
     <service id="session.storage.filesystem" alias="session.storage.mock_file" public="false"/>
     <service id="session.storage" alias="session.storage.native"/>
+    <service id="Symfony\Component\Form\ResolvedFormTypeFactoryInterface" alias="form.resolved_type_factory" public="false"/>
+    <service id="Symfony\Component\Form\FormRegistryInterface" alias="form.registry" public="false"/>
+    <service id="Symfony\Component\Form\FormFactoryInterface" alias="form.factory" public="false"/>
+    <service id="form.property_accessor" alias="property_accessor" public="false"/>
+    <service id="form.choice_list_factory" alias="form.choice_list_factory.cached" public="false"/>
     <service id="Symfony\Component\Asset\Packages" alias="assets.packages" public="false"/>
     <service id="cache.default_redis_provider" alias=".cache_connection.GD_MSZC" public="false"/>
     <service id="cache.default_memcached_provider" alias=".cache_connection.JKE6keX" public="false"/>
@@ -1143,12 +1282,13 @@
     <service id="Symfony\Component\Routing\Matcher\UrlMatcherInterface" alias="router.default" public="false"/>
     <service id="Symfony\Component\Routing\RequestContextAwareInterface" alias="router.default" public="false"/>
     <service id="Symfony\Component\Routing\RequestContext" alias="router.request_context" public="false"/>
+    <service id="Symfony\Component\PropertyAccess\PropertyAccessorInterface" alias="property_accessor" public="false"/>
     <service id="Twig_Environment" alias="twig" public="false"/>
     <service id="Twig\Environment" alias="twig" public="false"/>
     <service id="argument_resolver.controller_locator" alias=".service_locator.9_yeNH1"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>
-    <service id=".service_locator.AoifO_3" alias=".2_ServiceLocator~rb9gT7C" public="false"/>
+    <service id=".service_locator.AoifO_3" alias=".2_ServiceLocator~JjHKe0l" public="false"/>
   </services>
 </container>

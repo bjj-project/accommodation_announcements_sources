@@ -21,8 +21,9 @@ class srcDevDebugProjectContainerUrlGenerator extends Symfony\Component\Routing\
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = array(
         '_twig_error_test' => array(array('code', '_format'), array('_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'), array('code' => '\\d+'), array(array('variable', '.', '[^/]++', '_format'), array('variable', '/', '\\d+', 'code'), array('text', '/_error')), array(), array()),
-        'app_acc_annoncements' => array(array(), array('_controller' => 'App\\Controller\\MainController::MainSite'), array(), array(array('text', '/')), array(), array()),
-        'blog' => array(array(), array('_controller' => 'App\\Controller\\MainController::blog'), array(), array(array('text', '/blog')), array(), array()),
+        'app_acc_annoncements' => array(array(), array('_controller' => 'App\\Controller\\MainController::Login'), array(), array(array('text', '/')), array(), array()),
+        'account' => array(array(), array('_controller' => 'App\\Controller\\MainController::profile'), array(), array(array('text', '/account')), array(), array()),
+        'orders' => array(array(), array('_controller' => 'App\\Controller\\MainController::orders'), array(), array(array('text', '/orders')), array(), array()),
     );
         }
     }

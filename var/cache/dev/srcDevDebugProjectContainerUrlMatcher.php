@@ -64,16 +64,16 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         switch ($pathinfo) {
             default:
                 $routes = array(
-                    '/' => array(array('_route' => 'app_acc_annoncements', '_controller' => 'App\\Controller\\MainController::MainSite'), null, null, null),
+                    '/' => array(array('_route' => 'app_acc_annoncements', '_controller' => 'App\\Controller\\MainController::Login'), null, null, null),
                     '/account' => array(array('_route' => 'account', '_controller' => 'App\\Controller\\MainController::profile'), null, null, null),
                     '/orders' => array(array('_route' => 'orders', '_controller' => 'App\\Controller\\MainController::orders'), null, null, null),
                 );
-
+    
                 if (!isset($routes[$pathinfo])) {
                     break;
                 }
                 list($ret, $requiredHost, $requiredMethods, $requiredSchemes) = $routes[$pathinfo];
-
+    
                 $hasRequiredScheme = !$requiredSchemes || isset($requiredSchemes[$context->getScheme()]);
                 if ($requiredMethods && !isset($requiredMethods[$canonicalMethod]) && !isset($requiredMethods[$requestMethod])) {
                     if ($hasRequiredScheme) {
@@ -85,7 +85,7 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     $allowSchemes += $requiredSchemes;
                     break;
                 }
-
+    
                 return $ret;
         }
 
@@ -103,15 +103,15 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                         $routes = array(
                             35 => array(array('_route' => '_twig_error_test', '_controller' => 'twig.controller.preview_error::previewErrorPageAction', '_format' => 'html'), array('code', '_format'), null, null),
                         );
-
+            
                         list($ret, $vars, $requiredMethods, $requiredSchemes) = $routes[$m];
-
+            
                         foreach ($vars as $i => $v) {
                             if (isset($matches[1 + $i])) {
                                 $ret[$v] = $matches[1 + $i];
                             }
                         }
-
+            
                         $hasRequiredScheme = !$requiredSchemes || isset($requiredSchemes[$context->getScheme()]);
                         if ($requiredMethods && !isset($requiredMethods[$canonicalMethod]) && !isset($requiredMethods[$requestMethod])) {
                             if ($hasRequiredScheme) {
@@ -123,7 +123,7 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                             $allowSchemes += $requiredSchemes;
                             break;
                         }
-
+            
                         return $ret;
                 }
 
