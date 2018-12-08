@@ -4,7 +4,7 @@
 
 app_acc_annoncements:
     path: /
-    controller: App\Controller\MainController::MainSite
+    controller: App\Controller\MainController::Login
 
 account:
     path: /account
