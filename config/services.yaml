@@ -4,6 +4,13 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: db_apartment_booking_system
+    database_driver: mysql
+    database_user: root
+    database_password:
+
 
 services:
     # default configuration for services in *this* file

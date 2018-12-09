@@ -137,6 +137,10 @@
 
                                         <h2>Zaloguj się</h2>
                                         <BR><BR>
+                                        {% if was_ok == 0 %}
+                                            <H1 style="color: #FF0000;"> Error: {{ error_message }} </H1>
+                                        {% endif %}
+
                                         <div class="form_row">
                                             {{ form_start(form) }}
                                             {{ form_widget(form) }}

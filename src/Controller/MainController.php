@@ -9,48 +9,56 @@
 namespace App\Controller;
 
 use App\Model\Task;
+use App\Model\LoginModel;
+use App\Database\DatabaseManager;
 use Symfony\Component\Form\Forms;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Helper\DebugLog;
 
 
 class MainController extends Controller
 {
     public function Login(Request $request)
     {
-        // just setup a fresh $task object (remove the dummy data)
-        $task = new Task();
+        $login = new LoginModel();
 
-        $form = $this->createFormBuilder($task)
-            ->add('task', TextType::class)
-            ->add('dueDate', DateType::class)
+        $form = $this->createFormBuilder($login)
+            ->add('email', TextType::class)
+            ->add('password', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $login = $form->getData();
 
-            $task = $form->getData();
+            $database = new DatabaseManager($this->container);
+            $was_ok = $database->execQuery($login);
+            if(false == $was_ok)
+            {
+                //error system
+            }
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($task);
-            // $entityManager->flush();
+            DebugLog::console_log('error:', $login->getErrorMessage());
+            DebugLog::console_log('was_ok:', $login->getWasOk());
 
-            return $this->render('index.html.twig', array(
-                'form' => $form->createView()
+            return $this->render('base.html.twig', array(
+                'form' => $form->createView(),
+                'was_ok' => $login->getWasOk(),
+                'error_message' => $login->getErrorMessage()
             ));
 
-            //return $this->redirectToRoute('task_success');
         }
 
         return $this->render('base.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'was_ok' => 1
         ));
     }
 
