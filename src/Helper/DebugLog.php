@@ -13,28 +13,23 @@ class DebugLog
     public static function console_log($message, $data = '')
     {
         echo '<script>';
-        echo 'console.log("' . $message . '");';
 
         if(is_array($data))
         {
-            echo 'console.log("Array");';
+            echo 'console.log("' . $message . ' type: Array");';
             echo 'console.log(' . json_encode( $data ) . ');';
-            echo '</script>';
-            return;
         }
         else if(is_object($data))
         {
-            echo 'console.log("Object");';
+            echo 'console.log("' . $message . ' type: Object");';
             echo 'console.log(' . $data->debug() . ');';
-            echo '</script>';
-            return;
         }
         else
         {
-            echo 'console.log("'. $data .'");';
-            echo '</script>';
-            return;
+            echo 'console.log("' . $message . ' ' . $data . '");';
         }
+
+        echo '</script>';
     }
 
     public static function message_log($message, $data = '')

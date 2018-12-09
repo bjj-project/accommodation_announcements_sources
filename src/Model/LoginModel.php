@@ -8,6 +8,8 @@
 
 namespace App\Model;
 
+use \PDO;
+use App\Helper\DebugLog;
 use App\Database\I_Query;
 
 class LoginModel extends I_Query
@@ -23,12 +25,15 @@ class LoginModel extends I_Query
     private $m_email;
     private $m_password;
 
+
+    //SET QUERY
     private function prepareQuery()
     {
         $this->m_sql_query_text = "CALL login ('". $this->m_email ."', '". $this->m_password ."');";
     }
 
-    //CONSTRUCTOR SET QUERY
+
+    //CONSTRUCTOR
     public function __construct()
     {
         $this->prepareQuery();
@@ -97,8 +102,10 @@ class LoginModel extends I_Query
 
 
     //SET FROM QUERY RESULT
-    final public function setQueryResult($one_row_of_result_query)
+    final public function setQueryResult($statement)
     {
+        $one_row_of_result_query = $statement->fetch(PDO::FETCH_ASSOC);
+
         $this->m_was_ok         = $one_row_of_result_query['was_ok'];
         $this->m_error_message  = $one_row_of_result_query['message'];
         $this->m_error_code     = $one_row_of_result_query['code'];
@@ -106,6 +113,8 @@ class LoginModel extends I_Query
         $this->m_name           = $one_row_of_result_query['name'];
         $this->m_surname        = $one_row_of_result_query['surname'];
         $this->m_is_admin       = $one_row_of_result_query['admin'];
+
+        DebugLog::console_log("Query result:", $one_row_of_result_query);
     }
 
     public function debug()

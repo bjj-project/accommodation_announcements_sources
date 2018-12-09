@@ -73,7 +73,7 @@ class DatabaseManager
         return $this->m_last_error;
     }
 
-    public function execQuery(I_Query& $query)
+    public function execQuery(&$query)
     {
         if(false == $this->m_is_connected)
         {
@@ -82,17 +82,13 @@ class DatabaseManager
 
         DebugLog::console_log('Query:', $query->getQueryText());
         $statement = $this->m_connection->prepare($query->getQueryText());
-        if(false == $statement->execute())
-        {
+        if (false == $statement->execute()) {
             $arr = $statement->errorInfo();
             DebugLog::console_log('Error:', $arr);
             return false;
         }
 
-        $one_row = $statement->fetch(PDO::FETCH_ASSOC);
-        $query->setQueryResult($one_row);
-        DebugLog::console_log('Row:', $one_row);
-
+        $query->setQueryResult($statement);
         return true;
     }
 }
