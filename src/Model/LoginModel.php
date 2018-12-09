@@ -23,10 +23,15 @@ class LoginModel extends I_Query
     private $m_email;
     private $m_password;
 
+    private function prepareQuery()
+    {
+        $this->m_sql_query_text = "CALL login ('". $this->m_email ."', '". $this->m_password ."');";
+    }
+
     //CONSTRUCTOR SET QUERY
     public function __construct()
     {
-        $this->m_sql_query_text = "CALL login ('". $this->m_email ."', '". $this->m_password ."');";
+        $this->prepareQuery();
     }
 
 
@@ -81,11 +86,13 @@ class LoginModel extends I_Query
     public function setEmail($email)
     {
         $this->m_email = $email;
+        $this->prepareQuery();
     }
 
     public function setPassword($password)
     {
         $this->m_password = $password;
+        $this->prepareQuery();
     }
 
 
@@ -99,5 +106,10 @@ class LoginModel extends I_Query
         $this->m_name           = $one_row_of_result_query['name'];
         $this->m_surname        = $one_row_of_result_query['surname'];
         $this->m_is_admin       = $one_row_of_result_query['admin'];
+    }
+
+    public function debug()
+    {
+        return json_encode( get_object_vars($this));
     }
 }

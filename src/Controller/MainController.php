@@ -45,6 +45,7 @@ class MainController extends Controller
                 //error system
             }
 
+            DebugLog::console_log('login:', $login);
             DebugLog::console_log('error:', $login->getErrorMessage());
             DebugLog::console_log('was_ok:', $login->getWasOk());
 
