@@ -77,7 +77,10 @@
     <service id="App\Database\DatabaseManager" class="App\Database\DatabaseManager" public="false" autowire="true" autoconfigure="true"/>
     <service id="App\Database\I_Query" class="App\Database\I_Query" public="false" autowire="true" autoconfigure="true"/>
     <service id="App\Helper\DebugLog" class="App\Helper\DebugLog" public="false" autowire="true" autoconfigure="true"/>
+    <service id="App\Model\AccommodationByClientModel" class="App\Model\AccommodationByClientModel" public="false" autowire="true" autoconfigure="true"/>
+    <service id="App\Model\AllAccommodationModel" class="App\Model\AllAccommodationModel" public="false" autowire="true" autoconfigure="true"/>
     <service id="App\Model\LoginModel" class="App\Model\LoginModel" public="false" autowire="true" autoconfigure="true"/>
+    <service id="App\Model\RegistrationModel" class="App\Model\RegistrationModel" public="false" autowire="true" autoconfigure="true"/>
     <service id="App\Model\Task" class="App\Model\Task" public="false" autowire="true" autoconfigure="true"/>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>

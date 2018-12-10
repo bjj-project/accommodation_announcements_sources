@@ -22,5 +22,10 @@ class I_Query
         //override this method
     }
 
+    public function debug()
+    {
+        //override this method
+    }
+
 
 }
