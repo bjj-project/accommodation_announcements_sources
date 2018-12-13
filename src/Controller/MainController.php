@@ -24,41 +24,55 @@ class MainController extends Controller
 {
     public function Login(Request $request)
     {
-        $login = new LoginModel();
-
-        $form = $this->createFormBuilder($login)
-            ->add('email', TextType::class)
-            ->add('password', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create Task'))
+        $form_login = $this->createFormBuilder(null)
             ->getForm();
 
-        $form->handleRequest($request);
+        $form_login_2 = $this->createFormBuilder(null)
+            ->getForm();
 
-        if ($form->isSubmitted() && $form->isValid())
+        if($request->isMethod('POST'))
         {
-            $login = $form->getData();
-
-            $database = new DatabaseManager($this->container);
-            $was_ok = $database->execQuery($login);
-            if(false == $was_ok)
+            //SUBMIT login
+            if(false == is_null($request->request->get("login")))
             {
-                //error system
+                DebugLog::console_log('LOGIN');
+
+                $login = new LoginModel();
+                $login->setEmail($request->request->get("username"));
+                $login->setPassword($request->request->get("password"));
+
+                $database = new DatabaseManager($this->container);
+                $was_ok = $database->execQuery($login);
+                if(false == $was_ok)
+                {
+                    //error system
+                }
+
+                DebugLog::console_log('login:', $login);
+                DebugLog::console_log('error:', $login->getErrorMessage());
+                DebugLog::console_log('was_ok:', $login->getWasOk());
+                DebugLog::console_log('code:', $login->getErrorCode());
+
+                return $this->render('base.html.twig', array(
+                    'form_login' => $form_login->createView(),
+                    'form_login_2' => $form_login_2->createView(),
+                    'was_ok' => $login->getWasOk(),
+                    'error_code' => $login->getErrorCode(),
+                    'error_message' => $login->getErrorMessage()
+                ));
             }
 
-            DebugLog::console_log('login:', $login);
-            DebugLog::console_log('error:', $login->getErrorMessage());
-            DebugLog::console_log('was_ok:', $login->getWasOk());
-
-            return $this->render('base.html.twig', array(
-                'form' => $form->createView(),
-                'was_ok' => $login->getWasOk(),
-                'error_message' => $login->getErrorMessage()
-            ));
-
+            //SUBMIT register
+            if(false == is_null($request->request->get("register")))
+            {
+                DebugLog::console_log('REJESTRACJA');
+            }
         }
 
         return $this->render('base.html.twig', array(
-            'form' => $form->createView(),
+            'form_login' => $form_login->createView(),
+            'form_login_2' => $form_login_2->createView(),
+            'error_code' => 0,
             'was_ok' => 1
         ));
     }

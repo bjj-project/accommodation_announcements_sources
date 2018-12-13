@@ -136,18 +136,11 @@
 
 
                                         <h2>Zaloguj się</h2>
-                                        <BR><BR>
                                         {% if was_ok == 0 %}
                                             <H1 style="color: #FF0000;"> Error: {{ error_message }} </H1>
                                         {% endif %}
-
-                                        <div class="form_row">
-                                            {{ form_start(form) }}
-                                            {{ form_widget(form) }}
-                                            {{ form_end(form) }}
-                                        </div>
-                                        <BR><BR>
-                                        <form class="accannouncements-form accannouncements-form-login login" method="post">
+                                        {{ form_start(form_login) }}
+                                        <!--<form class="accannouncements-form accannouncements-form-login login" method="post" >-->
 
 
                                             <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
@@ -170,8 +163,8 @@
                                                 <a href="/">Nie pamiętasz hasła?</a>
                                             </p>
 
-
-                                        </form>
+                                        {{ form_end(form_login) }}
+                                        <!--</form>-->
 
 
                                     </div>
@@ -179,8 +172,8 @@
                                     <div class="u-column2 col-2">
 
                                         <h2>Zarejestruj się</h2>
-
-                                        <form method="post" class="accannouncements-form accannouncements-form-register register"  >
+                                        {{ form_start(form_login_2) }}
+                                        <!--<form method="post" class="accannouncements-form accannouncements-form-register register"  >-->
 
 
 
@@ -195,7 +188,8 @@
                                             </p>
 
 
-                                        </form>
+                                        {{ form_end(form_login_2) }}
+                                        <!--</form>-->
 
                                     </div>
 
