@@ -106,11 +106,13 @@ class RegistrationModel extends I_Query
     {
         $one_row_of_result_query = $statement->fetch(PDO::FETCH_ASSOC);
 
+        DebugLog::console_log("Query result:", $one_row_of_result_query);
+
         $this->m_was_ok   = $one_row_of_result_query['was_ok'];
         $this->m_message  = $one_row_of_result_query['message'];
         $this->m_code     = $one_row_of_result_query['code'];
 
-        DebugLog::console_log("Query result:", $one_row_of_result_query);
+        $statement->closeCursor();
     }
 
     //DEBUG

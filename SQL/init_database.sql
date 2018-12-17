@@ -275,3 +275,205 @@ modification_user_label:BEGIN
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
 DELIMITER ;
+
+
+
+/*DROP PROCEDURE create_offer*/
+/*CALL create_offer(id_user, id_permission, 'imie', 'title', 'description', '2018-11-09', '2018-11-23') RETURN columns:  was_ok, code, message, id_offer */
+DELIMITER $$
+CREATE PROCEDURE create_offer(IN id_user_var BIGINT, IN id_promotion_var INT, IN title_var VARCHAR(100), IN description_var VARCHAR(200), IN date_validity_from_var DATE, IN date_validity_to_var DATE) 
+create_offer_label:BEGIN
+
+	/*TODO*/
+
+	INSERT INTO offers VALUES(DEFAULT, id_user_var, id_promotion_var, title_var, description_var, FALSE, date_validity_from_var, date_validity_to_var, TRUE, FALSE, NULL);
+
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_offer;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE modification_offer*/
+/*CALL modification_offer(id_user, id_permission, 'imie', 'nazwisko', 'mail', 'haslo') RETURN columns:  was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE modification_offer(IN id_offer_var BIGINT, IN id_promotion_var INT, IN title_var VARCHAR(100), IN description_var VARCHAR(200), IN date_validity_from_var DATE, IN date_validity_to_var DATE) 
+modification_offer_label:BEGIN
+
+	/*TODO*/
+
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE delete_offer*/
+/*CALL delete_offer(id_offer_var) RETURN columns:  was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE delete_offer(IN id_offer_var BIGINT) 
+delete_offer_label:BEGIN
+
+	/*TODO*/
+
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE confirm_offer*/
+/*CALL confirm_offer(id_offer_var) RETURN columns:  was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE confirm_offer(IN id_offer_var BIGINT) 
+confirm_offer_label:BEGIN
+
+	/*TODO*/
+
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+END$$
+DELIMITER ;
+
+
+/*DROP VIEW get_all_offer*/
+/*SELECT * FROM get_all_offer RETURN columns:  id_offer, id_user, id_promotion, m_promotion_name, m_promotion_reduction, m_price_per_day, m_promotion_price_per_day, m_title, m_description, m_best, m_date_validity_from, m_date_validity_to    */
+CREATE VIEW get_all_offer
+AS
+	SELECT 
+		o.id_offer,
+		o.id_user,
+		o.id_promotion,
+		pr.name,
+		pr.price_reduction,
+		1.0 AS price_per_day,
+		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		o.title,
+		o.description,
+		o.best,
+		o.date_validity_from,
+		o.date_validity_to
+	FROM 
+		offers AS o 
+		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
+	WHERE 
+		o.active=TRUE 
+		AND o.confirmation = TRUE;
+		
+
+/*TODO: dodanie pobieranie zdjęcia*/
+/*DROP PROCEDURE get_offer_by_id*/
+/*CALL get_offer_by_id(id_offer_var) RETURN columns:  id_offer, id_user, id_promotion, m_promotion_name, m_promotion_reduction, m_price_per_day, m_promotion_price_per_day, m_title, m_description, m_best, m_date_validity_from, m_date_validity_to, o.active, o.confirmation */
+DELIMITER $$
+CREATE PROCEDURE get_offer_by_id(IN id_offer_var BIGINT)
+BEGIN
+	SELECT 
+		o.id_offer,
+		o.id_user,
+		o.id_promotion,
+		pr.name,
+		pr.price_reduction,
+		1.0 AS price_per_day,
+		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		o.title,
+		o.description,
+		o.best,
+		o.date_validity_from,
+		o.date_validity_to,
+		o.active,
+		o.confirmation
+	FROM 
+		offers AS o 
+		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
+	WHERE
+		o.id_offer = id_offer_var;
+END$$
+DELIMITER ;
+
+		
+/*DROP PROCEDURE add_image*/
+/*CALL add_image(id_offer_var, image_var, description_var, main_var) RETURN columns:  was_ok, code, message, id_offer_image */
+DELIMITER $$
+CREATE PROCEDURE add_image(IN id_offer_var BIGINT, IN image_var LONGBLOB, IN description_var VARCHAR(200), IN main_var BOOLEAN) 
+add_image_label:BEGIN
+
+	/*TODO*/
+
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_offer_image;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE delete_image*/
+/*CALL delete_image(id_offer_image_var) RETURN columns:  was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE delete_image(IN id_offer_image_var BIGINT) 
+delete_image_label:BEGIN
+
+	/*TODO*/
+
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE modification_image*/
+/*CALL modification_image(id_offer_image_var) RETURN columns:  was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE modification_image(IN id_offer_image_var BIGINT, IN description_var VARCHAR(200), IN main_var BOOLEAN) 
+modification_image_label:BEGIN
+
+	/*TODO*/
+	
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE create_reservation*/
+/*CALL create_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
+DELIMITER $$
+CREATE PROCEDURE create_reservation(IN id_user_var BIGINT, IN id_offer_var BIGINT, IN id_promotion_var INT, IN date_from DATE, IN date_to DATE) 
+create_reservation_label:BEGIN
+
+	/*TODO*/
+	
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
+END$$
+DELIMITER ;
+
+
+
+/*DROP PROCEDURE confirm_reservation*/
+/*CALL confirm_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
+DELIMITER $$
+CREATE PROCEDURE confirm_reservation(IN id_reservation_var BIGINT) 
+confirm_reservation_label:BEGIN
+
+	/*TODO*/
+	
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE delete_reservation*/
+/*CALL delete_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
+DELIMITER $$
+CREATE PROCEDURE delete_reservation(IN id_reservation_var BIGINT) 
+confirm_reservation_label:BEGIN
+
+	/*TODO*/
+	
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
+END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE modification_reservation*/
+/*CALL modification_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
+DELIMITER $$
+CREATE PROCEDURE modification_reservation(IN id_reservation_var BIGINT) 
+modification_reservation_label:BEGIN
+
+	/*TODO*/
+	
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
+END$$
+DELIMITER ;

@@ -10,6 +10,8 @@ namespace App\Controller;
 
 use App\Model\Task;
 use App\Model\LoginModel;
+use App\Model\AllAccommodationModel;
+use App\Model\AccommodationByIdModel;
 use App\Database\DatabaseManager;
 use Symfony\Component\Form\Forms;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -41,12 +43,21 @@ class MainController extends Controller
                 $login->setEmail($request->request->get("username"));
                 $login->setPassword($request->request->get("password"));
 
+
+                //$all_offer = new AllAccommodationModel();
+                $offer_by_id = new AccommodationByIdModel();
+                $offer_by_id->setIdOffer(1);
                 $database = new DatabaseManager($this->container);
-                $was_ok = $database->execQuery($login);
+                //$was_ok = $database->execQuery($login);
+                //$was_ok = $database->execQuery($all_offer);
+                $was_ok = $database->execQuery($offer_by_id);
                 if(false == $was_ok)
                 {
                     //error system
                 }
+
+                //DebugLog::console_log('$all_offer->getTitle(0):', $all_offer->getTitle(0));
+                DebugLog::console_log('$offer_by_id->getTitle:', $offer_by_id->getTitle());
 
                 DebugLog::console_log('login:', $login);
                 DebugLog::console_log('error:', $login->getErrorMessage());

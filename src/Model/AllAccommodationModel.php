@@ -30,7 +30,7 @@ class AllAccommodationModel extends I_Query
     //SET QUERY
     private function prepareQuery()
     {
-        $this->m_sql_query_text = "";
+        $this->m_sql_query_text = "SELECT * FROM get_all_offer;";
     }
 
 
@@ -124,11 +124,26 @@ class AllAccommodationModel extends I_Query
     //SET FROM QUERY RESULT
     public function setQueryResult($statement)
     {
-        $one_row_of_result_query = $statement->fetch(PDO::FETCH_ASSOC);
+        $id = 0;
+        while($one_row_of_result_query = $statement->fetch(PDO::FETCH_ASSOC))
+        {
+            DebugLog::console_log("Query result:", $one_row_of_result_query);
 
-        //TODO: set from database
-
-        DebugLog::console_log("Query result:", $one_row_of_result_query);
+            $this->m_id_offer[$id]                  = $one_row_of_result_query['id_offer'];
+            $this->m_id_user[$id]                   = $one_row_of_result_query['id_user'];
+            $this->m_id_promotion[$id]              = $one_row_of_result_query['id_promotion'];
+            $this->m_promotion_name[$id]            = $one_row_of_result_query['name'];
+            $this->m_promotion_reduction[$id]       = $one_row_of_result_query['price_reduction'];
+            $this->m_price_per_day[$id]             = $one_row_of_result_query['price_per_day'];
+            $this->m_promotion_price_per_day[$id]   = $one_row_of_result_query['promotion_price_per_day'];
+            $this->m_title[$id]                     = $one_row_of_result_query['title'];
+            $this->m_description[$id]               = $one_row_of_result_query['description'];
+            $this->m_best[$id]                      = $one_row_of_result_query['best'];
+            $this->m_date_validity_from[$id]        = $one_row_of_result_query['date_validity_from'];
+            $this->m_date_validity_to[$id]          = $one_row_of_result_query['date_validity_to'];
+            $id++;
+        }
+        $statement->closeCursor();
     }
 
 
