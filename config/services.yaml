@@ -11,6 +11,7 @@ parameters:
     database_user: root
     database_password:
 
+    locale: 'en'
 
 services:
     # default configuration for services in *this* file

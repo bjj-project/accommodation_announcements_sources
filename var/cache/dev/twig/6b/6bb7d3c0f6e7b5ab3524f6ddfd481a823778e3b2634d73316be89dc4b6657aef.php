@@ -31,7 +31,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
     <meta name=\"viewport\" content=\"width=device-width\">
     <link rel=\"profile\" href=\"http://gmpg.org/xfn/11\">
 
-    <title>Zamówienia &#8211; Accommodation Announcements</title>
+    <title>Rezerwacje &#8211; Accommodation Announcements</title>
     <link rel='dns-prefetch' href='//fonts.googleapis.com' />
     <link rel='dns-prefetch' href='//s.w.org' />
 
@@ -147,7 +147,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
             <div id=\"content-box\">
                 <div id=\"post-body\">
                     <div class=\"post-single post-4179 page type-page status-publish hentry\">
-                        <h1 id=\"post-title\" class=\"entry-title post-4179 page type-page status-publish hentry\">Zamówienia </h1>
+                        <h1 id=\"post-title\" class=\"entry-title post-4179 page type-page status-publish hentry\">Rezerwacje </h1>
                         <div class=\"breadcrumbs\">
                             <div class=\"breadcrumbs-wrap\">
                                 <ul><li><a href=\"/\">Home</a></li><li class=\"separator\"> / </li><li> Moje konto</li></ul>\t\t\t\t\t</div>
@@ -158,7 +158,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
                                     <ul>
 
                                         <li class=\"accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--orders is-active\">
-                                            <a href=\"#\">Zamówienia</a>
+                                            <a href=\"#\">Rezerwacje</a>
                                         </li>
 
 
@@ -178,7 +178,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
                                     <table class=\"accannouncements-orders-table accannouncements-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table\">
                                         <thead>
                                         <tr>
-                                            <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-number\"><span class=\"nobr\">Zamówienie</span></th>
+                                            <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-number\"><span class=\"nobr\">Rezerwacja</span></th>
                                             <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-date\"><span class=\"nobr\">Data</span></th>
                                             <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-status\"><span class=\"nobr\">Status</span></th>
                                             <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-total\"><span class=\"nobr\">Suma</span></th>
@@ -188,7 +188,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
 
                                         <tbody>
                                         <tr class=\"accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order\">
-                                            <td class=\"accannouncements-orders-table__cell accannouncements-orders-table__cell-order-number\" data-title=\"Zamówienie\">
+                                            <td class=\"accannouncements-orders-table__cell accannouncements-orders-table__cell-order-number\" data-title=\"Rezerwacja\">
                                                 <a href=\"#\">
                                                     #4189\t\t\t\t\t\t\t\t</a>
 
@@ -353,7 +353,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
     <meta name=\"viewport\" content=\"width=device-width\">
     <link rel=\"profile\" href=\"http://gmpg.org/xfn/11\">
 
-    <title>Zamówienia &#8211; Accommodation Announcements</title>
+    <title>Rezerwacje &#8211; Accommodation Announcements</title>
     <link rel='dns-prefetch' href='//fonts.googleapis.com' />
     <link rel='dns-prefetch' href='//s.w.org' />
 
@@ -469,7 +469,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
             <div id=\"content-box\">
                 <div id=\"post-body\">
                     <div class=\"post-single post-4179 page type-page status-publish hentry\">
-                        <h1 id=\"post-title\" class=\"entry-title post-4179 page type-page status-publish hentry\">Zamówienia </h1>
+                        <h1 id=\"post-title\" class=\"entry-title post-4179 page type-page status-publish hentry\">Rezerwacje </h1>
                         <div class=\"breadcrumbs\">
                             <div class=\"breadcrumbs-wrap\">
                                 <ul><li><a href=\"/\">Home</a></li><li class=\"separator\"> / </li><li> Moje konto</li></ul>\t\t\t\t\t</div>
@@ -480,7 +480,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
                                     <ul>
 
                                         <li class=\"accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--orders is-active\">
-                                            <a href=\"#\">Zamówienia</a>
+                                            <a href=\"#\">Rezerwacje</a>
                                         </li>
 
 
@@ -500,7 +500,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
                                     <table class=\"accannouncements-orders-table accannouncements-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table\">
                                         <thead>
                                         <tr>
-                                            <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-number\"><span class=\"nobr\">Zamówienie</span></th>
+                                            <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-number\"><span class=\"nobr\">Rezerwacja</span></th>
                                             <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-date\"><span class=\"nobr\">Data</span></th>
                                             <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-status\"><span class=\"nobr\">Status</span></th>
                                             <th class=\"accannouncements-orders-table__header accannouncements-orders-table__header-order-total\"><span class=\"nobr\">Suma</span></th>
@@ -510,7 +510,7 @@ class __TwigTemplate_acfa14231ce6a4b51a3b7b47384b7d627d92078ad3d15176ec8b4d3a32b
 
                                         <tbody>
                                         <tr class=\"accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order\">
-                                            <td class=\"accannouncements-orders-table__cell accannouncements-orders-table__cell-order-number\" data-title=\"Zamówienie\">
+                                            <td class=\"accannouncements-orders-table__cell accannouncements-orders-table__cell-order-number\" data-title=\"Rezerwacja\">
                                                 <a href=\"#\">
                                                     #4189\t\t\t\t\t\t\t\t</a>
 

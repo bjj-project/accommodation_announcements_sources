@@ -108,4 +108,11 @@ class MainController extends Controller
             'orders.html.twig'
         );
     }
+
+    public function offerslist()
+    {
+        return $this->render(
+            'offerslist.html.twig'
+        );
+    }
 }

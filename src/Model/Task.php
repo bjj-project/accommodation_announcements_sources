@@ -23,13 +23,4 @@ class Task
         $this->task = $task;
     }
 
-    public function getDueDate()
-    {
-        return $this->dueDate;
-    }
-
-    public function setDueDate(\DateTime $dueDate = null)
-    {
-        $this->dueDate = $dueDate;
-    }
 }

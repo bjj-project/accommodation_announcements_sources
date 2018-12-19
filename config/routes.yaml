@@ -14,5 +14,11 @@ orders:
     path: /orders
     controller: App\Controller\MainController::orders
 
+offerslist:
+    path: /offerslist
+    controller: App\Controller\MainController::offerslist
+
+
+
 
 
