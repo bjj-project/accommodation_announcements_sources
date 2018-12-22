@@ -51,6 +51,7 @@ class ComposerStaticInitca69a54421a33bb7f9e6afccf7195ce3
             'Symfony\\Bundle\\FrameworkBundle\\' => 31,
             'Symfony\\Bridge\\Twig\\' => 20,
             'Symfony\\Bridge\\Doctrine\\' => 24,
+            'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
         ),
         'P' => 
         array (
@@ -207,6 +208,10 @@ class ComposerStaticInitca69a54421a33bb7f9e6afccf7195ce3
         'Symfony\\Bridge\\Doctrine\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/doctrine-bridge',
+        ),
+        'Sensio\\Bundle\\FrameworkExtraBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle',
         ),
         'Psr\\SimpleCache\\' => 
         array (
