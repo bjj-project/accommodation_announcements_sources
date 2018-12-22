@@ -18,6 +18,11 @@ offerslist:
     path: /offerslist
     controller: App\Controller\MainController::offerslist
 
+offer:
+    path: /offer/{id_offer}
+    controller: App\Controller\MainController::offer
+
+
 
 
 

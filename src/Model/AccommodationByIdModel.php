@@ -136,27 +136,74 @@ class AccommodationByIdModel extends I_Query
 
         DebugLog::console_log("Query result:", $one_row_of_result_query);
 
-        $this->m_id_user                   = $one_row_of_result_query['id_user'];
-        $this->m_id_promotion              = $one_row_of_result_query['id_promotion'];
-        $this->m_promotion_name            = $one_row_of_result_query['name'];
-        $this->m_promotion_reduction       = $one_row_of_result_query['price_reduction'];
-        $this->m_price_per_day             = $one_row_of_result_query['price_per_day'];
-        $this->m_promotion_price_per_day   = $one_row_of_result_query['promotion_price_per_day'];
-        $this->m_title                     = $one_row_of_result_query['title'];
-        $this->m_description               = $one_row_of_result_query['description'];
-        $this->m_best                      = $one_row_of_result_query['best'];
-        $this->m_date_validity_from        = $one_row_of_result_query['date_validity_from'];
-        $this->m_date_validity_to          = $one_row_of_result_query['date_validity_to'];
-        $this->m_active                    = $one_row_of_result_query['active'];
-		$this->m_confirmation              = $one_row_of_result_query['confirmation'];
-        $this->m_images = "";
-
-		//TODO: dodanie pobieranie zdjęcia oraz generacja kodu HTML z nimi
-        //TODO: zdjęcia będa z Base64 - trzeba dekodować
+        $this->setDate($one_row_of_result_query);
 
         $statement->closeCursor();
     }
 
+    public function setDate($date)
+    {
+        if (array_key_exists('id_offer', $date)) {
+            $this->m_id_offer = $date['id_offer'];
+        }
+
+        if (array_key_exists('id_user', $date)) {
+            $this->m_id_user = $date['id_user'];
+        }
+
+        if (array_key_exists('id_promotion', $date)) {
+            $this->m_id_promotion = $date['id_promotion'];
+        }
+
+        if (array_key_exists('name', $date)) {
+            $this->m_promotion_name = $date['name'];
+        }
+
+        if (array_key_exists('price_reduction', $date)) {
+            $this->m_promotion_reduction = $date['price_reduction'];
+        }
+
+        if (array_key_exists('price_per_day', $date)) {
+            $this->m_price_per_day = $date['price_per_day'];
+        }
+
+        if (array_key_exists('promotion_price_per_day', $date)) {
+            $this->m_promotion_price_per_day = $date['promotion_price_per_day'];
+        }
+
+        if (array_key_exists('title', $date)) {
+            $this->m_title = $date['title'];
+        }
+
+        if (array_key_exists('description', $date)) {
+            $this->m_description = $date['description'];
+        }
+
+        if (array_key_exists('best', $date)) {
+            $this->m_best = $date['best'];
+        }
+
+        if (array_key_exists('date_validity_from', $date)) {
+            $this->m_date_validity_from = $date['date_validity_from'];
+        }
+
+        if (array_key_exists('date_validity_to', $date)) {
+            $this->m_date_validity_to = $date['date_validity_to'];
+        }
+
+        if (array_key_exists('active', $date)) {
+            $this->m_active = $date['active'];
+        }
+
+        if (array_key_exists('confirmation', $date)) {
+            $this->m_confirmation = $date['confirmation'];
+        }
+
+        $this->m_images = "";
+
+        //TODO: dodanie pobieranie zdjęcia oraz generacja kodu HTML z nimi
+        //TODO: zdjęcia będa z Base64 - trzeba dekodować
+    }
 
     //DEBUG
     public function debug()

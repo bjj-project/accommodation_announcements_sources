@@ -145,7 +145,16 @@
                                             <span><i class="fa fa-arrow-circle-o-right"></i><a href="#">czytaj więcej</a></span>
                                         </div>
                                     </div>
-                                </div><div class="post-wrapper wow fadeIn post type-post status-publish format-standard has-post-thumbnail hentry" data-wow-delay="0.5s">
+                                </div>
+
+
+                                {% for row_of_offer in all_offer.getList()%}
+                                <DIV style="background-color: #4cae4c;">
+                                    {{ row_of_offer.getIdOffer() }} - {{ row_of_offer.getPromotionName() }} <A href="{{ app.request.getBaseURL() }}/offer/{{ row_of_offer.getIdOffer() }}">Czytaj więcej...</A>
+                                </DIV>
+                                {% endfor %}
+
+                                <div class="post-wrapper wow fadeIn post type-post status-publish format-standard has-post-thumbnail hentry" data-wow-delay="0.5s">
                                     <div class="image-holder">
                                         <div class="thumb-wrapper" style="background-image: url(assets/fot2.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;">
                                         </div>

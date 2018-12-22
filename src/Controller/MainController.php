@@ -111,8 +111,38 @@ class MainController extends Controller
 
     public function offerslist()
     {
-        return $this->render(
-            'offerslist.html.twig'
-        );
+        DebugLog::console_log('OFFER LIST');
+
+        $all_offer = new AllAccommodationModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($all_offer);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+
+        return $this->render('offerslist.html.twig', array(
+            'all_offer' => $all_offer,
+        ));
+    }
+
+    public function offer($id_offer)
+    {
+        DebugLog::console_log('ONE OFFER');
+
+        $one_offer = new AccommodationByIdModel();
+        $one_offer->setIdOffer($id_offer);
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($one_offer);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+
+        return $this->render('offer.html.twig', array(
+            'offer' => $one_offer,
+        ));
     }
 }
