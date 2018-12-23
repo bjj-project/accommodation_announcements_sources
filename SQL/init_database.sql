@@ -312,7 +312,7 @@ DELIMITER $$
 CREATE PROCEDURE delete_offer(IN id_offer_var BIGINT) 
 delete_offer_label:BEGIN
 
-	/*TODO*/
+	UPDATE offers SET active=FALSE WHERE id_offer = id_offer_var;
 
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
@@ -325,7 +325,7 @@ DELIMITER $$
 CREATE PROCEDURE confirm_offer(IN id_offer_var BIGINT) 
 confirm_offer_label:BEGIN
 
-	/*TODO*/
+	UPDATE offers SET confirmation=TRUE WHERE id_offer = id_offer_var;
 
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
@@ -384,6 +384,35 @@ BEGIN
 	WHERE
 		o.id_offer = id_offer_var;
 END$$
+DELIMITER ;
+
+
+/*DROP PROCEDURE get_offer_by_client_id*/
+/*CALL get_offer_by_client_id(id_client_var) RETURN columns:  */
+DELIMITER $$
+CREATE PROCEDURE get_offer_by_client_id(IN id_client_var BIGINT)
+BEGIN
+	SELECT 
+		o.id_offer,
+		o.id_user,
+		o.id_promotion,
+		pr.name,
+		pr.price_reduction,
+		1.0 AS price_per_day,
+		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		o.title,
+		o.description,
+		o.best,
+		o.date_validity_from,
+		o.date_validity_to,
+		o.active,
+		o.confirmation
+	FROM 
+		offers AS o 
+		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
+	WHERE
+		o.id_user = id_client_var;
+END $$
 DELIMITER ;
 
 		
