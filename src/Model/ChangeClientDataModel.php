@@ -46,12 +46,12 @@ class ChangeClientDataModel extends I_Query
         return $this->m_was_ok;
     }
 
-    public function getCode()
+    public function getErrorCode()
     {
         return $this->m_code;
     }
 
-    public function getMessage()
+    public function getErrorMessage()
     {
         return $this->m_message;
     }

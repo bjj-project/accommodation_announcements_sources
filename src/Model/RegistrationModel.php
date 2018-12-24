@@ -23,6 +23,7 @@ class RegistrationModel extends I_Query
     private $m_rodo;
     private $m_regulations;
     private $m_ip_address_v4;
+
     private $m_was_ok;
     private $m_code;
     private $m_message;
@@ -31,7 +32,7 @@ class RegistrationModel extends I_Query
     //SET QUERY
     private function prepareQuery()
     {
-        $this->m_sql_query_text = "";
+        $this->m_sql_query_text = "CALL registration('". $this->m_name ."', '". $this->m_surname ."', '". $this->m_mail ."', '". $this->m_password ."', ". $this->m_marketing .", ". $this->m_rodo .", ". $this->m_regulations .", '". $this->m_ip_address_v4 ."'); ";
     }
 
 
@@ -48,12 +49,12 @@ class RegistrationModel extends I_Query
         return $this->m_was_ok;
     }
 
-    public function getCode()
+    public function getErrorCode()
     {
         return $this->m_code;
     }
 
-    public function getMessage()
+    public function getErrorMessage()
     {
         return $this->m_message;
     }
@@ -63,41 +64,73 @@ class RegistrationModel extends I_Query
     public function setName($name)
     {
         $this->m_name = $name;
+        $this->prepareQuery();
     }
 
     public function setSurname($surname)
     {
         $this->m_surname = $surname;
+        $this->prepareQuery();
     }
 
     public function setMail($mail)
     {
         $this->m_mail = $mail;
+        $this->prepareQuery();
     }
 
     public function setPassword($password)
     {
         $this->m_password = $password;
+        $this->prepareQuery();
     }
 
     public function setMarketing($marketing)
     {
-        $this->m_marketing = $marketing;
+        if($marketing)
+        {
+            $this->m_marketing = 'true';
+        }
+        else
+        {
+            $this->m_marketing = 'false';
+        }
+
+        $this->prepareQuery();
     }
 
     public function setRodo($rodo)
     {
-        $this->m_rodo = $rodo;
+        if($rodo)
+        {
+            $this->m_rodo = 'true';
+        }
+        else
+        {
+            $this->m_rodo = 'false';
+        }
+
+        $this->prepareQuery();
     }
 
     public function setRegulations($regulations)
     {
-        $this->m_regulations = $regulations;
+        if($regulations)
+        {
+            $this->m_regulations = 'true';
+        }
+        else
+        {
+            $this->m_regulations = 'false';
+        }
+
+        $this->prepareQuery();
     }
 
     public function setIpAddressV4($ip_address_v4)
     {
         $this->m_ip_address_v4= $ip_address_v4;
+        $this->prepareQuery();
     }
 
 

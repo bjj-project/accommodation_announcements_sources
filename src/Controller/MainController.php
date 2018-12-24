@@ -8,10 +8,10 @@
 
 namespace App\Controller;
 
-use App\Model\Task;
 use App\Model\LoginModel;
 use App\Model\AllAccommodationModel;
 use App\Model\AccommodationByIdModel;
+use App\Model\RegistrationModel;
 use App\Database\DatabaseManager;
 use Symfony\Component\Form\Forms;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,12 +20,19 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Helper\DebugLog;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 
 
 class MainController extends Controller
 {
-    public function Login(Request $request)
+    private $session;
+
+    public function login(Request $request)
     {
+        $this->session = new Session(new PhpBridgeSessionStorage());
+        $this->session->start();
+
         $form_login = $this->createFormBuilder(null)
             ->getForm();
 
@@ -37,54 +44,99 @@ class MainController extends Controller
             //SUBMIT login
             if(false == is_null($request->request->get("login")))
             {
-                DebugLog::console_log('LOGIN');
-
                 $login = new LoginModel();
                 $login->setEmail($request->request->get("username"));
                 $login->setPassword($request->request->get("password"));
 
-
-                //$all_offer = new AllAccommodationModel();
-                $offer_by_id = new AccommodationByIdModel();
-                $offer_by_id->setIdOffer(1);
                 $database = new DatabaseManager($this->container);
-                //$was_ok = $database->execQuery($login);
-                //$was_ok = $database->execQuery($all_offer);
-                $was_ok = $database->execQuery($offer_by_id);
+                $was_ok = $database->execQuery($login);
                 if(false == $was_ok)
                 {
                     //error system
                 }
 
-                //DebugLog::console_log('$all_offer->getTitle(0):', $all_offer->getTitle(0));
-                DebugLog::console_log('$offer_by_id->getTitle:', $offer_by_id->getTitle());
-
                 DebugLog::console_log('login:', $login);
-                DebugLog::console_log('error:', $login->getErrorMessage());
-                DebugLog::console_log('was_ok:', $login->getWasOk());
-                DebugLog::console_log('code:', $login->getErrorCode());
 
-                return $this->render('base.html.twig', array(
-                    'form_login' => $form_login->createView(),
-                    'form_login_2' => $form_login_2->createView(),
-                    'was_ok' => $login->getWasOk(),
-                    'error_code' => $login->getErrorCode(),
-                    'error_message' => $login->getErrorMessage()
-                ));
+                if(true == $login->getWasOk())
+                {
+                    $this->session->set('id_user', $login->getId());
+                    $this->session->set('name', $login->getName());
+                    $this->session->set('surname', $login->getSurname());
+                    $this->session->set('email', $login->getEmail());
+                    $this->session->set('admin', $login->getIsAdmin());
+
+                    return $this->profile();
+                }
+                else
+                {
+                    return $this->render('base.html.twig', array(
+                        'form_login' => $form_login->createView(),
+                        'form_login_2' => $form_login_2->createView(),
+                        'was_ok_login' => $login->getWasOk(),
+                        'was_ok_register' => true,
+                        'error_code' => $login->getErrorCode(),
+                        'error_message' => $login->getErrorMessage()
+                    ));
+                }
             }
 
             //SUBMIT register
             if(false == is_null($request->request->get("register")))
             {
-                DebugLog::console_log('REJESTRACJA');
+                $register = new RegistrationModel();
+                $register->setMail($request->request->get("email"));
+                $register->setPassword($request->request->get("password"));
+                $register->setName($request->request->get("name"));
+                $register->setSurname($request->request->get("surname"));
+
+                $marketing = 'true';
+                if(is_null($request->request->get("marketing")))
+                {
+                    $marketing = 'false';
+                }
+                $register->setMarketing($marketing);
+
+                $regulations = 'true';
+                if(is_null($request->request->get("regulations")))
+                {
+                    $regulations = 'false';
+                }
+                $register->setRegulations($regulations);
+
+                $rodo = 'true';
+                if(is_null($request->request->get("rodo")))
+                {
+                    $rodo = 'false';
+                }
+                $register->setRodo($rodo);
+
+                $register->setIpAddressV4($request->getClientIp());
+
+                $database = new DatabaseManager($this->container);
+                $was_ok = $database->execQuery($register);
+                if(false == $was_ok)
+                {
+                    //error system
+                }
+
+                DebugLog::console_log('register:', $register);
+
+                return $this->render('base.html.twig', array(
+                    'form_login' => $form_login->createView(),
+                    'form_login_2' => $form_login_2->createView(),
+                    'was_ok_login' => true,
+                    'was_ok_register' => $register->getWasOk(),
+                    'error_code' => $register->getErrorCode(),
+                    'error_message' => $register->getErrorMessage()
+                ));
             }
         }
 
         return $this->render('base.html.twig', array(
             'form_login' => $form_login->createView(),
             'form_login_2' => $form_login_2->createView(),
-            'error_code' => 0,
-            'was_ok' => 1
+            'was_ok_login' => true,
+            'was_ok_register' => true
         ));
     }
 
@@ -97,22 +149,23 @@ class MainController extends Controller
 
     public function profile()
     {
-        return $this->render(
-            'profile.html.twig'
-        );
+        return $this->render('profile.html.twig', array(
+            'name' => $this->session->get('name'),
+            'surname' => $this->session->get('surname'),
+            'email' => $this->session->get('email'),
+            'admin' => $this->session->get('admin'),
+        ));
     }
 
-    public function orders()
+    public function myOrders()
     {
         return $this->render(
             'orders.html.twig'
         );
     }
 
-    public function offerslist()
+    public function offersList()
     {
-        DebugLog::console_log('OFFER LIST');
-
         $all_offer = new AllAccommodationModel();
         $database = new DatabaseManager($this->container);
         $was_ok = $database->execQuery($all_offer);
@@ -121,7 +174,6 @@ class MainController extends Controller
             //error system
         }
 
-
         return $this->render('offerslist.html.twig', array(
             'all_offer' => $all_offer,
         ));
@@ -129,8 +181,6 @@ class MainController extends Controller
 
     public function offer($id_offer)
     {
-        DebugLog::console_log('ONE OFFER');
-
         $one_offer = new AccommodationByIdModel();
         $one_offer->setIdOffer($id_offer);
         $database = new DatabaseManager($this->container);
@@ -140,9 +190,23 @@ class MainController extends Controller
             //error system
         }
 
-
         return $this->render('offer.html.twig', array(
             'offer' => $one_offer,
         ));
+    }
+
+    public function logout()
+    {
+        $this->session = new Session(new PhpBridgeSessionStorage());
+        $this->session->start();
+
+        $this->session->clear();
+
+        return $this->offersList();
+    }
+
+    public function myOffers()
+    {
+
     }
 }

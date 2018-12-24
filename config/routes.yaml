@@ -3,24 +3,32 @@
 #    controller: App\Controller\DefaultController::index
 
 app_acc_annoncements:
-    path: /
-    controller: App\Controller\MainController::Login
+    path: /login
+    controller: App\Controller\MainController::login
 
 account:
     path: /account
     controller: App\Controller\MainController::profile
 
-orders:
-    path: /orders
-    controller: App\Controller\MainController::orders
+my_orders:
+    path: /my_orders
+    controller: App\Controller\MainController::myOrders
 
 offerslist:
     path: /offerslist
-    controller: App\Controller\MainController::offerslist
+    controller: App\Controller\MainController::offersList
 
 offer:
     path: /offer/{id_offer}
     controller: App\Controller\MainController::offer
+
+logout:
+    path: /logout
+    controller: App\Controller\MainController::logout
+
+my_offers:
+    path: /my_offers
+    controller: App\Controller\MainController::myOffers
 
 
 

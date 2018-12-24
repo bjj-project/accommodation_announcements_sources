@@ -129,28 +129,22 @@
 
                         <div id="article">
                             <div class="accannouncements"><div class="accannouncements-notices-wrapper"></div>
-
                                 <div class="u-columns col2-set" id="customer_login">
-
                                     <div class="u-column1 col-1">
-
-
                                         <h2>Zaloguj się</h2>
-                                        {% if was_ok == 0 %}
-                                            <H1 style="color: #FF0000;"> Error: {{ error_message }} </H1>
+                                        {% if not was_ok_login %}
+                                            <H1 style="color: #FF0000;"> Error: {{error_message}} Kod błędu: {{error_code}}</H1>
                                         {% endif %}
+
                                         {{ form_start(form_login) }}
-                                        <!--<form class="accannouncements-form accannouncements-form-login login" method="post" >-->
-
-
                                             <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
                                                 <label for="username">Użytkownik lub e-mail&nbsp;<span class="required">*</span></label>
                                                 <input type="text" class="accannouncements-Input accannouncements-Input--text input-text" name="username" id="username" autocomplete="username" value="" />			</p>
+
                                             <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
                                                 <label for="password">Hasło&nbsp;<span class="required">*</span></label>
                                                 <input class="accannouncements-Input accannouncements-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password" />
                                             </p>
-
 
                                             <p class="form-row">
                                                 <input type="hidden" id="accannouncements-login-nonce" name="accannouncements-login-nonce" value="d326c07e50" /><input type="hidden" name="" value="" />
@@ -159,37 +153,61 @@
                                                     <input class="accannouncements-form__input accannouncements-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span>Zapamiętaj mnie</span>
                                                 </label>
                                             </p>
+
                                             <p class="accannouncements-LostPassword lost_password">
                                                 <a href="/">Nie pamiętasz hasła?</a>
                                             </p>
-
                                         {{ form_end(form_login) }}
-                                        <!--</form>-->
-
-
                                     </div>
 
                                     <div class="u-column2 col-2">
-
                                         <h2>Zarejestruj się</h2>
+                                        {% if not was_ok_register %}
+                                            <H1 style="color: #FF0000;"> Error: {{error_message}} Kod błędu: {{error_code}}</H1>
+                                        {% endif %}
                                         {{ form_start(form_login_2) }}
-                                        <!--<form method="post" class="accannouncements-form accannouncements-form-register register"  >-->
-
-
-
                                             <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
                                                 <label for="reg_email">Adres E-mail&nbsp;<span class="required">*</span></label>
-                                                <input type="email" class="accannouncements-Input accannouncements-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="" />			</p>
+                                                <input type="email" class="accannouncements-Input accannouncements-Input--text input-text" name="email" id="reg_email" autocomplete="email" />
+                                            </p>
 
+                                            <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
+                                                <label for="reg_name">Imię<span class="required">*</span></label>
+                                                <input type="text" class="accannouncements-Input accannouncements-Input--text input-text" name="name" id="reg_name" />
+                                            </p>
+
+                                            <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
+                                                <label for="reg_surname">Nazwisko<span class="required">*</span></label>
+                                                <input type="text" class="accannouncements-Input accannouncements-Input--text input-text" name="surname" id="reg_surname" />
+                                            </p>
+
+                                            <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
+                                                <label for="reg_password">Hasło<span class="required">*</span></label>
+                                                <input type="password" class="accannouncements-Input accannouncements-Input--text input-text" name="password" id="reg_password" />
+                                            </p>
+
+                                            <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
+                                                <label for="reg_marketing">Zgoda na marketing</label>
+                                                <input type="checkbox" class="accannouncements-Input" name="marketing" id="reg_marketing" />
+                                            </p>
+
+                                            <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
+                                                <label for="reg_regulations">Zgoda na regulamin<span class="required">*</span></label>
+                                                <input type="checkbox" class="accannouncements-Input" name="regulations" id="reg_regulations" />
+                                            </p>
+
+                                            <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
+                                                <label for="reg_rodo">Zgoda na RODO<span class="required">*</span></label>
+                                                <input type="checkbox" class="accannouncements-Input" name="rodo" id="reg_rodo" />
+                                            </p>
 
                                             <div class="accannouncements-privacy-policy-text"></div>
                                             <p class="accannouncements-FormRow form-row">
-                                                <input type="hidden" id="accannouncements-register-nonce" name="accannouncements-register-nonce" value="ce32910364" /><input type="hidden" name="" value="" />				<button type="submit" class="accannouncements-Button button" name="register" value="Zarejestruj się">Zarejestruj się</button>
+                                                <input type="hidden" id="accannouncements-register-nonce" name="accannouncements-register-nonce" value="ce32910364" />
+                                                <button type="submit" class="accannouncements-Button button" name="register" value="Zarejestruj się">Zarejestruj się</button>
                                             </p>
 
-
                                         {{ form_end(form_login_2) }}
-                                        <!--</form>-->
 
                                     </div>
 
