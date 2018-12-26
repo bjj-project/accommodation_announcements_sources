@@ -30,7 +30,9 @@ my_offers:
     path: /my_offers
     controller: App\Controller\MainController::myOffers
 
-
+pojedyncza_oferta:
+    path: /pojedyncza-oferta
+    controller: App\Controller\MainController::pojedynczaOferta
 
 
 
