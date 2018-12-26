@@ -207,6 +207,16 @@ class MainController extends Controller
 
     public function myOffers()
     {
-
+        return $this->render(
+            'my_offers.html.twig'
+        );
     }
+
+    public function pojedynczaOferta()
+    {
+        return $this->render(
+            'offer.html.twig'
+        );
+    }
+
 }
