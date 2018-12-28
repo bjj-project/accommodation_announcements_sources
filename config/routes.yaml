@@ -33,7 +33,27 @@ my_offers:
 pojedyncza_oferta:
     path: /pojedyncza-oferta
     controller: App\Controller\MainController::pojedynczaOferta
+    
+offers_to_confirm:
+    path: /offers_to_confirm
+    controller: App\Controller\MainController::offersToConfirm
+    
+active_offers:
+    path: /active_offers
+    controller: App\Controller\MainController::activeOffers
+    
+users_to_confirm:
+    path: /users_to_confirm
+    controller: App\Controller\MainController::usersToConfirm
 
+users:
+    path: /users
+    controller: App\Controller\MainController::users
+    
+payments:
+    path: /payments
+    controller: App\Controller\MainController::payments
 
-
-
+reservations:
+    path: /reservations
+    controller: App\Controller\MainController::reservations

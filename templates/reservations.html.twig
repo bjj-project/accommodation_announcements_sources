@@ -122,31 +122,42 @@
             <div id="content-box">
                 <div id="post-body">
                     <div class="post-single post-4179 page type-page status-publish hentry">
-                        <h1 id="post-title" class="entry-title post-4179 page type-page status-publish hentry">moje oferty </h1>
+                        <h1 id="post-title" class="entry-title post-4179 page type-page status-publish hentry">Lista rezerwacji</h1>
                         <div class="breadcrumbs">
                             <div class="breadcrumbs-wrap">
-                                <ul><li><a href="/">Home</a></li><li class="separator"> / </li><li> Moje konto</li></ul>					</div>
+                                <ul><li><a href="/">Home</a></li><li class="separator"> / </li><li>Lista rezerwacji</li></ul>					</div>
                         </div>
                         <div id="article">
                             <div class="accannouncements">
                                 <nav class="accannouncements-MyAccount-navigation">
                                     <ul>
-
                                         <li class="accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--orders">
-                                            <a href="{{app.request.getBaseURL()}}/my_offers">Moje oferty</a>
+                                            <a href="{{app.request.getBaseURL()}}/active_offers">Oferty</a>
                                         </li>
 
                                         <li class="accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--orders">
-                                            <a href="{{app.request.getBaseURL()}}/my_orders">Moje rezerwacje</a>
+                                            <a href="{{app.request.getBaseURL()}}/offers_to_confirm">Oferty do zatwierdzenia</a>
+                                        </li>
+
+                                        <li class="accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--orders">
+                                            <a href="{{app.request.getBaseURL()}}/users_to_confirm">Klienci do  zatwierdzenia</a>
+                                        </li>
+
+                                        <li class="accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--orders">
+                                            <a href="{{app.request.getBaseURL()}}/users">Klienci</a>
                                         </li>
 
                                         <li class="accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--edit-account is-active">
-                                            <a href="{{app.request.getBaseURL()}}/account">Szczegóły konta</a>
+                                            <a href="{{app.request.getBaseURL()}}/payments">Płatności</a>
                                         </li>
+
+                                        <li class="accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--edit-account is-active">
+                                            <a href="{{app.request.getBaseURL()}}/reservations">Rezerwacje</a>
+                                        </li>
+
                                         <li class="accannouncements-MyAccount-navigation-link accannouncements-MyAccount-navigation-link--customer-logout">
                                             <a href="{{app.request.getBaseURL()}}/logout">Wyloguj</a>
                                         </li>
-
                                     </ul>
                                 </nav>
 
@@ -157,54 +168,68 @@
                                     <table class="accannouncements-orders-table accannouncements-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
                                         <thead>
                                         <tr>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Reserwacja</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Użytkownik</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Oferta</span></th>
-                                            <th class="accannouncements-orders-table__header"><span class="nobr">Foto</span></th>
-                                            <th class="accannouncements-orders-table__header"><span class="nobr">Data</span></th>
-                                            <th class="accannouncements-orders-table__header"><span class="nobr">Zatwierdzona</span></th>
-                                            <th class="accannouncements-orders-table__header"><span class="nobr">Cena</span></th>
+                                            <th class="accannouncements-orders-table__header"><span class="nobr">Imię</span></th>
+                                            <th class="accannouncements-orders-table__header"><span class="nobr">Nazwisko</span></th>
+                                            <th class="accannouncements-orders-table__header"><span class="nobr">Mail</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Tytuł</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Nazwa promocji</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Data utworzenia</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Data od</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Data do</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Do zapłaty</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Zapłacono</span></th>
+											<th class="accannouncements-orders-table__header"><span class="nobr">Status płatności</span></th>
 
                                         </tr>
                                         </thead>
 
                                         <tbody>
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
+                                            <td class="accannouncements-orders-table__cell">
                                                 <a href="#">#05</a>
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
-                                                <div class="thumb-wrapper" style="height: 50px; background-image: url(assets/fot1.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;"></div>
+											<td class="accannouncements-orders-table__cell">
+                                                <a href="#">#05</a>
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Data">
-                                                <time datetime="2018-11-24T17:34:54+00:00">24 listopada 2018</time>
-
+											<td class="accannouncements-orders-table__cell">
+                                                <a href="#">#05</a>
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Zaatwierdzona">
-                                                Nie
+                                            <td class="accannouncements-orders-table__cell">
+                                                imię
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Suma">
-                                                <span class="accannouncements-Price-amount amount">200,00&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
+                                            <td class="accannouncements-orders-table__cell">
+                                                nazwisko
                                             </td>
-
-                                        </tr>
-
-                                        <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
-                                                <a href="#">#03</a>
+                                            <td class="accannouncements-orders-table__cell">
+                                                mail
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
-                                                <div class="thumb-wrapper" style="height: 50px; background-image: url(assets/fot2.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;"></div>
+											<td class="accannouncements-orders-table__cell">
+                                                tytul
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Data">
-                                                <time datetime="2018-11-24T17:34:54+00:00">24 listopada 2018</time>
-
+											<td class="accannouncements-orders-table__cell">
+                                                nazwa promocji
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Zaatwierdzona">
-                                                Nie
+											<td class="accannouncements-orders-table__cell">
+                                                data utworzenia
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Suma">
-                                                <span class="accannouncements-Price-amount amount">200,00&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
+											<td class="accannouncements-orders-table__cell">
+                                                data od
                                             </td>
-
+											<td class="accannouncements-orders-table__cell">
+                                                Data do
+                                            </td>
+											<td class="accannouncements-orders-table__cell">
+                                                do zapłaty
+                                            </td>
+											<td class="accannouncements-orders-table__cell">
+                                                zapłacono
+                                            </td>
+											<td class="accannouncements-orders-table__cell">
+                                                Status płatności
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>

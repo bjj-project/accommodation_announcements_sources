@@ -51,7 +51,7 @@ CREATE TABLE promotions
 (
 	id_promotion INT NOT NULL PRIMARY KEY,
 	name VARCHAR(100) NOT NULL,
-	obnizka REAL NOT NULL 
+	price_reduction REAL NOT NULL 
 );
 INSERT INTO promotions VALUES(1, 'Standardowa cena', 1.0);
 
@@ -99,7 +99,7 @@ CREATE TABLE type_payment_status
 	paid BOOLEAN NOT NULL,
 	cancel BOOLEAN NOT NULL
 );
-INSERT INTO type_payment_status VALUES(1, 'Płatność wygenerowana', TRUE, FALSE, FALSE, FALSE),
+INSERT INTO type_payment_status VALUES(1, 'Płatność do zapłacenia', TRUE, FALSE, FALSE, FALSE),
 									  (2, 'Płatność podczas płacenia', TRUE, TRUE, FALSE, FALSE),
 									  (3, 'Płatność zapłacona', TRUE, FALSE, TRUE, FALSE),
 									  (4, 'Płatność anulowana', TRUE, FALSE, FALSE, TRUE),
@@ -209,6 +209,48 @@ confirm_registration_label:BEGIN
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
 DELIMITER ;
+
+
+/*DROP VIEW get_users_to_confirm*/
+/*SELECT * FROM get_users_to_confirm RETURN columns:  id_client_registration, name, surname, mail, password, agreement_for_marketing, agreement_for_rodo, agreement_for_regulations, ip_address_v4, creation_date    */
+CREATE VIEW get_users_to_confirm
+AS
+	SELECT 
+		u.id_client_registration,
+		u.name,
+		u.surname,
+		u.mail,
+		'****' AS password,
+		u.agreement_for_marketing,
+		u.agreement_for_rodo,
+		u.agreement_for_regulations,
+		u.ip_address_v4,
+		u.creation_date
+	FROM 
+		clients_registration AS u
+	WHERE 
+		u.confirmation=FALSE;
+
+/*DROP VIEW get_all_users*/
+/*SELECT * FROM get_all_users RETURN columns:  id_user, id_permission, permission_name, name, surname, mail, password    */
+CREATE VIEW get_all_users
+AS
+	SELECT 
+		u.id_user,
+		u.id_permission,
+		p.name AS permission_name,
+		u.name,
+		u.surname,
+		u.mail,
+		'****' AS password,
+		cr.ip_address_v4
+	FROM 
+		users AS u
+		INNER JOIN permissions AS p ON p.id_permission=u.id_permission
+		LEFT JOIN clients_registration AS cr ON cr.id_client_registration=u.id_client_registration
+	WHERE 
+		u.active=TRUE;
+		
 
 /*DROP PROCEDURE create_user*/
 /*CALL create_user(id_permission, 'imie', 'nazwisko', 'mail', 'haslo') RETURN columns:  was_ok, code, message */
@@ -355,6 +397,32 @@ AS
 	WHERE 
 		o.active=TRUE 
 		AND o.confirmation = TRUE;
+		
+		
+/*DROP VIEW get_offer_to_confirm*/
+/*SELECT * FROM get_offer_to_confirm RETURN columns:  id_offer, id_user, id_promotion, m_promotion_name, m_promotion_reduction, m_price_per_day, m_promotion_price_per_day, m_title, m_description, m_best, m_date_validity_from, m_date_validity_to    */
+CREATE VIEW get_offer_to_confirm
+AS
+	SELECT 
+		o.id_offer,
+		o.id_user,
+		o.id_promotion,
+		pr.name,
+		pr.price_reduction,
+		1.0 AS price_per_day,
+		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		o.title,
+		o.description,
+		o.best,
+		o.date_validity_from,
+		o.date_validity_to
+	FROM 
+		offers AS o 
+		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
+	WHERE 
+		o.active=TRUE 
+		AND o.confirmation = FALSE;
+		
 		
 
 /*TODO: dodanie pobieranie zdjęcia*/
@@ -506,3 +574,111 @@ modification_reservation_label:BEGIN
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
 END$$
 DELIMITER ;
+
+
+/*DROP PROCEDURE get_reservation_by_client_id*/
+/*CALL get_reservation_by_client_id(id_client_var) RETURN columns: id_reservation, id_user, id_offer, title, id_promotion, name, price_reduction, creation_date, date_from, date_to, to_pay, paid */
+DELIMITER $$
+CREATE PROCEDURE get_reservation_by_client_id(IN id_client_var BIGINT)
+BEGIN
+	SELECT 	
+		r.id_reservation,
+		r.id_user,
+		r.id_offer,
+		o.title,
+		r.id_promotion,
+		p.name AS promotion_name,
+		p.price_reduction,
+		r.creation_date,
+		r.date_from,
+		r.date_to,
+		pay.to_pay,
+		pay.paid,
+		type_payment.name AS payment_name
+	FROM 
+		reservations AS r 
+		INNER JOIN offer AS o ON o.id_offer=r.id_offer
+		INNER JOIN promotions AS p ON p.id_promotion=r.id_promotion
+		INNER JOIN payment AS pay ON pay.id_reservation=r.id_reservation
+		INNER JOIN type_payment_status AS type_payment ON type_payment.id_type_payment_status=pay.id_type_payment_status
+	WHERE
+		r.id_user=id_client_var;
+END $$
+DELIMITER ;
+
+
+/*DROP VIEW get_all_reservations*/
+/*SELECT * FROM get_all_reservations RETURN columns: id_reservation, id_user, id_offer, name, surname, mail, title, id_promotion, name, price_reduction, creation_date, date_from, date_to, to_pay, paid */
+CREATE VIEW get_all_reservations
+AS
+	SELECT 	
+		r.id_reservation,
+		r.id_user,
+		r.id_offer,
+		u.name,
+		u.surname,
+		u.mail,
+		o.title,
+		r.id_promotion,
+		p.name AS promotion_name,
+		p.price_reduction,
+		r.creation_date,
+		r.date_from,
+		r.date_to,
+		pay.to_pay,
+		pay.paid,
+		type_payment.name AS payment_name
+	FROM 
+		reservations AS r 
+		INNER JOIN offers AS o ON o.id_offer=r.id_offer
+		INNER JOIN promotions AS p ON p.id_promotion=r.id_promotion
+		INNER JOIN payment AS pay ON pay.id_reservation=r.id_reservation
+		INNER JOIN type_payment_status AS type_payment ON type_payment.id_type_payment_status=pay.id_type_payment_status
+		INNER JOIN users AS u ON u.id_user=r.id_user;
+
+/*DROP PROCEDURE pay_reservation*/
+/*CALL pay_reservation(id_client_var) RETURN columns: was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE pay_reservation(IN id_reservation_var BIGINT)
+pay_reservation_label:BEGIN
+
+	IF EXISTS (SELECT 1 FROM payment WHERE id_reservation=id_reservation_var AND id_type_payment_status<>3) THEN
+		SELECT FALSE AS was_ok, 1 AS code, 'Płatność był już zapłacona.' AS message;
+		LEAVE pay_reservation_label;
+	END IF;
+	
+	UPDATE payment SET id_type_payment_status=3, date_change_payment_status=NOW(), paid=to_pay WHERE id_reservation=id_reservation_var;
+
+	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została zapłacona' AS message;
+END $$
+DELIMITER ;
+
+
+/*DROP PROCEDURE cancel_reservation*/
+/*CALL cancel_reservation(id_client_var) RETURN columns: was_ok, code, message */
+DELIMITER $$
+CREATE PROCEDURE cancel_reservation(IN id_reservation_var BIGINT)
+cancel_reservation_label:BEGIN
+
+	UPDATE payment SET id_type_payment_status=4, date_change_payment_status=NOW() WHERE id_reservation=id_reservation_var;
+
+	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została zapłacona' AS message;
+END $$
+DELIMITER ;
+
+/*DROP VIEW get_all_payments*/
+/*SELECT * FROM get_all_payments RETURN columns: id_payment, id_type_payment_status, name, date_change_payment_status, to_pay, paid, date_validity */
+CREATE VIEW get_all_payments
+AS
+SELECT
+	p.id_payment,
+	p.id_type_payment_status,
+	tps.name,
+	p.date_change_payment_status,
+	p.to_pay,
+	p.paid,
+	p.date_validity
+FROM 
+	payment AS p
+	INNER JOIN type_payment_status AS tps ON tps.id_type_payment_status=p.id_type_payment_status;
+

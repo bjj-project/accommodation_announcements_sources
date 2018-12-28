@@ -28,10 +28,19 @@ class MainController extends Controller
 {
     private $session;
 
-    public function login(Request $request)
+    public function __construct()
     {
+        session_start();
         $this->session = new Session(new PhpBridgeSessionStorage());
         $this->session->start();
+    }
+
+    public function login(Request $request)
+    {
+        if(null != $this->session->get('id_user'))
+        {
+            return $this->profile();
+        }
 
         $form_login = $this->createFormBuilder(null)
             ->getForm();
@@ -160,7 +169,7 @@ class MainController extends Controller
     public function myOrders()
     {
         return $this->render(
-            'orders.html.twig'
+            'my_orders.html.twig'
         );
     }
 
@@ -197,9 +206,6 @@ class MainController extends Controller
 
     public function logout()
     {
-        $this->session = new Session(new PhpBridgeSessionStorage());
-        $this->session->start();
-
         $this->session->clear();
 
         return $this->offersList();
@@ -218,5 +224,46 @@ class MainController extends Controller
             'offer.html.twig'
         );
     }
-
+	
+	public function offersToConfirm()
+    {
+        return $this->render(
+            'offers_to_confirm.html.twig'
+        );
+    }
+	
+	public function activeOffers()
+    {
+        return $this->render(
+            'active_offers.html.twig'
+        );
+    }
+	
+	public function usersToConfirm()
+    {
+        return $this->render(
+            'users_to_confirm.html.twig'
+        );
+    }
+	
+	public function users()
+    {
+        return $this->render(
+            'users.html.twig'
+        );
+    }
+	
+	public function payments()
+    {
+        return $this->render(
+            'payments.html.twig'
+        );
+    }
+	
+	public function reservations()
+    {
+        return $this->render(
+            'reservations.html.twig'
+        );
+    }
 }
