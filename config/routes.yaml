@@ -19,7 +19,7 @@ offerslist:
     controller: App\Controller\MainController::offersList
 
 offer:
-    path: /offer/{id_offer}
+    path: /offer-{id_offer}
     controller: App\Controller\MainController::offer
 
 logout:
@@ -57,3 +57,7 @@ payments:
 reservations:
     path: /reservations
     controller: App\Controller\MainController::reservations
+
+confirm_client:
+    path: /confirm_client-{id_client}
+    controller: App\Controller\MainController::confirmClient

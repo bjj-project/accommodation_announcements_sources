@@ -182,6 +182,7 @@
                                         </thead>
 
                                         <tbody>
+
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
                                             <td class="accannouncements-orders-table__cell">
                                                 <a href="#">#05</a>
@@ -205,10 +206,10 @@
                                                 data do
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-												<a href="http://www.google.com/">
+												<a href="{{app.request.getBaseURL()}}">
 													<input type="button" value="Wyświetl" />
 												</a>
-												<a href="http://www.google.com/">
+												<a href="{{app.request.getBaseURL()}}/confirm_client-1">
 													<input type="button" value="Zatwierdz" />
 												</a>
                                             </td>

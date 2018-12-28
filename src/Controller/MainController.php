@@ -12,6 +12,8 @@ use App\Model\LoginModel;
 use App\Model\AllAccommodationModel;
 use App\Model\AccommodationByIdModel;
 use App\Model\RegistrationModel;
+use App\Model\ClientListToConfirmModel;
+use App\Model\ClientConfirmByIdModel;
 use App\Database\DatabaseManager;
 use Symfony\Component\Form\Forms;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -98,24 +100,45 @@ class MainController extends Controller
                 $register->setName($request->request->get("name"));
                 $register->setSurname($request->request->get("surname"));
 
-                $marketing = 'true';
-                if(is_null($request->request->get("marketing")))
+                $marketing = false;
+                if(!is_null($request->request->get("marketing")))
                 {
-                    $marketing = 'false';
+                    if($request->request->get("marketing") == "on")
+                    {
+                        $marketing = true;
+                    }
+                    else
+                    {
+                        $marketing = false;
+                    }
                 }
                 $register->setMarketing($marketing);
 
-                $regulations = 'true';
-                if(is_null($request->request->get("regulations")))
+                $regulations = false;
+                if(!is_null($request->request->get("regulations")))
                 {
-                    $regulations = 'false';
+                    if($request->request->get("regulations") == "on")
+                    {
+                        $regulations = true;
+                    }
+                    else
+                    {
+                        $regulations = false;
+                    }
                 }
                 $register->setRegulations($regulations);
 
-                $rodo = 'true';
-                if(is_null($request->request->get("rodo")))
+                $rodo = false;
+                if(!is_null($request->request->get("rodo")))
                 {
-                    $rodo = 'false';
+                    if($request->request->get("rodo") == "on")
+                    {
+                        $rodo = true;
+                    }
+                    else
+                    {
+                        $rodo = false;
+                    }
                 }
                 $register->setRodo($rodo);
 
@@ -241,9 +264,18 @@ class MainController extends Controller
 	
 	public function usersToConfirm()
     {
-        return $this->render(
-            'users_to_confirm.html.twig'
-        );
+        $client_list_to_confirm = new ClientListToConfirmModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($client_list_to_confirm);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('users_to_confirm.html.twig', array(
+            'client_list_to_confirm' => $client_list_to_confirm,
+            'show_message' => false,
+        ));
     }
 	
 	public function users()
@@ -265,5 +297,32 @@ class MainController extends Controller
         return $this->render(
             'reservations.html.twig'
         );
+    }
+
+    public function confirmClient($id_client)
+    {
+        $confirm = new ClientConfirmByIdModel();
+        $confirm->setIdClient($id_client);
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($confirm);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        $client_list_to_confirm = new ClientListToConfirmModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($client_list_to_confirm);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('users_to_confirm.html.twig', array(
+            'client_list_to_confirm' => $client_list_to_confirm,
+            'show_message' => true,
+            'error_code' => $confirm->getErrorCode(),
+            'error_message' => $confirm->getErrorMessage()
+        ));
     }
 }

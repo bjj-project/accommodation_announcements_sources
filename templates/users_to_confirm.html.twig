@@ -163,7 +163,13 @@
 
 
                                 <div class="accannouncements-MyAccount-content">
-
+                                    {% if show_message %}
+                                        {% if error_code==0 %}
+                                            <H1 style="color: #00FF00;">{{error_message}}</H1>
+                                        {% elseif error_code>0 %}
+                                            <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
+                                        {% endif %}
+                                    {% endif %}
 
                                     <table class="accannouncements-orders-table accannouncements-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
                                         <thead>
@@ -184,44 +190,45 @@
                                         </thead>
 
                                         <tbody>
+                                        {% for client_to_confirm in client_list_to_confirm.getList()%}
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
                                             <td class="accannouncements-orders-table__cell">
                                                 <a href="#">#05</a>
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                imię
+                                                {{client_to_confirm.getName()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                nazwisko
+                                                {{client_to_confirm.getSurname()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                mail
+                                                {{client_to_confirm.getMail()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                hasło
+                                                {{client_to_confirm.getPassword()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                Zatwierdzona
+                                                {{client_to_confirm.getMarketing()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                Zatwierdzona
+                                                {{client_to_confirm.getRODO()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                Zatwierdzona
+                                                {{client_to_confirm.getRegulations()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                IP v4
+                                                {{client_to_confirm.getIPv4()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                data utworzenia
+                                                {{client_to_confirm.getCreationDate()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                <a href="http://www.google.com/">
+                                                <a href="{{app.request.getBaseURL()}}/confirm_client-{{client_to_confirm.getIdClient()}}">
 													<input type="button" value="Zatwierdź" />
 												</a>
                                             </td>
-
                                         </tr>
+                                        {%endfor %}
                                         </tbody>
                                     </table>
 
