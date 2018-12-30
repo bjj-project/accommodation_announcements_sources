@@ -176,6 +176,7 @@ dir.form_row label
 	border: 1px solid #ccc;
 	border-radius: 10px;
     overflow: auto;
+    background: #f7f7f7;
 }
 
 #form-nowa-oferta {
