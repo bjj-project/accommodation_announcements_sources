@@ -164,9 +164,9 @@
 
                                 <div class="accannouncements-MyAccount-content">
                                     {% if show_message %}
-                                        {% if error_code==0 %}
+                                        {% if was_ok %}
                                             <H1 style="color: #00FF00;">{{error_message}}</H1>
-                                        {% elseif error_code>0 %}
+                                        {% else %}
                                             <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
                                         {% endif %}
                                     {% endif %}

@@ -61,3 +61,11 @@ reservations:
 confirm_client:
     path: /confirm_client-{id_client}
     controller: App\Controller\MainController::confirmClient
+
+confirm_offer:
+    path: /confirm_offer-{id_offer}
+    controller: App\Controller\MainController::confirmOffer
+
+delete_offer:
+    path: /delete_offer-{id_offer}
+    controller: App\Controller\MainController::deleteOffer

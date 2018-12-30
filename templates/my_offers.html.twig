@@ -154,10 +154,16 @@
 
 
                                 <div class="accannouncements-MyAccount-content">
+                                    {% if show_message %}
+                                        {% if error_code==0 %}
+                                            <H1 style="color: #00FF00;">{{error_message}}</H1>
+                                        {% elseif error_code>0 %}
+                                            <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
+                                        {% endif %}
+                                    {% endif %}
                                 <h3>Wyślij nową ofertę</h3>
                                 <div class="acc-form-wrap">
-
-                                    <form action="#" method="post" class="">
+                                    {{ form_start(form_new_offer) }}
                                         <p><label>Tytuł<br \>
                                                 <span class="">
                                                     <input type="text" name="tytul" value="" size="40" class="acc-form-input">
@@ -176,6 +182,17 @@
                                                 </span>
                                             </label>
                                         </p>
+                                        <p>
+                                            <label>Promocja<br \>
+                                                <span class="">
+                                                    <select name="promotion" acc-form->
+                                                        {% for promotion in promotion_list.getList()%}
+                                                        <option value="{{promotion.getIdPromotion()}}">{{promotion.getName()}} - {{promotion.getPriceReduction()*100}}% ceny</option>
+                                                        {%endfor %}
+                                                    </select>
+                                                </span>
+                                            </label>
+                                        </p>
 
                                         <p><label>Data od<br \>
                                                 <span class="">
@@ -190,7 +207,7 @@
                                             </label>
                                         </p>
                                         <p><input type="submit" value="Wyślij" class="acc-form-submit"></p>
-                                    </form>
+                                    {{ form_end(form_new_offer) }}
                                 </div>
 
                                     <h3>Lista Twoich ofert</h3>
@@ -198,59 +215,54 @@
                                         <thead>
                                         <tr>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Oferta</span></th>
+                                            <th class="accannouncements-orders-table__header"><span class="nobr">Tytuł</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Foto</span></th>
-                                            <th class="accannouncements-orders-table__header"><span class="nobr">Data</span></th>
+                                            <th class="accannouncements-orders-table__header"><span class="nobr">Okres</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Zatwierdzona</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Cena</span></th>
-
+                                            <th class="accannouncements-orders-table__header"><span class="nobr">Akcje</span></th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
+                                        {% for offer_per_user in offer_list_per_user.getList()%}
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
-                                                <a href="#">#05</a>
+                                            <td class="accannouncements-orders-table__cell">
+                                                <a href="#">{{offer_per_user.getIdOffer()}}</a>
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
-                                                <div class="thumb-wrapper" style="height: 50px; background-image: url(assets/fot1.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;"></div>
+                                            <td class="accannouncements-orders-table__cell">
+                                                {{offer_per_user.getTitle()}}
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Data">
-                                                <time datetime="2018-11-24T17:34:54+00:00">24 listopada 2018</time>
-
+                                            <td class="accannouncements-orders-table__cell">
+                                                NULL
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Zaatwierdzona">
-                                                Nie
+                                            <td class="accannouncements-orders-table__cell">
+                                                Od {{offer_per_user.getDateValidityFrom()}} Do {{offer_per_user.getDateValidityTo()}}
                                             </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Suma">
-                                                <span class="accannouncements-Price-amount amount">200,00&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
+                                            <td class="accannouncements-orders-table__cell">
+                                                {% if offer_per_user.getConfirmation()==0 %}
+                                                    Nie
+                                                {% else %}
+                                                    Tak
+                                                {% endif %}
                                             </td>
-
+                                            <td class="accannouncements-orders-table__cell">
+                                                TODO
+                                            </td>
+                                            <td class="accannouncements-orders-table__cell">
+                                                <!-- TODO
+                                                <a href="{{app.request.getBaseURL()}}/delete_offer-{{offer_per_user.getIdOffer()}}">
+                                                    <input type="button" value="Usuń" />
+                                                </a>
+                                                <a href="{{app.request.getBaseURL()}}/my_offers">
+                                                    <input type="button" value="Edytuj" />
+                                                </a>
+                                                -->
+                                            </td>
                                         </tr>
-
-                                        <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
-                                                <a href="#">#03</a>
-                                            </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Oferta">
-                                                <div class="thumb-wrapper" style="height: 50px; background-image: url(assets/fot2.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;"></div>
-                                            </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Data">
-                                                <time datetime="2018-11-24T17:34:54+00:00">24 listopada 2018</time>
-
-                                            </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Zaatwierdzona">
-                                                Nie
-                                            </td>
-                                            <td class="accannouncements-orders-table__cell" data-title="Suma">
-                                                <span class="accannouncements-Price-amount amount">200,00&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
-                                            </td>
-
-                                        </tr>
+                                        {%endfor %}
                                         </tbody>
                                     </table>
-
-
-
 
                                     <div class="accannouncements-notices-wrapper"></div></div>
                             </div>

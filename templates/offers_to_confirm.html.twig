@@ -164,7 +164,13 @@
 
 
                                 <div class="accannouncements-MyAccount-content">
-
+                                    {% if show_message %}
+                                        {% if was_ok %}
+                                            <H1 style="color: #00FF00;">{{error_message}}</H1>
+                                        {% else %}
+                                            <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
+                                        {% endif %}
+                                    {% endif %}
 
                                     <table class="accannouncements-orders-table accannouncements-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
                                         <thead>
@@ -177,44 +183,43 @@
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Data od</span></th>
 											<th class="accannouncements-orders-table__header"><span class="nobr">Data do</span></th>
 											<th class="accannouncements-orders-table__header"><span class="nobr">Akcje</span></th>
-
                                         </tr>
                                         </thead>
 
                                         <tbody>
-
+                                        {% for offer_to_confirm in offer_list_to_confirm.getList()%}
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
                                             <td class="accannouncements-orders-table__cell">
-                                                <a href="#">#05</a>
+                                                <a href="#">#{{offer_to_confirm.getIdOffer()}}</a>
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                Nazwa promocji
+                                                {{offer_to_confirm.getPromotionName()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                Tytuł
+                                                {{offer_to_confirm.getTitle()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                <span class="accannouncements-Price-amount amount">200,00&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
+                                                <span class="accannouncements-Price-amount amount">{{offer_to_confirm.getPromotionPricePerDay()}}<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                Najlepsza
+                                                {{offer_to_confirm.getBest()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                data od
+                                                {{offer_to_confirm.getDateValidityFrom()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                data do
+                                                {{offer_to_confirm.getDateValidityTo()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-												<a href="{{app.request.getBaseURL()}}">
+												<a href="{{app.request.getBaseURL()}}/offer-{{offer_to_confirm.getIdOffer()}}">
 													<input type="button" value="Wyświetl" />
 												</a>
-												<a href="{{app.request.getBaseURL()}}/confirm_client-1">
+												<a href="{{app.request.getBaseURL()}}/confirm_offer-{{offer_to_confirm.getIdOffer()}}">
 													<input type="button" value="Zatwierdz" />
 												</a>
                                             </td>
-
                                         </tr>
+                                        {%endfor %}
                                         </tbody>
                                     </table>
 

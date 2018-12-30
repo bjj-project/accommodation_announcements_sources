@@ -61,7 +61,7 @@ CREATE TABLE offers
 	id_user BIGINT NOT NULL REFERENCES users(id_user),
 	id_promotion INT NOT NULL REFERENCES promotions(id_promotion),
 	title VARCHAR(100) NOT NULL,
-	description VARCHAR(200) NOT NULL,
+	description TEXT NOT NULL,
 	best BOOLEAN NOT NULL DEFAULT FALSE,
 	date_validity_from TIMESTAMP NOT NULL DEFAULT NOW(),
 	date_validity_to TIMESTAMP NOT NULL,
@@ -323,14 +323,27 @@ DELIMITER ;
 /*DROP PROCEDURE create_offer*/
 /*CALL create_offer(id_user, id_permission, 'imie', 'title', 'description', '2018-11-09', '2018-11-23') RETURN columns:  was_ok, code, message, id_offer */
 DELIMITER $$
-CREATE PROCEDURE create_offer(IN id_user_var BIGINT, IN id_promotion_var INT, IN title_var VARCHAR(100), IN description_var VARCHAR(200), IN date_validity_from_var DATE, IN date_validity_to_var DATE) 
+CREATE PROCEDURE create_offer(IN id_user_var BIGINT, IN id_promotion_var INT, IN title_var VARCHAR(100), IN description_var TEXT, IN date_validity_from_var DATE, IN date_validity_to_var DATE) 
 create_offer_label:BEGIN
 
-	/*TODO*/
+	IF id_user_var < 1 THEN
+		SELECT FALSE AS was_ok, 1 AS code, 'Nieprawidłowy ID klienta' AS message;
+		LEAVE create_offer_label;
+	END IF;
+	
+	IF date_validity_from_var < (SELECT NOW()) THEN
+		SELECT FALSE AS was_ok, 2 AS code, 'Rezerwacji nie mozna utworzyć w przeszłości' AS message;
+		LEAVE create_offer_label;
+	END IF;
+	
+	IF date_validity_to_var <= date_validity_from_var THEN
+		SELECT FALSE AS was_ok, 3 AS code, 'Okres rezerwacji jest nieprawidłowy' AS message;
+		LEAVE create_offer_label;
+	END IF;
 
 	INSERT INTO offers VALUES(DEFAULT, id_user_var, id_promotion_var, title_var, description_var, FALSE, date_validity_from_var, date_validity_to_var, TRUE, FALSE, NULL);
 
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_offer;
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
 DELIMITER ;
 
@@ -389,8 +402,8 @@ AS
 		o.title,
 		o.description,
 		o.best,
-		o.date_validity_from,
-		o.date_validity_to
+		DATE(o.date_validity_from) AS date_validity_from,
+		DATE(o.date_validity_to) AS date_validity_to
 	FROM 
 		offers AS o 
 		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
@@ -414,8 +427,8 @@ AS
 		o.title,
 		o.description,
 		o.best,
-		o.date_validity_from,
-		o.date_validity_to
+		DATE(o.date_validity_from) AS date_validity_from,
+		DATE(o.date_validity_to) AS date_validity_to
 	FROM 
 		offers AS o 
 		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
@@ -424,7 +437,18 @@ AS
 		AND o.confirmation = FALSE;
 		
 		
-
+/*DROP VIEW get_all_promotions*/
+/*SELECT * FROM get_all_promotions RETURN columns: id_promotion, promotion_name, price_reduction*/
+CREATE VIEW get_all_promotions
+AS
+	SELECT 
+		id_promotion,
+		name AS promotion_name,
+		price_reduction
+	FROM 
+		promotions;
+		
+		
 /*TODO: dodanie pobieranie zdjęcia*/
 /*DROP PROCEDURE get_offer_by_id*/
 /*CALL get_offer_by_id(id_offer_var) RETURN columns:  id_offer, id_user, id_promotion, m_promotion_name, m_promotion_reduction, m_price_per_day, m_promotion_price_per_day, m_title, m_description, m_best, m_date_validity_from, m_date_validity_to, o.active, o.confirmation */
@@ -442,8 +466,8 @@ BEGIN
 		o.title,
 		o.description,
 		o.best,
-		o.date_validity_from,
-		o.date_validity_to,
+		DATE(o.date_validity_from) AS date_validity_from,
+		DATE(o.date_validity_to) AS date_validity_to,
 		o.active,
 		o.confirmation
 	FROM 
@@ -471,8 +495,8 @@ BEGIN
 		o.title,
 		o.description,
 		o.best,
-		o.date_validity_from,
-		o.date_validity_to,
+		DATE(o.date_validity_from) AS date_validity_from,
+		DATE(o.date_validity_to) AS date_validity_to,
 		o.active,
 		o.confirmation
 	FROM 

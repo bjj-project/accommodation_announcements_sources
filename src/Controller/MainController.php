@@ -11,9 +11,17 @@ namespace App\Controller;
 use App\Model\LoginModel;
 use App\Model\AllAccommodationModel;
 use App\Model\AccommodationByIdModel;
+use App\Model\AccommodationByClientModel;
+use App\Model\MakeAccommodationModel;
+use App\Model\AccommodationListToConfirmModel;
+use App\Model\AccommodationConfirmByIdModel;
 use App\Model\RegistrationModel;
 use App\Model\ClientListToConfirmModel;
 use App\Model\ClientConfirmByIdModel;
+use App\Model\PromotionListModel;
+
+
+
 use App\Database\DatabaseManager;
 use Symfony\Component\Form\Forms;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -234,11 +242,93 @@ class MainController extends Controller
         return $this->offersList();
     }
 
-    public function myOffers()
+    public function myOffers(Request $request)
     {
-        return $this->render(
-            'my_offers.html.twig'
-        );
+        if(null == $this->session->get('id_user'))
+        {
+            return $this->offersList();
+        }
+
+        $id_user = $this->session->get('id_user');
+
+        $form_new_offer = $this->createFormBuilder(null)->getForm();
+
+        if($request->isMethod('POST'))
+        {
+            //Tworzenie nowej oferty
+            $new_offer = new MakeAccommodationModel();
+
+            $new_offer->setIdUser($id_user);
+            $new_offer->setIdPromotion($request->request->get("promotion"));
+            $new_offer->setTitle($request->request->get("tytul"));
+            $new_offer->setDescription($request->request->get("opis"));
+            $new_offer->setDateValidityFrom($request->request->get("data-od"));
+            $new_offer->setDateValidityTo($request->request->get("data-do"));
+
+            $database = new DatabaseManager($this->container);
+            $was_ok = $database->execQuery($new_offer);
+            if(false == $was_ok)
+            {
+                //error system
+            }
+
+            DebugLog::console_log('new_offer:', $new_offer);
+
+            //generowanie listy ofert per user
+            $offer_list_per_user = new AccommodationByClientModel();
+            $offer_list_per_user->setUserId($id_user);
+            $database = new DatabaseManager($this->container);
+            $was_ok = $database->execQuery($offer_list_per_user);
+            if(false == $was_ok)
+            {
+                //error system
+            }
+
+            //generowanie listy promocji
+            $promotion_list= new PromotionListModel();
+            $database = new DatabaseManager($this->container);
+            $was_ok = $database->execQuery($promotion_list);
+            if(false == $was_ok)
+            {
+                //error system
+            }
+
+            return $this->render('my_offers.html.twig', array(
+                'form_new_offer' => $form_new_offer->createView(),
+                'show_message' => true,
+                'was_ok' => $new_offer->getWasOk(),
+                'error_code' => $new_offer->getErrorCode(),
+                'error_message' => $new_offer->getErrorMessage(),
+                'offer_list_per_user' => $offer_list_per_user,
+                'promotion_list' => $promotion_list
+            ));
+        }
+
+        //generowanie listy ofert per user
+        $offer_list_per_user = new AccommodationByClientModel();
+        $offer_list_per_user->setUserId($id_user);
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($offer_list_per_user);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        //generowanie listy promocji
+        $promotion_list= new PromotionListModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($promotion_list);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('my_offers.html.twig', array(
+            'form_new_offer' => $form_new_offer->createView(),
+            'show_message' => false,
+            'offer_list_per_user' => $offer_list_per_user,
+            'promotion_list' => $promotion_list
+        ));
     }
 
     public function pojedynczaOferta()
@@ -250,9 +340,19 @@ class MainController extends Controller
 	
 	public function offersToConfirm()
     {
-        return $this->render(
-            'offers_to_confirm.html.twig'
-        );
+        //generowanie listy ofert do potwierdzenia
+        $offer_list_to_confirm = new AccommodationListToConfirmModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($offer_list_to_confirm);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('offers_to_confirm.html.twig', array(
+            'offer_list_to_confirm' => $offer_list_to_confirm,
+            'show_message' => false
+        ));
     }
 	
 	public function activeOffers()
@@ -321,8 +421,44 @@ class MainController extends Controller
         return $this->render('users_to_confirm.html.twig', array(
             'client_list_to_confirm' => $client_list_to_confirm,
             'show_message' => true,
+            'was_ok' => $confirm->getWasOk(),
             'error_code' => $confirm->getErrorCode(),
             'error_message' => $confirm->getErrorMessage()
         ));
+    }
+
+    public function confirmOffer($id_offer)
+    {
+        //potwierdzanie oferty
+        $confirm = new AccommodationConfirmByIdModel();
+        $confirm->setIdOffer($id_offer);
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($confirm);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        //generowanie listy ofert do potwierdzenia
+        $offer_list_to_confirm = new AccommodationListToConfirmModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($offer_list_to_confirm);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('offers_to_confirm.html.twig', array(
+            'offer_list_to_confirm' => $offer_list_to_confirm,
+            'show_message' => true,
+            'was_ok' => $confirm->getWasOk(),
+            'error_code' => $confirm->getErrorCode(),
+            'error_message' => $confirm->getErrorMessage()
+        ));
+    }
+
+    public function deleteOffer($id_offer)
+    {
+
     }
 }
