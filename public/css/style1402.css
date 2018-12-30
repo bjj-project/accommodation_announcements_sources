@@ -3470,7 +3470,7 @@ ul.nav-bar .focus > ul,
 input[type="submit"],
 button {
 	display: inline-block;
-	color: #FFF;
+	color: #fff;
 	font-size: 13px;
 	padding: 8px;
 	border: none;
@@ -3482,7 +3482,7 @@ button {
 
 input[type="submit"]:hover,
 button:hover {
-	background-color: #a0a0a0;
+	background-color: #888;
 	transition: background-color 125ms linear;
 }
 
