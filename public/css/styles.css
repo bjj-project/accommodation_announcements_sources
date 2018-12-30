@@ -175,5 +175,38 @@ dir.form_row label
 	margin: 0 0 10px 0;
 	border: 1px solid #ccc;
 	border-radius: 1%;
+}
 
+#form-nowa-oferta {
+	display: none;
+}
+
+.acc-form-select {
+	background: none repeat scroll 0 0 #eaeaea;
+	color: #667279;
+	display: block;
+	margin: 0;
+	padding: 14px 20px;
+	width: 100%;
+	font-size: 16px;
+	resize: none;
+	border-radius: 7px;
+	border: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.acc-togglebtn {
+	width: auto;
+	height: auto;
+	padding: 10px 25px;
+	border-radius: 8px;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+	line-height: 3em;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-color: #3498db;
 }

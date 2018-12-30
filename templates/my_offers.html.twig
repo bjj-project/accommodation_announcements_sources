@@ -151,8 +151,6 @@
                                 </nav>
 
 
-
-
                                 <div class="accannouncements-MyAccount-content">
                                     {% if show_message %}
                                         {% if error_code==0 %}
@@ -162,7 +160,11 @@
                                         {% endif %}
                                     {% endif %}
                                 <h3>Wyślij nową ofertę</h3>
-                                <div class="acc-form-wrap">
+
+
+                                <button class="acc-togglebtn">Dodaj nową ofertę <i class="fa fa-arrow-circle-right"></i></button>
+
+                                 <div id="form-nowa-oferta" class="acc-form-wrap">
                                     {{ form_start(form_new_offer) }}
                                         <p><label>Tytuł<br \>
                                                 <span class="">
@@ -185,7 +187,7 @@
                                         <p>
                                             <label>Promocja<br \>
                                                 <span class="">
-                                                    <select name="promotion" acc-form->
+                                                    <select name="promotion" class="acc-form-select">
                                                         {% for promotion in promotion_list.getList()%}
                                                         <option value="{{promotion.getIdPromotion()}}">{{promotion.getName()}} - {{promotion.getPriceReduction()*100}}% ceny</option>
                                                         {%endfor %}
@@ -369,6 +371,14 @@
 </script>
 <script type='text/javascript' src='js/ideal-slides.js?ver=4.9.8'></script>
 
+<script>
+    jQuery(document).ready(function(){
+        jQuery(".acc-togglebtn").click(function(){
+            jQuery("#form-nowa-oferta").toggle(300,"swing",function(){
+            });
+        });
+    });
+</script>
 
 
 <script type="text/javascript">
