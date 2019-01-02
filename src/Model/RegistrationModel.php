@@ -85,10 +85,6 @@ class RegistrationModel extends I_Query
         $this->prepareQuery();
     }
 
-    public function nowafunkcjatestowa() {
-
-    }
-
     public function setMarketing($marketing)
     {
         if($marketing)
