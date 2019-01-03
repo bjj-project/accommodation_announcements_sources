@@ -108,7 +108,7 @@
 
                         <li id="menu-item-3697" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3697"><a title="Kontakt" href="/">Kontakt</a></li>
 
-                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/login">Moje konto</a></li>
+                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/account">Moje konto</a></li>
                     </ul>
                 </div>
 
@@ -150,7 +150,7 @@
 
                                 {% for row_of_offer in all_offer.getList()%}
                                 <DIV style="background-color: #4cae4c;">
-                                    //{{ row_of_offer.getIdOffer() }} - {{ row_of_offer.getPromotionName() }} <A href="{{ app.request.getBaseURL() }}/offer/{{ row_of_offer.getIdOffer() }}">Czytaj więcej...</A>
+                                    //{{ row_of_offer.getIdOffer() }} - {{ row_of_offer.getPromotionName() }} <A href="{{ app.request.getBaseURL() }}/offer-{{ row_of_offer.getIdOffer() }}">Czytaj więcej...</A>
                                 </DIV>
                                 {%endfor %}
 

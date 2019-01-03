@@ -110,7 +110,7 @@
 
                         <li id="menu-item-3697" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3697"><a title="Kontakt" href="/">Kontakt</a></li>
 
-                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/login">Moje konto</a></li>
+                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/account">Moje konto</a></li>
                     </ul>
                 </div>
 
@@ -153,9 +153,9 @@
 
                                 <div class="accannouncements-MyAccount-content">
                                     {% if show_message %}
-                                        {% if error_code==0 %}
+                                        {% if was_ok %}
                                             <H1 style="color: #00FF00;">{{error_message}}</H1>
-                                        {% elseif error_code>0 %}
+                                        {% else %}
                                             <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
                                         {% endif %}
                                     {% endif %}
@@ -165,7 +165,7 @@
                                 <button class="acc-togglebtn">Dodaj nową ofertę <i class="fa fa-arrow-circle-right"></i></button>
 
                                  <div id="form-nowa-oferta" class="acc-form-wrap">
-                                    {{ form_start(form_new_offer) }}
+                                     <FORM class="u-column1 col-1" method="post" action="{{app.request.getBaseURL()}}/create_new_offer">
                                         <p><label>Tytuł<br \>
                                                 <span class="">
                                                     <input type="text" name="tytul" value="" size="40" class="acc-form-input">
@@ -209,7 +209,7 @@
                                             </label>
                                         </p>
                                         <p><input type="submit" value="Wyślij" class="acc-form-submit"></p>
-                                    {{ form_end(form_new_offer) }}
+                                     </FORM>
                                 </div>
 
                                     <h3>Lista Twoich ofert</h3>

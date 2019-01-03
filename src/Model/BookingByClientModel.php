@@ -37,7 +37,7 @@ class BookingByClientModel extends I_Query
     //GETS
     public function getList()
     {
-        return $this->m_accommodation_list_per_client;
+        return $this->m_booking_list_per_client;
     }
 
 

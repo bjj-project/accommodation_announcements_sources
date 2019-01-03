@@ -550,42 +550,21 @@ DELIMITER ;
 /*DROP PROCEDURE create_reservation*/
 /*CALL create_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
 DELIMITER $$
-CREATE PROCEDURE create_reservation(IN id_user_var BIGINT, IN id_offer_var BIGINT, IN id_promotion_var INT, IN date_from DATE, IN date_to DATE) 
+CREATE PROCEDURE create_reservation(IN id_user_var BIGINT, IN id_offer_var BIGINT, IN date_from DATE, IN date_to DATE) 
 create_reservation_label:BEGIN
 
-	/*TODO*/
+	DECLARE m_days INT;
 	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
+	SELECT DATEDIFF(date_to, date_from) INTO m_days;
+
+	INSERT INTO reservations VALUES(DEFAULT, id_user_var, id_offer_var, (SELECT id_promotion FROM offers WHERE id_offer=id_offer_var), NOW(), date_from, date_to);
+	
+	INSERT INTO payment VALUES(DEFAULT, LAST_INSERT_ID(), 1, NOW(), m_days * 1.0, 0.0, NOW());  
+	
+	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
 DELIMITER ;
-
-
-
-/*DROP PROCEDURE confirm_reservation*/
-/*CALL confirm_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
-DELIMITER $$
-CREATE PROCEDURE confirm_reservation(IN id_reservation_var BIGINT) 
-confirm_reservation_label:BEGIN
-
-	/*TODO*/
-	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
-END$$
-DELIMITER ;
-
-
-/*DROP PROCEDURE delete_reservation*/
-/*CALL delete_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
-DELIMITER $$
-CREATE PROCEDURE delete_reservation(IN id_reservation_var BIGINT) 
-confirm_reservation_label:BEGIN
-
-	/*TODO*/
-	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message, -1 AS id_reservation;
-END$$
-DELIMITER ;
-
+CALL create_reservation(2, 1, 2019-01-04, 2019-01-06);
 
 /*DROP PROCEDURE modification_reservation*/
 /*CALL modification_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
@@ -621,7 +600,7 @@ BEGIN
 		type_payment.name AS payment_name
 	FROM 
 		reservations AS r 
-		INNER JOIN offer AS o ON o.id_offer=r.id_offer
+		INNER JOIN offers AS o ON o.id_offer=r.id_offer
 		INNER JOIN promotions AS p ON p.id_promotion=r.id_promotion
 		INNER JOIN payment AS pay ON pay.id_reservation=r.id_reservation
 		INNER JOIN type_payment_status AS type_payment ON type_payment.id_type_payment_status=pay.id_type_payment_status
@@ -666,14 +645,14 @@ DELIMITER $$
 CREATE PROCEDURE pay_reservation(IN id_reservation_var BIGINT)
 pay_reservation_label:BEGIN
 
-	IF EXISTS (SELECT 1 FROM payment WHERE id_reservation=id_reservation_var AND id_type_payment_status<>3) THEN
+	IF EXISTS (SELECT 1 FROM payment WHERE id_reservation=id_reservation_var AND id_type_payment_status=3) THEN
 		SELECT FALSE AS was_ok, 1 AS code, 'Płatność był już zapłacona.' AS message;
 		LEAVE pay_reservation_label;
 	END IF;
 	
 	UPDATE payment SET id_type_payment_status=3, date_change_payment_status=NOW(), paid=to_pay WHERE id_reservation=id_reservation_var;
 
-	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została zapłacona' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została zapłacona, rezerwacja została potwierdzona' AS message;
 END $$
 DELIMITER ;
 
@@ -684,11 +663,16 @@ DELIMITER $$
 CREATE PROCEDURE cancel_reservation(IN id_reservation_var BIGINT)
 cancel_reservation_label:BEGIN
 
-	UPDATE payment SET id_type_payment_status=4, date_change_payment_status=NOW() WHERE id_reservation=id_reservation_var;
+	IF EXISTS (SELECT 1 FROM payment WHERE id_reservation=id_reservation_var AND id_type_payment_status=3) THEN
+		UPDATE payment SET id_type_payment_status=5, date_change_payment_status=NOW() WHERE id_reservation=id_reservation_var;
+	ELSE
+		UPDATE payment SET id_type_payment_status=4, date_change_payment_status=NOW() WHERE id_reservation=id_reservation_var;
+	END IF;
 
-	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została zapłacona' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została anulowana' AS message;
 END $$
 DELIMITER ;
+
 
 /*DROP VIEW get_all_payments*/
 /*SELECT * FROM get_all_payments RETURN columns: id_payment, id_type_payment_status, name, date_change_payment_status, to_pay, paid, date_validity */
@@ -704,5 +688,7 @@ SELECT
 	p.date_validity
 FROM 
 	payment AS p
-	INNER JOIN type_payment_status AS tps ON tps.id_type_payment_status=p.id_type_payment_status;
+	INNER JOIN type_payment_status AS tps ON tps.id_type_payment_status=p.id_type_payment_status
+ORDER BY 
+	p.id_payment ASC;
 

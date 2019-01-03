@@ -110,7 +110,7 @@
 
                         <li id="menu-item-3697" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3697"><a title="Kontakt" href="/">Kontakt</a></li>
 
-                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/login">Moje konto</a></li>
+                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/account">Moje konto</a></li>
                     </ul>
                 </div>
 
@@ -152,39 +152,51 @@
 
 
                                 <div class="accannouncements-MyAccount-content">
-
+                                    {% if show_message %}
+                                        {% if was_ok %}
+                                            <H1 style="color: #00FF00;">{{error_message}}</H1>
+                                        {% else %}
+                                            <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
+                                        {% endif %}
+                                    {% endif %}
 
                                     <table class="accannouncements-orders-table accannouncements-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
                                         <thead>
                                         <tr>
                                             <th class="accannouncements-orders-table__header accannouncements-orders-table__header-order-number"><span class="nobr">Rezerwacja</span></th>
-                                            <th class="accannouncements-orders-table__header accannouncements-orders-table__header-order-date"><span class="nobr">Data</span></th>
+                                            <th class="accannouncements-orders-table__header accannouncements-orders-table__header-order-date"><span class="nobr">Okres</span></th>
                                             <th class="accannouncements-orders-table__header accannouncements-orders-table__header-order-status"><span class="nobr">Status</span></th>
                                             <th class="accannouncements-orders-table__header accannouncements-orders-table__header-order-total"><span class="nobr">Suma</span></th>
-                                            <th class="accannouncements-orders-table__header accannouncements-orders-table__header-order-actions"><span class="nobr">Działania</span></th>
+                                            <th class="accannouncements-orders-table__header accannouncements-orders-table__header-order-actions"><span class="nobr">Akcje</span></th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
+                                        {% for book_per_user in book_list_per_user.getList()%}
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
                                             <td class="accannouncements-orders-table__cell accannouncements-orders-table__cell-order-number" data-title="Rezerwacja">
-                                                <a href="#">
-                                                    #4189								</a>
-
+                                                <a href="#">#{{book_per_user.getIdReservation()}}</a>
                                             </td>
                                             <td class="accannouncements-orders-table__cell accannouncements-orders-table__cell-order-date" data-title="Data">
-                                                <time datetime="2018-11-24T17:34:54+00:00">24 listopada 2018</time>
-
+                                                Od {{book_per_user.getDateFrom()}} do {{book_per_user.getDateTo()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell accannouncements-orders-table__cell-order-status" data-title="Status">
-                                                Wstrzymane (oczekujące na płatność)
+                                                {{book_per_user.getPaymentName()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell accannouncements-orders-table__cell-order-total" data-title="Suma">
-                                                <span class="accannouncements-Price-amount amount">200,00&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za 1 pozycję
+                                                Do zapłaty: {{book_per_user.getToPay()}} zł<BR>
+                                                Zapłacono: {{book_per_user.getPaid()}} zł
                                             </td>
                                             <td class="accannouncements-orders-table__cell accannouncements-orders-table__cell-order-actions" data-title="Działania">
-                                                <a href="#" class="accannouncements-button button view">Zobacz</a>													</td>
+                                                <a href="{{app.request.getBaseURL()}}/delete_booking-{{book_per_user.getIdReservation()}}">
+                                                    <input type="button" value="Usuń" />
+                                                </a>
+                                                <a href="{{app.request.getBaseURL()}}/confirm_booking-{{book_per_user.getIdReservation()}}">
+                                                    <input type="button" value="Zapłać" />
+                                                </a>
+                                            </td>
                                         </tr>
+                                        {%endfor %}
                                         </tbody>
                                     </table>
 

@@ -80,11 +80,20 @@ class DatabaseManager
             return false;
         }
 
-        DebugLog::console_log('Query:', $query->getQueryText());
-        $statement = $this->m_connection->prepare($query->getQueryText());
-        if (false == $statement->execute()) {
-            $arr = $statement->errorInfo();
-            DebugLog::console_log('Error:', $arr);
+        try
+        {
+            DebugLog::console_log('Query:', $query->getQueryText());
+            $statement = $this->m_connection->prepare($query->getQueryText());
+            if (false == $statement->execute()) {
+                $this->m_last_error = $statement->errorInfo();
+                DebugLog::console_log('Error:', $this->m_last_error);
+                return false;
+            }
+        }
+        catch (Exception $e)
+        {
+            $this->m_last_error = $e->getMessage();
+            DebugLog::console_log('Error:', $e->getMessage());
             return false;
         }
 

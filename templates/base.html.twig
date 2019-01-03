@@ -108,7 +108,7 @@
 
                         <li id="menu-item-3697" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3697"><a title="Kontakt" href="/">Kontakt</a></li>
 
-                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/login">Moje konto</a></li>
+                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/account">Moje konto</a></li>
                     </ul>
                 </div>
 
@@ -130,13 +130,13 @@
                         <div id="article">
                             <div class="accannouncements"><div class="accannouncements-notices-wrapper"></div>
                                 <div class="u-columns col2-set" id="customer_login">
-                                    <div class="u-column1 col-1">
+                                    <FORM class="u-column1 col-1" method="post" action="{{app.request.getBaseURL()}}/login">
                                         <h2>Zaloguj się</h2>
-                                        {% if not was_ok_login %}
-                                            <H1 style="color: #FF0000;"> Error: {{error_message}} Kod błędu: {{error_code}}</H1>
+                                        {% if show_message_login %}
+                                            {% if not was_ok %}
+                                                <H1 style="color: #FF0000;"> Error: {{error_message}} Kod błędu: {{error_code}}</H1>
+                                            {% endif %}
                                         {% endif %}
-
-                                        {{ form_start(form_login) }}
                                             <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
                                                 <label for="username">Użytkownik lub e-mail&nbsp;<span class="required">*</span></label>
                                                 <input type="text" class="accannouncements-Input accannouncements-Input--text input-text" name="username" id="username" autocomplete="username" value="" />			</p>
@@ -157,15 +157,20 @@
                                             <p class="accannouncements-LostPassword lost_password">
                                                 <a href="/">Nie pamiętasz hasła?</a>
                                             </p>
-                                        {{ form_end(form_login) }}
+                                        </FORM>
                                     </div>
 
                                     <div class="u-column2 col-2">
+                                        <FORM class="u-column1 col-1" method="post" action="{{app.request.getBaseURL()}}/register">
                                         <h2>Zarejestruj się</h2>
-                                        {% if not was_ok_register %}
-                                            <H1 style="color: #FF0000;"> Error: {{error_message}} Kod błędu: {{error_code}}</H1>
-                                        {% endif %}
-                                        {{ form_start(form_login_2) }}
+                                            {% if show_message_register %}
+                                                {% if was_ok %}
+                                                    <H1 style="color: #00FF00;">{{error_message}}</H1>
+                                                {% else %}
+                                                    <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
+                                                {% endif %}
+                                            {% endif %}
+
                                             <p class="accannouncements-form-row accannouncements-form-row--wide form-row form-row-wide">
                                                 <label for="reg_email">Adres E-mail&nbsp;<span class="required">*</span></label>
                                                 <input type="email" class="accannouncements-Input accannouncements-Input--text input-text" name="email" id="reg_email" autocomplete="email" />
@@ -207,7 +212,7 @@
                                                 <button type="submit" class="accannouncements-Button button" name="register" value="Zarejestruj się">Zarejestruj się</button>
                                             </p>
 
-                                        {{ form_end(form_login_2) }}
+                                        </FORM>
 
                                     </div>
 

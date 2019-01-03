@@ -108,7 +108,7 @@
 
                         <li id="menu-item-3697" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3697"><a title="Kontakt" href="/">Kontakt</a></li>
 
-                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/login">Moje konto</a></li>
+                        <li id="menu-item-4180" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-4179 current_page_item menu-item-4180 active"><a title="Moje konto" href="{{app.request.getBaseURL()}}/account">Moje konto</a></li>
                     </ul>
                 </div>
 
@@ -121,6 +121,13 @@
         <div class="content-posts-wrap">
             <div id="content-box" style="width:100%">
                 <div id="post-body">
+                    {% if show_message %}
+                        {% if was_ok %}
+                            <H1 style="color: #00FF00;">{{error_message}}</H1>
+                        {% else %}
+                            <H1 style="color: #FF0000;">Error: {{error_message}} Kod: {{error_code}}</H1>
+                        {% endif %}
+                    {% endif %}
                     <div class="post-single post type-post status-publish format-standard has-post-thumbnail ">
                         <h1 id="post-title" class="entry-title post type-post status-publish format-standard has-post-thumbnail ">Apartament 2 </h1>
                         <div class="breadcrumbs">
@@ -142,7 +149,7 @@
                         </div>
 
                         <h3>Zarezerwuj apartament</h3>
-
+                        <FORM method="post" action="{{app.request.getBaseURL()}}/make_booking">
                         <div class="acc-form-wrap">
                             <div class="col-sm-6 col-md-6">
                                 <p><label>Data od<br \>
@@ -160,10 +167,12 @@
                                     </label>
                                 </p>
                             </div>
+                            <input type="hidden" name="id_offer" value="{{offer.getIdOffer()}}" >
                             <div class="col-sm-6 col-md-6">
                                 <p><input type="submit" value="Zarezerwuj" class="acc-form-submit"></p>
                             </div>
                         </div>
+                        </FORM>
                     </div>
                 </div>
             </div>

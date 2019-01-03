@@ -31,8 +31,6 @@ class PayBookingModel extends I_Query
     public function __construct()
     {
         $this->prepareQuery();
-
-        $this->m_booking_to_confirm_list = array();
     }
 
 
@@ -56,7 +54,7 @@ class PayBookingModel extends I_Query
     //SET
     public function setReservationId($reservation_id)
     {
-        $this->id_reservation = $reservation_id;
+        $this->m_id_reservation = $reservation_id;
 
         $this->prepareQuery();
     }

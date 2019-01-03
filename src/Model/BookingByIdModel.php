@@ -20,7 +20,7 @@ class BookingByIdModel extends I_Query
 	protected $m_title;
 	protected $m_id_promotion;
 	protected $m_promotion_name;
-	protected $m_obnizka;
+	protected $m_price_reduction;
 	protected $m_creation_date;
 	protected $m_date_from;
 	protected $m_date_to;
@@ -74,9 +74,9 @@ class BookingByIdModel extends I_Query
 		return $this->m_promotion_name;
 	}
 	
-	public function getObnizka()
+	public function getPriceReduction()
 	{
-		return $this->m_obnizka;
+		return $this->m_price_reduction;
 	}
 	
 	public function getCreationDate()
@@ -156,8 +156,8 @@ class BookingByIdModel extends I_Query
             $this->m_promotion_name = $date['promotion_name'];
         }
 		
-		if (array_key_exists('obnizka', $date)) {
-            $this->m_obnizka = $date['obnizka'];
+		if (array_key_exists('price_reduction', $date)) {
+            $this->m_price_reduction = $date['price_reduction'];
         }
 		
 		if (array_key_exists('creation_date', $date)) {

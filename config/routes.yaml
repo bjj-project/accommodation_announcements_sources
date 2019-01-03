@@ -1,10 +1,14 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\MainController::home
 
-app_acc_annoncements:
+login:
     path: /login
     controller: App\Controller\MainController::login
+
+register:
+    path: /register
+    controller: App\Controller\MainController::register
 
 account:
     path: /account
@@ -29,6 +33,10 @@ logout:
 my_offers:
     path: /my_offers
     controller: App\Controller\MainController::myOffers
+
+create_new_offer:
+    path: /create_new_offer
+    controller: App\Controller\MainController::createNewOffer
 
 pojedyncza_oferta:
     path: /pojedyncza-oferta
@@ -69,3 +77,15 @@ confirm_offer:
 delete_offer:
     path: /delete_offer-{id_offer}
     controller: App\Controller\MainController::deleteOffer
+
+make_booking:
+    path: /make_booking
+    controller: App\Controller\MainController::makeBooking
+
+delete_booking:
+    path: /delete_booking-{id_book}
+    controller: App\Controller\MainController::deleteBooking
+
+confirm_booking:
+    path: /confirm_booking-{id_book}
+    controller: App\Controller\MainController::confirmBooking
