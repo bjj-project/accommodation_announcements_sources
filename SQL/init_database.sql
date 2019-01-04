@@ -564,7 +564,7 @@ create_reservation_label:BEGIN
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
 DELIMITER ;
-CALL create_reservation(2, 1, 2019-01-04, 2019-01-06);
+
 
 /*DROP PROCEDURE modification_reservation*/
 /*CALL modification_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
