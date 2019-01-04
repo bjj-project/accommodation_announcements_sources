@@ -130,61 +130,37 @@
                     <div class="posts-wrapper">
                         <div id="post-body">
                             <div class="post-single">
+
+
+
+                                {% for row_of_offer in all_offer.getList()%}
+
                                 <div class="post-wrapper wow fadeIn post type-post status-publish format-standard has-post-thumbnail hentry" data-wow-delay="0.5s">
                                     <div class="image-holder">
-                                        <div class="thumb-wrapper" style="background-image: url(assets/fot1.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;">
+                                        <div class="thumb-wrapper" style="background-image: url(assets/fot{{ random(['1','2','3']) }}.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;">
                                         </div>
                                     </div>
                                     <div class="text-holder">
-                                        <a class="post-title" href="#"><h3 class="entry-title post type-post status-publish format-standard has-post-thumbnail hentry">Apartament</h3></a>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat […]</p>
+                                        <a class="post-title" href="{{ app.request.getBaseURL() }}/offer-{{ row_of_offer.getIdOffer() }}"><h3 class="entry-title post type-post status-publish format-standard has-post-thumbnail hentry">{{ row_of_offer.getTitle() }}</h3></a>
+                                        <p>{{ row_of_offer.getDescription }}</p>
                                         <div class="clear"></div>
                                         <div class="meta">
-                                            <span><i class="fa fa-calendar"></i><a class="p-date" title="22:33" href="#"><span class="post_date date updated">Grudzień 19, 2018</span></a></span>
+                                            <span><i class="fa fa-calendar"></i><span class="post_date date updated">Grudzień 19, 2018</span></span>
                                             <span class="separator"> / </span>
-                                            <span><i class="fa fa-arrow-circle-o-right"></i><a href="#">czytaj więcej</a></span>
+                                            <span><i class="fa fa-dollar"></i>300 zł / dobę</span>
+                                            <span class="separator"> / </span>
+                                            <span><i class="fa fa-arrow-circle-o-right"></i><a href="{{ app.request.getBaseURL() }}/offer-{{ row_of_offer.getIdOffer() }}">czytaj więcej</a></span>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                {% for row_of_offer in all_offer.getList()%}
-                                <DIV style="background-color: #4cae4c;">
-                                    //{{ row_of_offer.getIdOffer() }} - {{ row_of_offer.getPromotionName() }} <A href="{{ app.request.getBaseURL() }}/offer-{{ row_of_offer.getIdOffer() }}">Czytaj więcej...</A>
-                                </DIV>
+
                                 {%endfor %}
 
-                                <div class="post-wrapper wow fadeIn post type-post status-publish format-standard has-post-thumbnail hentry" data-wow-delay="0.5s">
-                                    <div class="image-holder">
-                                        <div class="thumb-wrapper" style="background-image: url(assets/fot2.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;">
-                                        </div>
-                                    </div>
-                                    <div class="text-holder">
-                                        <a class="post-title" href="#"><h3 class="entry-title post-4134 post type-post status-publish format-standard has-post-thumbnail hentry">Apartament 2</h3></a>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat […]</p>
-                                        <div class="clear"></div>
-                                        <div class="meta">
-                                            <span><i class="fa fa-calendar"></i><a class="p-date" title="14:04" href="#"><span class="post_date date updated">Listopad 3, 2018</span></a></span>
-                                            <span class="separator"> / </span>
-                                            <span><i class="fa fa-arrow-circle-o-right"></i><a href="#">czytaj więcej</a></span>
-                                        </div>
-                                    </div>
-                                </div><div class="post-wrapper wow fadeIn post type-post status-publish format-standard has-post-thumbnail hentry" data-wow-delay="0.5s">
-                                    <div class="image-holder">
-                                        <div class="thumb-wrapper" style="background-image: url(assets/fot3.jpg); background-size: cover; background-position: center top; background-repeat: no-repeat;">
-                                        </div>
-                                    </div>
-                                    <div class="text-holder">
-                                        <a class="post-title" href="#"><h3 class="entry-title post type-post status-publish format-standard has-post-thumbnail hentry">Apartament 3</h3></a>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat […]</p>
-                                        <div class="clear"></div>
-                                        <div class="meta">
-                                            <span><i class="fa fa-calendar"></i><a class="p-date" title="14:01" href="#"><span class="post_date date updated">Listopad 3, 2018</span></a></span>
-                                            <span class="separator"> / </span>
-                                            <span><i class="fa fa-arrow-circle-o-right"></i><a href="#">czytaj więcej</a></span>
-                                        </div>
-                                    </div>
-                                </div>						<div class="clear"></div> 					</div>
+
+
+						<div class="clear"></div> 					</div>
                         </div>
                     </div>
                 </div>

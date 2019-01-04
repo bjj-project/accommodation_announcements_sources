@@ -129,10 +129,10 @@
                         {% endif %}
                     {% endif %}
                     <div class="post-single post type-post status-publish format-standard has-post-thumbnail ">
-                        <h1 id="post-title" class="entry-title post type-post status-publish format-standard has-post-thumbnail ">Apartament 2 </h1>
+                        <h1 id="post-title" class="entry-title post type-post status-publish format-standard has-post-thumbnail ">{{offer.getTitle()}}</h1>
                         <div class="breadcrumbs">
                             <div class="breadcrumbs-wrap">
-                                <ul><li><a href="">Home</a></li><li class="separator"> / </li><li><a href="/oferty/" rel="category tag">oferty</a></li><li class="separator"> / </li><li>Apartament 2</li></ul>					</div>
+                                <ul><li><a href="">Home</a></li><li class="separator"> / </li><li><a href="/oferty/" rel="category tag">oferty</a></li><li class="separator"> / </li><li>{{ offer.getTitle() }}</li></ul>					</div>
                         </div>
                         <div class="post-info">
                             <span><i class="fa fa-calendar"></i>26 grudnia 2018</span>
@@ -144,7 +144,7 @@
                         <div class="thumb-wrapper">
                             <img width="1024" height="683" src="{{ asset('assets/fot3.jpg') }}" class="attachment-full size-full wp-post-image" alt="">							</div>
                         <div id="article">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                            <p>{{offer.getDescription()}}</p>
 
                         </div>
 
