@@ -1,31 +1,10 @@
 {{ block("head", "base.html.twig") }}
 
-<div id="main" class="col1">
-
-		<div class="content-posts-wrap">
-			<div id="content-box">
-				<div id="post-body">
-					<div class="post-single post-4179 page type-page status-publish hentry">
-						<h1 id="post-title" class="entry-title post-4179 page type-page status-publish hentry">Home </h1>
-
-						<div class="breadcrumbs">
-							<div class="breadcrumbs-wrap">
-								<ul><li><a href="/">Home</a></li></ul>
-							</div>
-						</div>
-
-						<div id="article">
-							<div class="accannouncements"><div class="accannouncements-notices-wrapper"></div>
-
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-
+<div id="acc-slider" style="width:100%; height: 550px; background: url(assets/domek1.jpg) no-repeat; background-size: cover">
+	<div id="" style="position:absolute; left: 300px; top: 400px; width: 400px; height: 100px; background: #333; opacity: .8; padding:10px; margin:10px">
+		<a href="{{app.request.getBaseURL()}}/account"<span style="color: #fff;font-size:150%; font-weight: bold">WITAMY! Zaloguj się aby wynająć apartament</span></a>
 	</div>
+</div>
+
 
 {{ block("footer", "base.html.twig") }}
