@@ -16,6 +16,106 @@
 
                     <div id="article">
 
+                    <div style="position: relative; width:100%; height:200px; border: 1px solid #ddd; margin-bottom: 20px; border-radius: 10px">
+                        <div class="acc-obrazki-slide">
+                            <h3 style="text-align: center; margin: auto">bjj project</h3>
+                            <div class="acc-ruchome-obrazki">
+                                <div class="wrap-obrazek">
+                                    <img class="acc-obrazek" src="assets\js.png" width="100"/>
+                                    <div>Jarek Słabik</div>
+                                </div>
+                            </div>
+                            <div class="acc-ruchome-obrazki">
+                                <div class="wrap-obrazek">
+                                    <img class="acc-obrazek" src="assets\bd.png" width="100"/>
+                                    <div>Bartek Dębkowski</div>
+                                </div>
+                            </div>
+                            <div class="acc-ruchome-obrazki">
+                                <div class="wrap-obrazek">
+                                    <img class="acc-obrazek" src="assets\jw.jpg" width="100"/>
+                                    <div>Janek Woroniecki</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        <button class="acc-togglebtn">Napisz do nas <i class="fa fa-arrow-circle-right"></i></button>
+
+                        <div id="form-nowa-oferta" class="acc-form-wrap">
+                            <form id="napisz" class="u-column1 col-1" method="post" action="">
+                                <p><label>Imię i nazwisko<br \>
+                                        <span class="">
+                                                    <input type="text" name="tytul" value="" size="40" class="acc-form-input">
+                                                </span>
+                                    </label>
+                                </p>
+
+                                <p><label>adres email<br \>
+                                        <span class="">
+                                                    <input type="email" name="email" value="" size="40" class="acc-form-input">
+                                                </span>
+                                    </label>
+                                </p>
+
+
+                                <p><label>Treść wiadomości<br \>
+                                        <span class="">
+                                                    <textarea name="tresc" cols="40" rows="10" class="acc-form-textarea"></textarea>
+                                                </span>
+                                    </label>
+                                </p>
+
+                                <p><input type="submit" value="Wyślij" class="acc-form-submit"></p>
+                                <div id="walidacja"></div>
+                            </form>
+
+                            <script>
+                                jQuery(document).ready(function(){
+                                    jQuery(".acc-togglebtn").click(function(){
+                                        jQuery("#form-nowa-oferta").toggle(300,"swing",function(){
+                                        });
+                                    });
+                                });
+
+
+                                function validateForm()
+                                {
+                                    var a=document.forms["napisz"]["tytul"].value;
+                                    var b=document.forms["napisz"]["email"].value;
+                                    var c=document.forms["napisz"]["tresc"].value;
+
+                                    if (a==null || a=="",b==null || b=="",c==null || c=="")
+                                    {
+                                        jQuery('#walidacja').html('<h3 style="color:red">Wypełnij wymagane pola!</h3>')
+                                        return false;
+                                    }
+                                    else{
+
+                                        jQuery.ajax({
+                                            type: 'post',
+                                            url: '',
+                                            data: jQuery('form').serialize(),
+                                            success: function () {
+                                                jQuery('#walidacja').html('<h3 style="color:red">Wysłano</h3>')
+                                                document.getElementById("napisz").reset();
+                                            }
+                                        });
+
+                                    }
+                                }
+
+                                jQuery(function () {
+                                    jQuery('#napisz').on('submit', function (e) {
+                                        e.preventDefault();
+                                        validateForm();
+                                    });
+                                });
+                            </script>
+
+                        </div>
+
 
                     </div>
 
