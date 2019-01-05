@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Jarek
- * Date: 10.12.2018
- * Time: 23:14
+ * Date: 05.01.2019
+ * Time: 11:49
  */
 
 namespace App\Model;
@@ -12,14 +12,14 @@ use \PDO;
 use App\Helper\DebugLog;
 use App\Database\I_Query;
 
-class AllAccommodationModel extends I_Query
+class AllPaymentsModel extends I_Query
 {
-    private $m_accommodation_list;
+    private $m_payment_list;
 
     //SET QUERY
     private function prepareQuery()
     {
-        $this->m_sql_query_text = "SELECT * FROM get_all_offer;";
+        $this->m_sql_query_text = "SELECT * FROM get_all_payments;";
     }
 
 
@@ -28,14 +28,14 @@ class AllAccommodationModel extends I_Query
     {
         $this->prepareQuery();
 
-        $this->m_accommodation_list = array();
+        $this->m_payment_list = array();
     }
 
 
     //GETS
     public function getList()
     {
-        return $this->m_accommodation_list;
+        return $this->m_payment_list;
     }
 
 
@@ -47,8 +47,8 @@ class AllAccommodationModel extends I_Query
         {
             DebugLog::console_log("Query result:", $one_row_of_result_query);
 
-            $this->m_accommodation_list[$id] = new AccommodationByIdModel();
-            $this->m_accommodation_list[$id]->setDate($one_row_of_result_query);
+            $this->m_payment_list[$id] = new PaymentByIdModel();
+            $this->m_payment_list[$id]->setDate($one_row_of_result_query);
             $id++;
         }
         $statement->closeCursor();

@@ -58,34 +58,31 @@
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Nazwisko</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Mail</span></th>
 											<th class="accannouncements-orders-table__header"><span class="nobr">Hasło</span></th>
-											<th class="accannouncements-orders-table__header"><span class="nobr">IP v4</span></th>
 											<th class="accannouncements-orders-table__header"><span class="nobr">Akcje</span></th>
 
                                         </tr>
                                         </thead>
 
                                         <tbody>
+                                        {%for user in users.getList()%}
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
                                             <td class="accannouncements-orders-table__cell">
-                                                <a href="#">#05</a>
+                                                <a href="#">#{{user.getIdClient()}}</a>
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                nazwa uprawnień
+                                                {{user.getPermissionName()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                imię
+                                                {{user.getName()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                nazwisko
+                                                {{user.getSurname()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                mail
+                                                {{user.getEmail()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                hasło
-                                            </td>
-											<td class="accannouncements-orders-table__cell">
-                                                IP v4
+                                                {{user.getPassword()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
                                                 <a href="http://www.google.com/">
@@ -96,6 +93,7 @@
 												</a>
                                             </td>
                                         </tr>
+                                        {%endfor%}
                                         </tbody>
                                     </table>
 

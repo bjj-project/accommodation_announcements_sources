@@ -8,6 +8,9 @@
 
 namespace App\Controller;
 
+use App\Model\AllBookingModel;
+use App\Model\AllClientsModel;
+use App\Model\AllPaymentsModel;
 use App\Model\LoginModel;
 use App\Model\AllAccommodationModel;
 use App\Model\AccommodationByIdModel;
@@ -422,9 +425,18 @@ class MainController extends Controller
 	
 	public function activeOffers()
     {
-        return $this->render(
-            'active_offers.html.twig'
-        );
+        //generowanie listy ofert
+        $all_offers = new AllAccommodationModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($all_offers);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('active_offers.html.twig', array(
+            'offers' => $all_offers
+        ));
     }
 	
 	public function usersToConfirm()
@@ -445,23 +457,47 @@ class MainController extends Controller
 	
 	public function users()
     {
-        return $this->render(
-            'users.html.twig'
-        );
+        $all_clients = new AllClientsModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($all_clients);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('users.html.twig', array(
+            'users' => $all_clients
+        ));
     }
 	
 	public function payments()
     {
-        return $this->render(
-            'payments.html.twig'
-        );
+        $all_payments = new AllPaymentsModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($all_payments);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('payments.html.twig', array(
+            'payments' => $all_payments
+        ));
     }
 	
 	public function reservations()
     {
-        return $this->render(
-            'reservations.html.twig'
-        );
+        $all_reservations = new AllBookingModel();
+        $database = new DatabaseManager($this->container);
+        $was_ok = $database->execQuery($all_reservations);
+        if(false == $was_ok)
+        {
+            //error system
+        }
+
+        return $this->render('reservations.html.twig', array(
+            'reservations' => $all_reservations
+        ));
     }
 
     public function confirmClient($id_client)
@@ -599,5 +635,10 @@ class MainController extends Controller
             'error_code' => $pay_booking->getErrorCode(),
             'error_message' => $pay_booking->getErrorMessage(),
         ));
+    }
+
+    public function kontakt()
+    {
+        return $this->render('kontakt.html.twig', array());
     }
 }

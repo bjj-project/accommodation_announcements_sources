@@ -90,7 +90,7 @@
         <div id ="header-wrap">
             <nav class="navbar navbar-default">
                 <div id="logo">
-                    <a href="/">Accommodation Announcements</a>
+                    <a href="{{app.request.getBaseURL()}}/">Accommodation Announcements</a>
                 </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -101,7 +101,7 @@
                     </button>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul id="menu-menu-1" class="nav navbar-nav"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-6"><a title="Strona główna" href="/">Strona główna</a></li>
+                    <ul id="menu-menu-1" class="nav navbar-nav"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-6"><a title="Strona główna" href="{{app.request.getBaseURL()}}/">Strona główna</a></li>
                         <li id="menu-item-145" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-145"><a title="Aktualności" href="{{app.request.getBaseURL()}}/offerslist">Oferty</a></li>
 
 

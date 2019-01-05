@@ -172,7 +172,7 @@ registration_label:BEGIN
 
 	INSERT INTO clients_registration VALUES(DEFAULT, name_var, surname_var, mail_var, password_var, marketing_var, rodo_var, regulations_var, ip_address_v4_var, DEFAULT, DEFAULT, DEFAULT);
 	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Rezerwacja została ukończona pomyślnie, poczekaj na akceptację Administratora' AS message;
 END$$
 DELIMITER ;
 
@@ -208,7 +208,7 @@ confirm_registration_label:BEGIN
 		
 	INSERT INTO users VALUES(DEFAULT, id_client_registration_var, m_id_permission, m_name, m_surname, m_mail, m_password, DEFAULT);
 	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Użytkownik został potwierdzony' AS message;
 END$$
 DELIMITER ;
 
@@ -266,13 +266,13 @@ create_user_label:BEGIN
 	END IF;
 
 	IF EXISTS (SELECT 1 FROM users WHERE mail=mail_var AND active=TRUE) THEN
-		SELECT FALSE AS was_ok, 1 AS code, 'Podany email już istnieje' AS message;
+		SELECT FALSE AS was_ok, 2 AS code, 'Podany email już istnieje' AS message;
 		LEAVE create_user_label;
 	END IF;
 	
 	INSERT INTO users VALUES(DEFAULT, NULL, id_permission_var, name_var, surname_var, mail_var, password_var, DEFAULT);
 	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Użytkownik został utworzony' AS message;
 END$$
 DELIMITER ;
 
@@ -284,7 +284,7 @@ BEGIN
 
 	UPDATE users SET active=FALSE WHERE id_user=id_user_var AND active=TRUE;
 
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Użytkownik został usuniety' AS message;
 END$$
 DELIMITER ;
 
@@ -316,7 +316,7 @@ modification_user_label:BEGIN
 			password<>COALESCE(password_var, password)
 		);
 	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Dane klienta zostały zmienione' AS message;
 END$$
 DELIMITER ;
 
@@ -334,18 +334,18 @@ create_offer_label:BEGIN
 	END IF;
 	
 	IF date_validity_from_var < (SELECT NOW()) THEN
-		SELECT FALSE AS was_ok, 2 AS code, 'Rezerwacji nie mozna utworzyć w przeszłości' AS message;
+		SELECT FALSE AS was_ok, 2 AS code, 'Oferty nie mozna utworzyć w przeszłości' AS message;
 		LEAVE create_offer_label;
 	END IF;
 	
 	IF date_validity_to_var <= date_validity_from_var THEN
-		SELECT FALSE AS was_ok, 3 AS code, 'Okres rezerwacji jest nieprawidłowy' AS message;
+		SELECT FALSE AS was_ok, 3 AS code, 'Okres oferty jest nieprawidłowy' AS message;
 		LEAVE create_offer_label;
 	END IF;
 
 	INSERT INTO offers VALUES(DEFAULT, id_user_var, id_promotion_var, title_var, description_var, FALSE, cost_per_day_var, date_validity_from_var, date_validity_to_var, TRUE, FALSE, NULL);
 
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Oferta została utworzona' AS message;
 END$$
 DELIMITER ;
 
@@ -371,7 +371,7 @@ delete_offer_label:BEGIN
 
 	UPDATE offers SET active=FALSE WHERE id_offer = id_offer_var;
 
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Oferta została usunięta' AS message;
 END$$
 DELIMITER ;
 
@@ -384,7 +384,7 @@ confirm_offer_label:BEGIN
 
 	UPDATE offers SET confirmation=TRUE WHERE id_offer = id_offer_var;
 
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Oferta została potwierdzona' AS message;
 END$$
 DELIMITER ;
 
@@ -553,32 +553,66 @@ DELIMITER ;
 /*DROP PROCEDURE create_reservation*/
 /*CALL create_reservation(id_user_var, id_offer_var, id_promotion_var, date_from, date_to) RETURN columns:  was_ok, code, message, id_reservation */
 DELIMITER $$
-CREATE PROCEDURE create_reservation(IN id_user_var BIGINT, IN id_offer_var BIGINT, IN date_from DATE, IN date_to DATE) 
+CREATE PROCEDURE create_reservation(IN id_user_var BIGINT, IN id_offer_var BIGINT, IN date_from_var DATE, IN date_to_var DATE) 
 create_reservation_label:BEGIN
 
 	DECLARE m_days INT;
 	DECLARE m_cost_per_day DECIMAL(5,2);
 	DECLARE m_cost_per_day_promo DECIMAL(5,2);
+	DECLARE m_date_validity_from DATE; 
+	DECLARE m_date_validity_to DATE;
+	DECLARE m_id_user BIGINT;
 	
-	SELECT DATEDIFF(date_to, date_from) INTO m_days;
+	IF date_from_var < (SELECT NOW()) THEN
+		SELECT FALSE AS was_ok, 1 AS code, 'Rezerwacji nie mozna utworzyć w przeszłości' AS message;
+		LEAVE create_reservation_label;
+	END IF;
+	
+	IF date_to_var <= date_from_var THEN
+		SELECT FALSE AS was_ok, 2 AS code, 'Okres rezerwacji jest nieprawidłowy' AS message;
+		LEAVE create_reservation_label;
+	END IF;
+	
+	SELECT DATEDIFF(date_to_var, date_from_var) INTO m_days;
 
 	SELECT 
-		o.cost_per_day AS price_per_day,
-		o.cost_per_day * pr.price_reduction AS promotion_price_per_day
+		o.cost_per_day,
+		o.cost_per_day * pr.price_reduction,
+		o.date_validity_from,
+		o.date_validity_to,
+		o.id_user
 	INTO 
 		m_cost_per_day,
-		m_cost_per_day_promo
+		m_cost_per_day_promo,
+		m_date_validity_from,
+		m_date_validity_to,
+		m_id_user
 	FROM 
 		offers AS o 
 		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
 	WHERE
 		o.id_offer = id_offer_var;
 	
-	INSERT INTO reservations VALUES(DEFAULT, id_user_var, id_offer_var, (SELECT id_promotion FROM offers WHERE id_offer=id_offer_var), NOW(), date_from, date_to);
+	IF m_id_user = id_user_var THEN
+		SELECT FALSE AS was_ok, 3 AS code, 'Nie możesz zarezerwować własnej oferty' AS message;
+		LEAVE create_reservation_label;
+	END IF;
+	
+	IF m_date_validity_from > date_from_var OR m_date_validity_to < date_to_var THEN
+		SELECT FALSE AS was_ok, 4 AS code, 'Okres rezerwacji nie mieści się w okresie ważności oferty' AS message;
+		LEAVE create_reservation_label;
+	END IF;
+	
+	IF EXISTS(SELECT 1 FROM reservations WHERE id_offer=id_offer_var AND ((date_from_var BETWEEN date_from AND date_to) OR (date_to_var BETWEEN date_from AND date_to))) THEN
+		SELECT FALSE AS was_ok, 5 AS code, 'Na podany okres istnieje już inna rezerwacja, wybierz inny okres' AS message;
+		LEAVE create_reservation_label;
+	END IF;
+	
+	INSERT INTO reservations VALUES(DEFAULT, id_user_var, id_offer_var, (SELECT id_promotion FROM offers WHERE id_offer=id_offer_var), NOW(), date_from_var, date_to_var);
 	
 	INSERT INTO payment VALUES(DEFAULT, LAST_INSERT_ID(), 1, NOW(), m_days * m_cost_per_day_promo, 0.0, NOW());  
 	
-	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Rezerwacja została utworzona' AS message;
 END$$
 DELIMITER ;
 
@@ -669,7 +703,7 @@ pay_reservation_label:BEGIN
 	
 	UPDATE payment SET id_type_payment_status=3, date_change_payment_status=NOW(), paid=to_pay WHERE id_reservation=id_reservation_var;
 
-	SELECT TRUE AS was_ok, 0 AS code, CONVERT('Płatność została zapłacona, rezerwacja została potwierdzona' USING utf8) AS message;
+	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została zapłacona, rezerwacja została potwierdzona' AS message;
 END $$
 DELIMITER ;
 

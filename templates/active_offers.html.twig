@@ -65,27 +65,28 @@
                                         </thead>
 
                                         <tbody>
+                                        {%for offer in offers.getList()%}
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
                                             <td class="accannouncements-orders-table__cell">
-                                                <a href="#">#05</a>
+                                                <a href="#">#{{offer.getIdOffer()}}</a>
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                Nazwa promocji
+                                                {{offer.getPromotionName()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                Tytuł
+                                                {{offer.getTitle()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                <span class="accannouncements-Price-amount amount">200,00&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
+                                                <span class="accannouncements-Price-amount amount">{{offer.getPromotionPricePerDay()}}&nbsp;<span class="accannouncements-Price-currencySymbol">zł</span></span> za dobę
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                Najlepsza
+                                                {{offer.getBest()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                data od
+                                                {{offer.getDateValidityFrom()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                data do
+                                                {{offer.getDateValidityTo()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
 												<a href="http://www.google.com/">
@@ -97,6 +98,7 @@
                                             </td>
 
                                         </tr>
+                                        {%endfor%}
                                         </tbody>
                                     </table>
 

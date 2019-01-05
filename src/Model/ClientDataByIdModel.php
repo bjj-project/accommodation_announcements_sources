@@ -89,17 +89,41 @@ class ClientDataByIdModel extends I_Query
 
         DebugLog::console_log("Query result:", $one_row_of_result_query);
 
-        $this->m_id_client          = $one_row_of_result_query['id_user'];
-        $this->m_id_permission      = $one_row_of_result_query['id_permission'];
-        $this->m_permission_name    = $one_row_of_result_query['permission_name'];
-        $this->m_name               = $one_row_of_result_query['client_name'];
-        $this->m_surname            = $one_row_of_result_query['surname'];
-        $this->m_mail               = $one_row_of_result_query['mail'];
-        $this->m_password           = $one_row_of_result_query['password'];
+        $this->setDate($one_row_of_result_query);
 
         $statement->closeCursor();
     }
 
+    public function setDate($date)
+    {
+        if (array_key_exists('id_user', $date)) {
+            $this->m_id_client = $date['id_user'];
+        }
+
+        if (array_key_exists('id_permission', $date)) {
+            $this->m_id_permission = $date['id_permission'];
+        }
+
+        if (array_key_exists('permission_name', $date)) {
+            $this->m_permission_name = $date['permission_name'];
+        }
+
+        if (array_key_exists('name', $date)) {
+            $this->m_name = $date['name'];
+        }
+
+        if (array_key_exists('surname', $date)) {
+            $this->m_surname = $date['surname'];
+        }
+
+        if (array_key_exists('mail', $date)) {
+            $this->m_mail = $date['mail'];
+        }
+
+        if (array_key_exists('password', $date)) {
+            $this->m_password = $date['password'];
+        }
+    }
 
     //DEBUG
     public function debug()

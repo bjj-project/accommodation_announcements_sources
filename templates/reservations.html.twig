@@ -71,15 +71,16 @@
                                         </thead>
 
                                         <tbody>
+                                        {%for reservation in reservations.getList()%}
                                         <tr class="accannouncements-orders-table__row accannouncements-orders-table__row--status-on-hold order">
                                             <td class="accannouncements-orders-table__cell">
-                                                <a href="#">#05</a>
+                                                <a href="#">#{{reservation.getIdReservation()}}</a>
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                <a href="#">#05</a>
+                                                <a href="#">#{{reservation.getIdUser()}}</a>
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                <a href="#">#05</a>
+                                                <a href="#">#{{reservation.getIdOffer()}}</a>
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
                                                 imię
@@ -91,30 +92,31 @@
                                                 mail
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                tytul
+                                                {{reservation.getTitle()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                nazwa promocji
+                                                {{reservation.getPromotionName()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                data utworzenia
+                                                {{reservation.getCreationDate()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                data od
+                                                {{reservation.getDateFrom()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                Data do
+                                                {{reservation.getDateTo()}}
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                do zapłaty
+                                                {{reservation.getToPay()}} zł
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                zapłacono
+                                                {{reservation.getPaid()}} zł
                                             </td>
 											<td class="accannouncements-orders-table__cell">
-                                                Status płatności
+                                                {{reservation.getPaymentName()}}
                                             </td>
                                         </tr>
+                                        {%endfor%}
                                         </tbody>
                                     </table>
 

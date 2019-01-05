@@ -91,5 +91,5 @@ confirm_booking:
     controller: App\Controller\MainController::confirmBooking
 
 kontakt:
-    path: kontakt
+    path: /kontakt
     controller: App\Controller\MainController::kontakt

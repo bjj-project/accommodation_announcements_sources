@@ -9,6 +9,8 @@
 namespace App\Database;
 
 use \PDO;
+use \PDO\PDOException;
+
 use App\Helper\DebugLog;
 
 class DatabaseManager
@@ -32,7 +34,7 @@ class DatabaseManager
         $host = $container->getParameter('database_host');
         $port = $container->getParameter('database_port');
         $db_name = $container->getParameter('database_name');
-        $connection_string = $driver . ':' . 'dbname=' . $db_name . ';host=' . $host . ';port=' . $port;
+        $connection_string = $driver . ':' . 'dbname=' . $db_name . ';host=' . $host . ';port=' . $port.';charset=utf8';
         $password = $container->getParameter('database_password');
         $login = $container->getParameter('database_user');
 
@@ -89,6 +91,12 @@ class DatabaseManager
                 DebugLog::console_log('Error:', $this->m_last_error);
                 return false;
             }
+        }
+        catch (PDOException $pdo_exception)
+        {
+            $this->m_last_error = $pdo_exception->getMessage();
+            DebugLog::console_log('Error:', $pdo_exception->getMessage());
+            return false;
         }
         catch (Exception $e)
         {
