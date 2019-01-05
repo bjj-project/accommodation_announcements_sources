@@ -19,10 +19,16 @@
                                 <ul><li><a href="">Home</a></li><li class="separator"> / </li><li><a href="/oferty/" rel="category tag">oferty</a></li><li class="separator"> / </li><li>{{ offer.getTitle() }}</li></ul>					</div>
                         </div>
                         <div class="post-info">
-                            <span><i class="fa fa-calendar"></i>26 grudnia 2018</span>
+                            <span><i class="fa fa-calendar"></i>Oferta dostępna od {{offer.getDateValidityFrom()}} do {{offer.getDateValidityTo()}}.</span>
                         </div>
                         <div class="post-info">
-                            <span><i class="fa fa-dollar"></i>200 PLN / dobę</span>
+                            <span><i class="fa fa-dollar"></i>
+                                {% if offer.getPricePerDay() == offer.getPromotionPricePerDay() %}
+                                    {{offer.getPricePerDay()}} PLN / dobę
+                                {% else %}
+                                    <span style="text-decoration: line-through; color:red;">{{offer.getPricePerDay()}}</span> {{offer.getPromotionPricePerDay()}} PLN / dobę {{offer.getPromotionName()}}
+                                {% endif %}
+                            </span>
                         </div>
 
                         <div class="thumb-wrapper">

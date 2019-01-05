@@ -64,7 +64,7 @@
                                         </p>
                                         <p><label>Cena<br \>
                                                 <span class="">
-                                                    <input type="number" name="cena" value="" size="40" class="acc-form-input">
+                                                    <input type="number" name="cena" value="" size="40" class="acc-form-input" min="0">
                                                 </span>
                                             </label>
                                         </p>
@@ -106,6 +106,7 @@
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Okres</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Zatwierdzona</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Cena</span></th>
+                                            <th class="accannouncements-orders-table__header"><span class="nobr">Promocja</span></th>
                                             <th class="accannouncements-orders-table__header"><span class="nobr">Akcje</span></th>
                                         </tr>
                                         </thead>
@@ -133,7 +134,10 @@
                                                 {% endif %}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
-                                                TODO
+                                                {{offer_per_user.getPromotionPricePerDay()}}zł za dobę.
+                                            </td>
+                                            <td class="accannouncements-orders-table__cell">
+                                                {{offer_per_user.getPromotionName()}}
                                             </td>
                                             <td class="accannouncements-orders-table__cell">
                                                 <!-- TODO

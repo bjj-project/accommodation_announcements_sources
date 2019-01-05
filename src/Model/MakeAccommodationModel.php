@@ -18,6 +18,7 @@ class MakeAccommodationModel extends I_Query
     protected $m_id_promotion;
     protected $m_title;
     protected $m_description;
+    protected $m_cost_per_day;
     protected $m_date_validity_from;
     protected $m_date_validity_to;
 
@@ -28,7 +29,7 @@ class MakeAccommodationModel extends I_Query
 	//SET QUERY
     private function prepareQuery()
     {
-        $this->m_sql_query_text = "CALL create_offer(".$this->m_id_user.", ".$this->m_id_promotion.", '".$this->m_title."', '".$this->m_description."', '".$this->m_date_validity_from."', '".$this->m_date_validity_to."');";
+        $this->m_sql_query_text = "CALL create_offer(".$this->m_id_user.", ".$this->m_id_promotion.", '".$this->m_title."', '".$this->m_description."', ".$this->m_cost_per_day.", '".$this->m_date_validity_from."', '".$this->m_date_validity_to."');";
     }
 
 
@@ -78,6 +79,12 @@ class MakeAccommodationModel extends I_Query
     public function setDescription($description)
     {
         $this->m_description = $description;
+        $this->prepareQuery();
+    }
+
+    public function setCostPerDay($cost_per_day)
+    {
+        $this->m_cost_per_day = $cost_per_day;
         $this->prepareQuery();
     }
 

@@ -54,6 +54,7 @@ CREATE TABLE promotions
 	price_reduction REAL NOT NULL 
 );
 INSERT INTO promotions VALUES(1, 'Standardowa cena', 1.0);
+INSERT INTO promotions VALUES(2, 'Promocja świąteczna', 0.7);
 
 CREATE TABLE offers
 (
@@ -63,6 +64,7 @@ CREATE TABLE offers
 	title VARCHAR(100) NOT NULL,
 	description TEXT NOT NULL,
 	best BOOLEAN NOT NULL DEFAULT FALSE,
+	cost_per_day DECIMAL(5,2) NOT NULL,
 	date_validity_from TIMESTAMP NOT NULL DEFAULT NOW(),
 	date_validity_to TIMESTAMP NOT NULL,
 	active BOOLEAN NOT NULL DEFAULT TRUE,
@@ -323,7 +325,7 @@ DELIMITER ;
 /*DROP PROCEDURE create_offer*/
 /*CALL create_offer(id_user, id_permission, 'imie', 'title', 'description', '2018-11-09', '2018-11-23') RETURN columns:  was_ok, code, message, id_offer */
 DELIMITER $$
-CREATE PROCEDURE create_offer(IN id_user_var BIGINT, IN id_promotion_var INT, IN title_var VARCHAR(100), IN description_var TEXT, IN date_validity_from_var DATE, IN date_validity_to_var DATE) 
+CREATE PROCEDURE create_offer(IN id_user_var BIGINT, IN id_promotion_var INT, IN title_var VARCHAR(100), IN description_var TEXT, IN cost_per_day_var DECIMAL(5,2), IN date_validity_from_var DATE, IN date_validity_to_var DATE) 
 create_offer_label:BEGIN
 
 	IF id_user_var < 1 THEN
@@ -341,7 +343,7 @@ create_offer_label:BEGIN
 		LEAVE create_offer_label;
 	END IF;
 
-	INSERT INTO offers VALUES(DEFAULT, id_user_var, id_promotion_var, title_var, description_var, FALSE, date_validity_from_var, date_validity_to_var, TRUE, FALSE, NULL);
+	INSERT INTO offers VALUES(DEFAULT, id_user_var, id_promotion_var, title_var, description_var, FALSE, cost_per_day_var, date_validity_from_var, date_validity_to_var, TRUE, FALSE, NULL);
 
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
@@ -397,8 +399,8 @@ AS
 		o.id_promotion,
 		pr.name,
 		pr.price_reduction,
-		1.0 AS price_per_day,
-		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		cost_per_day AS price_per_day,
+		cost_per_day * pr.price_reduction AS promotion_price_per_day, 
 		o.title,
 		o.description,
 		o.best,
@@ -409,7 +411,8 @@ AS
 		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
 	WHERE 
 		o.active=TRUE 
-		AND o.confirmation = TRUE;
+		AND o.confirmation = TRUE
+		AND DATE(NOW()) <= DATE(o.date_validity_to);
 		
 		
 /*DROP VIEW get_offer_to_confirm*/
@@ -422,8 +425,8 @@ AS
 		o.id_promotion,
 		pr.name,
 		pr.price_reduction,
-		1.0 AS price_per_day,
-		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		cost_per_day AS price_per_day,
+		cost_per_day * pr.price_reduction AS promotion_price_per_day, 
 		o.title,
 		o.description,
 		o.best,
@@ -461,8 +464,8 @@ BEGIN
 		o.id_promotion,
 		pr.name,
 		pr.price_reduction,
-		1.0 AS price_per_day,
-		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		cost_per_day AS price_per_day,
+		cost_per_day * pr.price_reduction AS promotion_price_per_day, 
 		o.title,
 		o.description,
 		o.best,
@@ -490,8 +493,8 @@ BEGIN
 		o.id_promotion,
 		pr.name,
 		pr.price_reduction,
-		1.0 AS price_per_day,
-		1.0 * pr.price_reduction AS promotion_price_per_day, 
+		cost_per_day AS price_per_day,
+		cost_per_day * pr.price_reduction AS promotion_price_per_day, 
 		o.title,
 		o.description,
 		o.best,
@@ -554,12 +557,26 @@ CREATE PROCEDURE create_reservation(IN id_user_var BIGINT, IN id_offer_var BIGIN
 create_reservation_label:BEGIN
 
 	DECLARE m_days INT;
+	DECLARE m_cost_per_day DECIMAL(5,2);
+	DECLARE m_cost_per_day_promo DECIMAL(5,2);
 	
 	SELECT DATEDIFF(date_to, date_from) INTO m_days;
 
+	SELECT 
+		o.cost_per_day AS price_per_day,
+		o.cost_per_day * pr.price_reduction AS promotion_price_per_day
+	INTO 
+		m_cost_per_day,
+		m_cost_per_day_promo
+	FROM 
+		offers AS o 
+		INNER JOIN promotions AS pr ON pr.id_promotion=o.id_promotion
+	WHERE
+		o.id_offer = id_offer_var;
+	
 	INSERT INTO reservations VALUES(DEFAULT, id_user_var, id_offer_var, (SELECT id_promotion FROM offers WHERE id_offer=id_offer_var), NOW(), date_from, date_to);
 	
-	INSERT INTO payment VALUES(DEFAULT, LAST_INSERT_ID(), 1, NOW(), m_days * 1.0, 0.0, NOW());  
+	INSERT INTO payment VALUES(DEFAULT, LAST_INSERT_ID(), 1, NOW(), m_days * m_cost_per_day_promo, 0.0, NOW());  
 	
 	SELECT TRUE AS was_ok, 0 AS code, 'OK' AS message;
 END$$
@@ -593,8 +610,8 @@ BEGIN
 		p.name AS promotion_name,
 		p.price_reduction,
 		r.creation_date,
-		r.date_from,
-		r.date_to,
+		DATE(r.date_from) AS date_from,
+		DATE(r.date_to) AS date_to,
 		pay.to_pay,
 		pay.paid,
 		type_payment.name AS payment_name
@@ -626,8 +643,8 @@ AS
 		p.name AS promotion_name,
 		p.price_reduction,
 		r.creation_date,
-		r.date_from,
-		r.date_to,
+		DATE(r.date_from) AS date_from,
+		DATE(r.date_to) AS date_to,
 		pay.to_pay,
 		pay.paid,
 		type_payment.name AS payment_name
@@ -652,7 +669,7 @@ pay_reservation_label:BEGIN
 	
 	UPDATE payment SET id_type_payment_status=3, date_change_payment_status=NOW(), paid=to_pay WHERE id_reservation=id_reservation_var;
 
-	SELECT TRUE AS was_ok, 0 AS code, 'Płatność została zapłacona, rezerwacja została potwierdzona' AS message;
+	SELECT TRUE AS was_ok, 0 AS code, CONVERT('Płatność została zapłacona, rezerwacja została potwierdzona' USING utf8) AS message;
 END $$
 DELIMITER ;
 

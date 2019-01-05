@@ -354,6 +354,7 @@ class MainController extends Controller
         $new_offer->setIdPromotion($request->request->get("promotion"));
         $new_offer->setTitle($request->request->get("tytul"));
         $new_offer->setDescription($request->request->get("opis"));
+        $new_offer->setCostPerDay($request->request->get("cena"));
         $new_offer->setDateValidityFrom($request->request->get("data-od"));
         $new_offer->setDateValidityTo($request->request->get("data-do"));
 
