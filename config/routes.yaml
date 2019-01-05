@@ -89,3 +89,7 @@ delete_booking:
 confirm_booking:
     path: /confirm_booking-{id_book}
     controller: App\Controller\MainController::confirmBooking
+
+kontakt:
+    path: kontakt
+    controller: App\Controller\MainController::kontakt
