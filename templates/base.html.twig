@@ -1,4 +1,4 @@
-
+{% block head %}
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
@@ -114,7 +114,11 @@
 
             </nav>
         </div>
-    </div>	<div id="main" class="col1">
+    </div>
+{% endblock %}
+
+
+    <div id="main" class="col1">
 
         <div class="content-posts-wrap">
             <div id="content-box">
@@ -226,7 +230,9 @@
             </div>
 
         </div>
-    </div>
+
+{% block footer %}
+</div>
     <div class="social">
         <div id="social-wrap">
             <div id="social-bar">
@@ -329,3 +335,4 @@
 </script>
 </body>
 </html>
+{% endblock %}
