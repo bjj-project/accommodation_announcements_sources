@@ -1,0 +1,728 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Performance Testing Report</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body class="http_pages_template">
+<div id="leftnavigation">
+<div class="divHeader">NeoLoad Test Report</div>
+<div class="menu_wrapper">
+<div class="item">
+<a href="./summary.html">Summary</a>
+</div>
+<div class="subitem">
+<a href="./summary.html#report.resultssummary">Results summary</a>
+</div>
+<div class="subitem">
+<a href="./summary.html#report.statisticssummary">Statistics Summary</a>
+</div>
+<div class="subitem">
+<a href="./summary.html#report.hotspots">Hot spots</a>
+</div>
+<div class="subitem">
+<a href="./summary.html#report.errors">Errors</a>
+</div>
+<div class="subitem">
+<a href="./summary.html#report.alerts">Alerts</a>
+</div>
+<div class="subitem">
+<a href="./summary.html#report.summary.all">General statistics</a>
+</div>
+<div class="subitem">
+<a href="./summary.html#report.summary.transactions">Transaction statistics</a>
+</div>
+<div class="item">
+<a href="./settings.html">Execution context</a>
+</div>
+<div class="item">
+<a href="./servers.html">Servers</a>
+</div>
+<div class="item">
+<a href="./populations.html">Populations</a>
+</div>
+<div class="item">
+<a href="./virtual-users.html">User Paths</a>
+</div>
+<div class="item">
+<a href="./transactions.html">Transactions</a>
+</div>
+<div class="item">
+<a href="./pages.html">Pages</a>
+</div>
+<div class="item">
+<a href="./medias.html">Media Contents</a>
+</div>
+<div class="item">
+<a href="./pushmessages.html">Push messages</a>
+</div>
+<div class="item">
+<a href="./monitors.html">Monitors</a>
+</div>
+<div class="item">
+<a href="./alerts.html">Alerts</a>
+</div>
+<div class="item">
+<a href="./scenario_Scenariusz testowy PZ.html">Scenario</a>
+</div>
+<div class="title">Main graphs</div>
+<div class="item">
+<a href="./Main graphs_pages.average.html">Average page response time</a>
+</div>
+<div class="item">
+<a href="./Main graphs_requests.average.html">Average request response time</a>
+</div>
+<div class="item">
+<a href="./Main graphs_transactions.average.html">Average response time (Transactions)</a>
+</div>
+<div class="item">
+<a href="./Main graphs_hits.html">Requests per second</a>
+</div>
+<div class="item">
+<a href="./Main graphs_errors.html">Errors</a>
+</div>
+<div class="item">
+<a href="./Main graphs_throughput.html">Throughput</a>
+</div>
+<div class="item">
+<a href="./Main graphs_percentile.html">Distribution of Transaction Durations</a>
+</div>
+<div class="item">
+<a href="./Main graphs_alerts.html">Top 10 First Alerts</a>
+</div>
+</div>
+<div style="float: right;">
+<img style="margin-top: 10px; margin-bottom: 0px; margin-right: 4px" src="./images/logo_neotys.png"></div>
+</div>
+<div id="content">
+<div class="divHeader">Pages</div>
+<div style="width: 100%; height: 20px;" id="report.shared">
+<div style="float:left" class="h1" id="statistics_summary_title">Shared Containers</div>
+</div>
+<div class="wrapper shared" align="center">
+<div align="center">
+<table class="hierarchical_shared_statistics_content_template">
+<tr>
+<th width="10%">Min</th><th width="10%">Avg</th><th width="10%">Max</th><th width="10%">Count</th><th width="10%">Err</th><th width="10%">% of Err</th><th width="10%">SLA Profile</th>
+</tr>
+<tr>
+<td colspan="7" class="line2">Empty list</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="user-tableheader" style="width: 100%; height: 20px;" id="BJJ_Testy">
+<div style="float:left" class="h1" id="statistics_summary_title">BJJ_Testy</div>
+</div>
+<div class="wrapper" align="center">
+<div align="center">
+<table class="hierarchical_statistics_content_template">
+<tr>
+<th width="10%">Min</th><th width="10%">Avg</th><th width="10%">Max</th><th width="10%">Count</th><th width="10%">Err</th><th width="10%">% of Err</th><th width="10%">SLA Profile</th>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped virtualuser" style="margin-left: 00px">BJJ_Testy</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">870.7</td><td class="line2right bordered">1,246</td><td class="line2right bordered">1,527</td><td class="line2right bordered">50</td><td class="line2right bordered">50</td><td class="line2right bordered">100</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container-blue" style="margin-left: 10px">Actions</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">33.6</td><td class="line1right bordered">89.6</td><td class="line1right bordered">219.6</td><td class="line1right bordered">677</td><td class="line1right bordered">677</td><td class="line1right bordered">100</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 20px">/public/account</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.259</td><td class="line2right bordered">2.45</td><td class="line2right bordered">12.5</td><td class="line2right bordered">727</td><td class="line2right bordered">16</td><td class="line2right bordered">2.2</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Rejestracja</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.271</td><td class="line1right bordered">2.89</td><td class="line1right bordered">10.11</td><td class="line1right bordered">722</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/register</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.271</td><td class="line2right bordered">2.89</td><td class="line2right bordered">10.11</td><td class="line2right bordered">722</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Logowanie_noaccept</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.252</td><td class="line1right bordered">2.51</td><td class="line1right bordered">8.99</td><td class="line1right bordered">720</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/login</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.252</td><td class="line2right bordered">2.51</td><td class="line2right bordered">8.99</td><td class="line2right bordered">720</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Logowanie_admin</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.238</td><td class="line1right bordered">2.68</td><td class="line1right bordered">9.97</td><td class="line1right bordered">720</td><td class="line1right bordered">7</td><td class="line1right bordered">1</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/login</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.238</td><td class="line2right bordered">2.68</td><td class="line2right bordered">9.97</td><td class="line2right bordered">720</td><td class="line2right bordered">7</td><td class="line2right bordered">1</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Klienci_admin</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.262</td><td class="line1right bordered">2.84</td><td class="line1right bordered">10.45</td><td class="line1right bordered">719</td><td class="line1right bordered">4</td><td class="line1right bordered">0.6</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/users</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.262</td><td class="line2right bordered">2.84</td><td class="line2right bordered">10.45</td><td class="line2right bordered">719</td><td class="line2right bordered">4</td><td class="line2right bordered">0.6</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Klienci_accept_admin</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.581</td><td class="line1right bordered">5.81</td><td class="line1right bordered">19.2</td><td class="line1right bordered">717</td><td class="line1right bordered">8</td><td class="line1right bordered">1.1</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/users_to_confirm</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.269</td><td class="line2right bordered">3.05</td><td class="line2right bordered">10.71</td><td class="line2right bordered">718</td><td class="line2right bordered">4</td><td class="line2right bordered">0.6</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/confirm_client-1</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.255</td><td class="line1right bordered">2.76</td><td class="line1right bordered">10.48</td><td class="line1right bordered">717</td><td class="line1right bordered">4</td><td class="line1right bordered">0.6</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Logowanie_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.268</td><td class="line2right bordered">2.96</td><td class="line2right bordered">9.75</td><td class="line2right bordered">716</td><td class="line2right bordered">1</td><td class="line2right bordered">0.1</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/login</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.268</td><td class="line1right bordered">2.96</td><td class="line1right bordered">9.75</td><td class="line1right bordered">716</td><td class="line1right bordered">1</td><td class="line1right bordered">0.1</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Moje_oferty_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.297</td><td class="line2right bordered">3.11</td><td class="line2right bordered">9.78</td><td class="line2right bordered">711</td><td class="line2right bordered">2</td><td class="line2right bordered">0.3</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/my_offers</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.297</td><td class="line1right bordered">3.11</td><td class="line1right bordered">9.78</td><td class="line1right bordered">711</td><td class="line1right bordered">2</td><td class="line1right bordered">0.3</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Dodaj_oferte_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">-</td><td class="line2right bordered">2.63</td><td class="line2right bordered">9.82</td><td class="line2right bordered">707</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/create_new_offer</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">-</td><td class="line1right bordered">2.63</td><td class="line1right bordered">9.82</td><td class="line1right bordered">707</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Dodaj_oferte_promocja_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">-</td><td class="line2right bordered">3.21</td><td class="line2right bordered">10.97</td><td class="line2right bordered">706</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/create_new_offer</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">-</td><td class="line1right bordered">3.21</td><td class="line1right bordered">10.97</td><td class="line1right bordered">706</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Akceptacja_oferta_admin</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.599</td><td class="line2right bordered">6.27</td><td class="line2right bordered">20.6</td><td class="line2right bordered">706</td><td class="line2right bordered">13</td><td class="line2right bordered">1.8</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/offers_to_confirm</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.265</td><td class="line1right bordered">2.94</td><td class="line1right bordered">10.66</td><td class="line1right bordered">706</td><td class="line1right bordered">7</td><td class="line1right bordered">1</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/confirm_offer-1</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.292</td><td class="line2right bordered">3.34</td><td class="line2right bordered">11.1</td><td class="line2right bordered">706</td><td class="line2right bordered">6</td><td class="line2right bordered">0.8</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Wyswietl_oferta_admin</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.914</td><td class="line1right bordered">9.13</td><td class="line1right bordered">27.4</td><td class="line1right bordered">705</td><td class="line1right bordered">9</td><td class="line1right bordered">1.3</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/offer-2</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.243</td><td class="line2right bordered">2.85</td><td class="line2right bordered">9.94</td><td class="line2right bordered">706</td><td class="line2right bordered">1</td><td class="line2right bordered">0.1</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/confirm_offer-1</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.263</td><td class="line1right bordered">2.92</td><td class="line1right bordered">12</td><td class="line1right bordered">705</td><td class="line1right bordered">1</td><td class="line1right bordered">0.1</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/confirm_offer-2</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.298</td><td class="line2right bordered">3.36</td><td class="line2right bordered">13.5</td><td class="line2right bordered">705</td><td class="line2right bordered">7</td><td class="line2right bordered">1</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Klienci_view_admin</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.258</td><td class="line1right bordered">2.76</td><td class="line1right bordered">9.37</td><td class="line1right bordered">705</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/users</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.258</td><td class="line2right bordered">2.76</td><td class="line2right bordered">9.37</td><td class="line2right bordered">705</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped container" style="margin-left: 20px">Oferty_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.541</td><td class="line1right bordered">5.03</td><td class="line1right bordered">16.3</td><td class="line1right bordered">704</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/offerslist</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.265</td><td class="line2right bordered">2.43</td><td class="line2right bordered">9.38</td><td class="line2right bordered">704</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/offer-1</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.263</td><td class="line1right bordered">2.6</td><td class="line1right bordered">9.63</td><td class="line1right bordered">704</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Rezerwacja_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.279</td><td class="line2right bordered">3.04</td><td class="line2right bordered">10.94</td><td class="line2right bordered">704</td><td class="line2right bordered">1</td><td class="line2right bordered">0.1</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/make_booking</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.279</td><td class="line1right bordered">3.04</td><td class="line1right bordered">10.94</td><td class="line1right bordered">704</td><td class="line1right bordered">1</td><td class="line1right bordered">0.1</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Rezerwacja_apartament</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.947</td><td class="line2right bordered">7.79</td><td class="line2right bordered">21</td><td class="line2right bordered">700</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/offerslist</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.255</td><td class="line1right bordered">2.73</td><td class="line1right bordered">12.1</td><td class="line1right bordered">701</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/offer-1</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.289</td><td class="line2right bordered">2.71</td><td class="line2right bordered">10.51</td><td class="line2right bordered">701</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/make_booking</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.258</td><td class="line1right bordered">2.35</td><td class="line1right bordered">8.67</td><td class="line1right bordered">700</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Platnosc_oferta</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.257</td><td class="line2right bordered">2.52</td><td class="line2right bordered">9.11</td><td class="line2right bordered">695</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/confirm_booking-1</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.257</td><td class="line1right bordered">2.52</td><td class="line1right bordered">9.11</td><td class="line1right bordered">695</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Platnosci_lista</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.265</td><td class="line2right bordered">2.4</td><td class="line2right bordered">9.35</td><td class="line2right bordered">695</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/payments</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.265</td><td class="line1right bordered">2.4</td><td class="line1right bordered">9.35</td><td class="line1right bordered">695</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Rezerwacja_lista</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.255</td><td class="line2right bordered">2.34</td><td class="line2right bordered">8.2</td><td class="line2right bordered">695</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/reservations</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.255</td><td class="line1right bordered">2.34</td><td class="line1right bordered">8.2</td><td class="line1right bordered">695</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Wyloguj_admin</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.279</td><td class="line2right bordered">2.38</td><td class="line2right bordered">9.14</td><td class="line2right bordered">691</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/logout</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.279</td><td class="line1right bordered">2.38</td><td class="line1right bordered">9.14</td><td class="line1right bordered">691</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Oferty_widok_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.257</td><td class="line2right bordered">2.3</td><td class="line2right bordered">8.98</td><td class="line2right bordered">691</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/offerslist</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.257</td><td class="line1right bordered">2.3</td><td class="line1right bordered">8.98</td><td class="line1right bordered">691</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Kontakt_widok_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.282</td><td class="line2right bordered">2.34</td><td class="line2right bordered">9.08</td><td class="line2right bordered">689</td><td class="line2right bordered">689</td><td class="line2right bordered">100</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/kontakt</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.282</td><td class="line1right bordered">2.34</td><td class="line1right bordered">9.08</td><td class="line1right bordered">689</td><td class="line1right bordered">689</td><td class="line1right bordered">100</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Stronaglowna_widok_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.249</td><td class="line2right bordered">2.23</td><td class="line2right bordered">10.04</td><td class="line2right bordered">687</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.249</td><td class="line1right bordered">2.23</td><td class="line1right bordered">10.04</td><td class="line1right bordered">687</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Moje_konto_widok_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.252</td><td class="line2right bordered">2.15</td><td class="line2right bordered">9.74</td><td class="line2right bordered">683</td><td class="line2right bordered">1</td><td class="line2right bordered">0.1</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/account</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.252</td><td class="line1right bordered">2.15</td><td class="line1right bordered">9.74</td><td class="line1right bordered">683</td><td class="line1right bordered">1</td><td class="line1right bordered">0.1</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Zmianahasla_widok_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.242</td><td class="line2right bordered">2.12</td><td class="line2right bordered">8.07</td><td class="line2right bordered">683</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/account</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.242</td><td class="line1right bordered">2.12</td><td class="line1right bordered">8.07</td><td class="line1right bordered">683</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line2">
+<div class="tablelabel typped container" style="margin-left: 20px">Mojeoferty_widok_klient</div>
+</td>
+</tr>
+<tr>
+<td class="line2right bordered">0.26</td><td class="line2right bordered">2.58</td><td class="line2right bordered">9.01</td><td class="line2right bordered">677</td><td class="line2right bordered">0</td><td class="line2right bordered">0</td><td class="line2right bordered">
+                                -
+                            </td>
+</tr>
+<tr>
+<td colspan="7" class="line1">
+<div class="tablelabel typped httppage" style="margin-left: 30px">/public/my_offers</div>
+</td>
+</tr>
+<tr>
+<td class="line1right bordered">0.26</td><td class="line1right bordered">2.58</td><td class="line1right bordered">9.01</td><td class="line1right bordered">677</td><td class="line1right bordered">0</td><td class="line1right bordered">0</td><td class="line1right bordered">
+                                -
+                            </td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>
