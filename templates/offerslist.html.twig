@@ -1,22 +1,22 @@
 {{ block("head", "base.html.twig") }}
 
-    <div id="main" class="col2-l" style="margin-top: 0px;">
-        <div class="clear"></div>
-        <div class="home-blog">
-            <div class="blog-top-image">
-                <div>
-                    <h1 class="section-title-right">OFERTY</h1>
-                </div>
+<div id="main" class="col2-l" style="margin-top: 0px;">
+    <div class="clear"></div>
+    <div class="home-blog">
+        <div class="blog-top-image">
+            <div>
+                <h1 class="section-title-right">OFERTY</h1>
             </div>
-            <div class="content-posts-wrap">
-                <div class="standard-posts-wrapper" style="width: 100%">
-                    <div class="posts-wrapper">
-                        <div id="post-body">
-                            <div class="post-single">
+        </div>
+        <div class="content-posts-wrap">
+            <div class="standard-posts-wrapper" style="width: 100%">
+                <div class="posts-wrapper">
+                    <div id="post-body">
+                        <div class="post-single">
 
 
 
-                                {% for row_of_offer in all_offer.getList()%}
+                            {% for row_of_offer in all_offer.getList()%}
 
                                 <div class="post-wrapper wow fadeIn post type-post status-publish format-standard has-post-thumbnail hentry" data-wow-delay="0.5s">
                                     <div class="image-holder">
@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="text-holder">
                                         <a class="post-title" href="{{ app.request.getBaseURL() }}/offer-{{ row_of_offer.getIdOffer() }}"><h3 class="entry-title post type-post status-publish format-standard has-post-thumbnail hentry">{{ row_of_offer.getTitle() }}</h3></a>
-                                        <p>{{ row_of_offer.getDescription }}</p>
+                                        <p>{{ row_of_offer.getDescription|slice(0, 500) ~ '...' }}</p>
                                         <div class="clear"></div>
                                         <div class="meta">
                                             <span><i class="fa fa-calendar"></i><span class="post_date date updated">Oferta dostępna od {{row_of_offer.getDateValidityFrom()}} do {{row_of_offer.getDateValidityTo()}}.</span></span>
@@ -47,19 +47,19 @@
 
 
 
-                                {%endfor %}
+                            {%endfor %}
 
 
 
-						<div class="clear"></div> 					</div>
-                        </div>
+                            <div class="clear"></div> 					</div>
                     </div>
                 </div>
-
             </div>
-        </div>
 
+        </div>
     </div>
+
+</div>
 
 
 
